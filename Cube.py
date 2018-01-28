@@ -11,7 +11,7 @@ class Cube():
     - sa longueur
     - sa hauteur"""
 
-    def __init__(self, x, y, z, larg, long, haut):
+    def __init__(self, x, y, z, larg, longr, haut):
         """constructeur de la classe cube
 
         exemple de creation d'un cube : c1 = Cube(0,0,0,10,10,10)
@@ -21,7 +21,7 @@ class Cube():
         self.y = y
         self.z = z
         self.larg = larg
-        self.long = long
+        self.longr = longr
         self.haut = haut
 
         
@@ -30,7 +30,7 @@ class Cube():
         cube[x= , y= , z= , larg= , long= , haut= ]
         """
         print("Cube(x=%.2f,y=%.2f,z=%.2f, larg=%.2f,long=%.2f,haut=%.2f)"
-              %(self.x, self.y, self.z, self.larg, self.long, self.haut))
+              %(self.x, self.y, self.z, self.larg, self.longr, self.haut))
 
 
     def getPos(self):
@@ -46,7 +46,7 @@ def Creation_Cube():
     z = random.randint(0,500)
     
     larg = random.randint(50,100)
-    long = random.randint(50,100)
+    longr = random.randint(50,100)
     haut = 0
     
-    return Cube(x, y, z, larg, long, haut)
+    return Cube(x, y, z, larg, longr, haut)
