@@ -11,6 +11,17 @@ class Robot:
 		self.dimension = dimension
 		self.vitesse = 0
 
-	
+	def getPosition(self):
+		return self.position
 
+	def getDirection(self):
+		return self.direction
+
+	def getDimension(self):
+		return self.dimension
+
+	def getVitesse(self):
+		return self.vitesse
+
+		
 	
