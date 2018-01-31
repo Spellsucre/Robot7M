@@ -67,17 +67,19 @@ class Arene :
                 i= i+1
         return False
 
-    def isPointInCube(self,x,y,z) :
+    def isCubeAtPoint(self,x,y,z) :
         """return True si le point à la position (x,y,z) appartient à un cube
             de l'arene et False sinon"""
         i = 0
+        cube = None
+        if (self.liste_cube is None) or x < self.lx or y < self.ly or z < self.lz :
+            return False
         while i<len(self.liste_cube) :
             c = self.liste_cube[i]
             if (c.x+0.5*c.larg >=x and c.x-0.5*c.larg <= x) and (c.y+0.5*c.longr >= y and c.y-0.5*c.longr <= y) and (c.z+0.5*c.haut >= z and c.z-0.5*c.haut <= z):
-                return True
-            else :
-                i= i+1
-        return False
+                cube = c
+            i= i+1
+        return cube
 
     def renvoie_cube(self,x,y,z) :
         """ Renvoie le cube à la position (x,y,z) si il y'en a un
@@ -113,4 +115,4 @@ def Creation_Arene() :
     
             
             
-"Arene.py 1ere soumission" 
+"Arene.py 2eme soumission (Vinson)" 
