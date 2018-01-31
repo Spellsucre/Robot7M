@@ -14,12 +14,14 @@ class Robot:
 		self.vitesse = 0
 
 
-	def move(self, dx, dy, dz):
-		x, y, z = getPosition()
-		x += dx
-		y += dy
-		z += dz
-		__setPosition((x, y, z))
+	def move(self):
+		x, y, z = self.getPosition()
+		a, b, c = self.getDirection()
+		vitesse = self.getVitesse()
+		x += a*vitesse
+		y += b*vitesse
+		z += c*vitesse
+		self.__setPosition((x, y, z))
 
 	def toString(self):
 		print("position:"+getPosition)
@@ -53,6 +55,7 @@ class Robot:
 def creation_robot() :
     """ Test création robot"""
     robot = Robot((0,0,0), (0,0,0), (1,1,1))
+    robot.move()
     #robot.toString()
 
 creation_robot()
