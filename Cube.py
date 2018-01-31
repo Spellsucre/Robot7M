@@ -1,5 +1,4 @@
 #import
-
 import random
 
 #code
@@ -29,8 +28,7 @@ class Cube():
         """Methode d'affichage d'un cube au format :
         cube[x= , y= , z= , larg= , long= , haut= ]
         """
-        print("Cube(x=%.2f,y=%.2f,z=%.2f, larg=%.2f,long=%.2f,haut=%.2f)"
-              %(self.x, self.y, self.z, self.larg, self.long, self.haut))
+        print("Cube(x=",self.x,",y=",self.y,",z=",self.z,", larg=",self.larg,",long=",self.long,",haut=",self.haut,")")
 
 
     def getPos(self):
@@ -45,8 +43,8 @@ def Creation_Cube():
     y = random.randint(0,500)
     z = random.randint(0,500)
     
-    larg = random.randint(50,100)
-    long = random.randint(50,100)
-    haut = 0
+    larg = random.randint(50,70)
+    long = random.randint(50,70)
+    haut = random.randint(50,70)
     
     return Cube(x, y, z, larg, long, haut)
