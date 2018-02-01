@@ -23,8 +23,14 @@ class Robot:
 		z += c*vitesse
 		self.__setPosition((x, y, z))
 
+	def rotation(self, teta):
+		a, b, c = self.getDirection()
+		a = a*Math.cos(teta) - y*Math.sin(teta)
+		y = x*Math.sin(teta) + y*Math.cos(teta)
+		self.__setDirection((a, b, c))
+
 	def toString(self):
-		print("position:"+getPosition)
+		return "position:",self.getPosition()
 		#à compléter
 
 
@@ -42,7 +48,7 @@ class Robot:
 		return self.vitesse
 
 	"""-----------------------SETTER-------------------------"""
-	def __setPosition(self, positon):
+	def __setPosition(self, position):
 		self.positon = position
 
 	def __setDirection(self, direction):
@@ -56,6 +62,6 @@ def creation_robot() :
     """ Test création robot"""
     robot = Robot((0,0,0), (0,0,0), (1,1,1))
     robot.move()
-    #robot.toString()
+    robot.toString()
 
 creation_robot()
