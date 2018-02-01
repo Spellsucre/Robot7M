@@ -1,0 +1,22 @@
+PROJET 2I013  P5: les 7 mercenaires
+
+-CR1 :
+
+  Création d’un github et d’un trello pour la communication avec le groupe.
+ 
+  On a réfléchi sur ce qu’il fallait prendre en compte pour le simulateur de robot.
+  Soit :
+    Arene :
+	  -Sol
+	  -Mur : limites, obstacles
+	  -Robot : -Capteurs:	camera-> couleur
+		                    detecteur distance
+		                     gyroscope->accelerer (vitesses), direction
+                         
+  	-Moteur : 	roues->vitesse de rotation 
+			          tete->tourner(gauche, droite)
+
+  Nous avons crée une classe Arene dans lequel on peut ajouter des objets, des murs et un sol.
+  On peut placer dans une Arene un robot, qui va pouvoir se déplacer. Le robot prend en parametre sa position, sa vitesse et son orientation.
+  On peut effectuer un affichage de cette arene, et placer dans cette arène des cubes et des murs.
+  Réorganisation du github avec des branches communes, à la place des branches personnelles.
