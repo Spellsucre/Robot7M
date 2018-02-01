@@ -14,7 +14,6 @@ class Robot:
 		self.dimension = dimension
 		self.vitesse = 0
 
-
 	def move(self):
 		x, y, z = self.getPosition()
 		a, b, c = self.getDirection()
@@ -24,7 +23,9 @@ class Robot:
 		z += c*vitesse
 		self.__setPosition((x, y, z))
 
+	#teta: int en degré
 	def rotation(self, teta):
+		teta = math.radians(teta)
 		a, b, c = self.getDirection()
 		a = a*math.cos(teta) - b*math.sin(teta)
 		y = a*math.sin(teta) + b*math.cos(teta)
