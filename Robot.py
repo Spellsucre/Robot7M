@@ -1,3 +1,4 @@
+import math
 class Robot:
 	"""
 		Classe caractérisé par:
@@ -25,14 +26,12 @@ class Robot:
 
 	def rotation(self, teta):
 		a, b, c = self.getDirection()
-		a = a*Math.cos(teta) - y*Math.sin(teta)
-		y = x*Math.sin(teta) + y*Math.cos(teta)
+		a = a*math.cos(teta) - b*math.sin(teta)
+		y = a*math.sin(teta) + b*math.cos(teta)
 		self.__setDirection((a, b, c))
 
 	def toString(self):
-		return "position:",self.getPosition()
-		#à compléter
-
+		return "position: {0}, direction: {1}, vitesse: {2}".format(self.getPosition(),self.getDirection(),self.getVitesse())
 
 	"""-----------------------GETTTER-------------------------"""
 	def getPosition(self):
@@ -56,12 +55,3 @@ class Robot:
 
 	def __setVitesse(self, vitesse):
 		self.vitesse = vitesse
-
-
-def creation_robot() :
-    """ Test création robot"""
-    robot = Robot((0,0,0), (0,0,0), (1,1,1))
-    robot.move()
-    robot.toString()
-
-creation_robot()
