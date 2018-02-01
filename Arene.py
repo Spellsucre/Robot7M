@@ -72,7 +72,7 @@ class Arene :
             de l'arene et False sinon"""
         i = 0
         cube = None
-        if (self.liste_cube is None) or x < self.lx or y < self.ly or z < self.lz :
+        if (self.liste_cube is None) or x >= self.lx or x < 0 or y >= self.ly or y < 0 or z < self.lz or z < self.lz :
             return False
         while i<len(self.liste_cube) :
             c = self.liste_cube[i]
