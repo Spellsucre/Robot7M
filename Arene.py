@@ -1,3 +1,6 @@
+from math import acos
+from math import sqrt
+
 class Arene :
     """ Classe Arene caracterisée par les attributs:
     - lx : sa limite (double) sur l'axe des x
@@ -55,7 +58,7 @@ class Arene :
                 i= i+1
         return False
 
-g    
+    
     def isCube(self,x,y,z) :
         """return True si il y'a un cube à la position (x,y,z)
             de l'arene et False sinon"""
@@ -100,20 +103,36 @@ g
             et on return True, et False sinon"""
 
         x,y,z = robot.position
-        longg,larg,haut = robot.dimension
+        long,larg,haut = robot.dimension
         
         bx = 0<x and x < self.lx
         by = 0<y and y < self.ly
         bz = 0<z and z < self.lz
 
         L = 0<larg and larg < self.lx
-        l = 0<longg and longg < self.ly
+        l = 0<long and long < self.ly
         h = 0<haut and haut < self.lx
         
         if bx and by and bz and L and l and h:
             self.liste_robot.append(robot)
             return True
         return False
+
+    def retourne_angle(self,x,y,xx,yy) :
+        """ retourne un angle teta en radian selon une direction initale d'un
+            vecteur u(x,y) et une les coordonées du vecteur de la prochaine
+            direction d'un vecteur v(xx,yy) en paramètres """
+
+        sgn = (x*yy)+(xx*y)
+        u = sqrt((x*x)+(y*y)) #norme de u
+        v = sqrt((xx*xx)+(yy*yy)) #norme de v
+        
+        tmp = ((x*xx)+(y*yy))/(u+v)
+        teta = acos(tmp)
+
+        if(sgn < 0):
+            return -1*teta
+        return teta
     
 
 
@@ -130,11 +149,5 @@ def Creation_Arene() :
 
 
 
-
-
-        
-
-    
-            
 "Arene.py 1ere soumission (Daoud)"           
 "Arene.py 2eme soumission (Vinson)" 
