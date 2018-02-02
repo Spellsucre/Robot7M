@@ -55,7 +55,7 @@ class Arene :
                 i= i+1
         return False
 
-    
+g    
     def isCube(self,x,y,z) :
         """return True si il y'a un cube à la position (x,y,z)
             de l'arene et False sinon"""
@@ -100,14 +100,14 @@ class Arene :
             et on return True, et False sinon"""
 
         x,y,z = robot.position
-        long,larg,haut = robot.dimension
+        longg,larg,haut = robot.dimension
         
         bx = 0<x and x < self.lx
         by = 0<y and y < self.ly
         bz = 0<z and z < self.lz
 
         L = 0<larg and larg < self.lx
-        l = 0<long and long < self.ly
+        l = 0<longg and longg < self.ly
         h = 0<haut and haut < self.lx
         
         if bx and by and bz and L and l and h:
