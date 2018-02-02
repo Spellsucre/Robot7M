@@ -11,6 +11,7 @@ class Arene :
         self.ly = ly
         self.lz = lz
         self.liste_cube = liste_cube
+        self.liste_robot = []
 
     def ajouter_cube(self,cube) :
         """Si c'est possible on ajoute un cube dans l'arene
@@ -93,6 +94,27 @@ class Arene :
             else :
                 i= i+1
         return None
+
+    def ajout_robot(self,robot) :
+        """Si c'est possible on ajoute un robot dans l'arene
+            et on return True, et False sinon"""
+
+        x,y,z = robot.position
+        long,larg,haut = robot.dimension
+        
+        bx = 0<x and x < self.lx
+        by = 0<y and y < self.ly
+        bz = 0<z and z < self.lz
+
+        L = 0<larg and larg < self.lx
+        l = 0<long and long < self.ly
+        h = 0<haut and haut < self.lx
+        
+        if bx and by and bz and L and l and h:
+            self.liste_robot.append(robot)
+            return True
+        return False
+    
 
 
 def Creation_Arene() :
