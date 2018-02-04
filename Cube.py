@@ -1,50 +1,63 @@
-from Cube import Cube
+#import
 import random
 
-class Mur(Cube):
-    """Classe héritant de la classe Cube, caractérisée par:
-        -ses coordonnées: x, y, z
-        -sa hauteur
-        -sa largueur
-        -sa longueur"""
+#code
+
+class Cube():
+    """Classe definissant un cube caractérisé par :
+    - ses coordonnées, x, y, z
+    - sa largueur
+    - sa longueur
+    - sa hauteur"""
 
     def __init__(self, x, y, z, larg, long, haut):
-        """Constructeur de la classe Mur"""
-        Cube.__init__(self,x,y,z,larg,long,haut)
+        """constructeur de la classe cube
 
-    def safficher(self):
-        """Methode d'affichage d'un mur au format :
-        mur[x= , y= , z= , larg= , long= , haut= ]
+        exemple de creation d'un cube : c1 = Cube(0,0,0,10,10,10)
+        (création d'un cube de coordonnées x = y = z = 0 et de taille 10
         """
-        print("Mur(x=%.2f,y=%.2f,z=%.2f, larg=%.2f,long=%.2f,haut=%.2f)"%(self.x, self.y, self.z, self.larg, self.long, self.haut))
+        self.x = x
+        self.y = y
+        self.z = z
+        self.larg = larg
+        self.long = long
+        self.haut = haut
+
+        
+    def safficher(self):
+        """Methode d'affichage d'un cube au format :
+        cube[x= , y= , z= , larg= , long= , haut= ]
+        """
+        print("Cube(x=",self.x,",y=",self.y,",z=",self.z,", larg=",self.larg,",long=",self.long,",haut=",self.haut,")")
 
 
-def Creation_Mur(arene):
-    """Création d'un mur avec une hauteur et une epaisseur fixé par les limites de l'Arene"""
+    def getPos(self):
+        """return la position du cube sous forme d'un triplet -> (x, y, z)"""
+        return self.x, self.y, self.z
 
-    x = random.randint(0, arene.lx)
-    y = random.randint(0, arene.ly)
-    z = 1   #un mur est posé au sol
 
-    larg = random.randint(10, 50) #largeur arbitraire
-    long = random.randint(20,100)
-    haut = arene.lz-1   #un mur va jusq'au plafond 
+
+def Creation_Cube(arene):
+    """Creation d'un cube de taille et coordonnees aleatoires"""
+    x = random.randint(0,arene.lx)
+    y = random.randint(0,arene.ly)
+    z = random.randint(0,arene.lz)
     
-    return Mur(x, y, z, larg, long, haut)
+    larg = random.randint(50,70)
+    long = random.randint(50,70)
+    haut = random.randint(50,70)
+    
+    return Cube(x, y, z, larg, long, haut)
 
-
-
-#creation d'u constructeur temporaire pour l'affichage tkinter
-def Creation_Mur_xy(x, y):
-    """Création d'un mur avec une hauteur et une epaisseur fixé par les limites de l'Arene"""
-
+#constructeur temporaire necessaire a tkinter (affichage graphique)
+def Creation_Cube_xy(x, y):
+    """Creation d'un cube de taille aleatoire"""
     x = x
     y = y
-    z = 1  # un mur est posé au sol
+    z = random.randint(0, arene.lz)
 
-    larg = random.randint(50, 250)
-    long = 20
-    haut = 499  # un mur monte jusqu'au plafond
+    larg = random.randint(30, 100)
+    long = random.randint(30, 100)
+    haut = random.randint(30, 100)
 
-    return Mur(x, y, z, larg, long, haut)
-    
+    return Cube(x, y, z, larg, long, haut)
