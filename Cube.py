@@ -48,3 +48,16 @@ def Creation_Cube():
     haut = random.randint(50,70)
     
     return Cube(x, y, z, larg, long, haut)
+
+#constructeur temporaire necessaire a tkinter (affichage graphique)
+def Creation_Cube_xy(x, y):
+    """Creation d'un cube de taille aleatoire"""
+    x = x
+    y = y
+    z = random.randint(0, 500)
+
+    larg = random.randint(30, 100)
+    long = random.randint(30, 100)
+    haut = random.randint(30, 100)
+
+    return Cube(x, y, z, larg, long, haut)
