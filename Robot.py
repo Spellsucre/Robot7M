@@ -1,4 +1,10 @@
+#imports
+
+import random
 import math
+
+#code
+
 class Robot:
 	"""
 		Classe caractérisé par:
@@ -34,6 +40,13 @@ class Robot:
 	def toString(self):
 		return "position: {0}, direction: {1}, vitesse: {2}".format(self.getPosition(),self.getDirection(),self.getVitesse())
 
+	def safficher(self):
+                """Methode d'affichage d'un robot au format :
+                Robot[position, direction, taille, vitesse]
+                """
+                print("Robot(Pos",self.position,",Dir",self.direction,",Dim",self.dimension,",Vit(",self.vitesse,"))")
+                
+
 	"""-----------------------GETTTER-------------------------"""
 	def getPosition(self):
 		return self.position
@@ -56,3 +69,23 @@ class Robot:
 
 	def __setVitesse(self, vitesse):
 		self.vitesse = vitesse
+
+
+def Creation_Robot(arene):
+        """creation d'un Robot avec une position aleatoire"""
+
+        x = random.randint(0, arene.lx)
+        y = random.randint(0, arene.ly)
+        z = 1   #un robot est posé sur le sol
+
+        dirx = 0
+        diry = 1
+        dirz = 0
+
+        larg = 10
+        long = 10
+        haut = 10
+
+        return Robot((x, y, z), (dirx, diry, dirz), (larg, long, haut))
+
+        
