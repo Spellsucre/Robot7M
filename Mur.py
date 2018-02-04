@@ -22,6 +22,18 @@ def Creation_Mur(x,y,z,long,arene):     #ajouter des parametres c'est étrange p
     
     return Mur(x, y, z, 10, long, arene.lz)
 
+#creation d'u constructeur temporaire pour l'affichage tkinter
+def Creation_Mur_xy(x, y):
+    """Création d'un mur avec une hauteur et une epaisseur fixé par les limites de l'Arene"""
 
+    x = x
+    y = y
+    z = 1  # un mur est posé au sol
+
+    larg = random.randint(50, 250)
+    long = 20
+    haut = 499  # un mur monte jusqu'au plafond
+
+    return Mur(x, y, z, larg, long, haut)
     
     
