@@ -21,11 +21,12 @@ class Sol(Cube):
 
 def Creation_Sol(arene): #parametre obligatoire pour pouvoir recupérer les dimensions de l'arene
     """Création d'un sol avec une hauteur = 1 et une taille (larg, long) par les limites de l'Arene"""
-    x = 0
-    y = 0
+    x = 1
+    y = 1
     z = 0
 
-    larg = arene.lx
-    long = arene.ly
+    larg = arene.lx-1
+    long = arene.ly-1
 
     return Sol(x, y, z, larg, long)
+
