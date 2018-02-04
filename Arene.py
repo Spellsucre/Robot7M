@@ -1,5 +1,9 @@
 from math import acos
 from math import sqrt
+from Cube import *
+from Mur import *
+from Sol import *
+from Robot import *
 
 class Arene :
     """ Classe Arene caracterisée par les attributs:
@@ -21,7 +25,7 @@ class Arene :
             et on return True, et False sinon"""
         bx = 0<cube.x and cube.x < self.lx
         by = 0<cube.y and cube.y < self.ly
-        bz = 0<cube.z and cube.z < self.lz
+        bz = 0<=cube.z and cube.z < self.lz
 
         L = 0<cube.larg and cube.larg < self.lx
         l = 0<cube.long and cube.long < self.ly
@@ -37,12 +41,16 @@ class Arene :
         Arene(limiteX= , limiteY= , limiteZ= )
         Liste d'objet [    ,    ,    ]
         """
-        print("Arene(limiteX=%.2f,limiteY=%.2f,limiteZ=%.2f)"
+        print("______________________________________________________________________________\nArene(limiteX=%.2f,limiteY=%.2f,limiteZ=%.2f)"
               %(self.lx, self.ly, self.lz))
-        print("Liste d'objet [")
+        print("LISTE OBJET [")
         for i in self.liste_cube:
             print(i.safficher())
         print("]")
+        print("LISTE ROBOT [")
+        for j in self.liste_robot:
+            print(j.safficher())
+        print("]\n______________________________________________________________________________")
         
 
     def retirer_cube(self,x,y,z) :
@@ -98,12 +106,12 @@ class Arene :
                 i= i+1
         return None
 
-    def ajout_robot(self,robot) :
+    def ajouter_robot(self,robot) :
         """Si c'est possible on ajoute un robot dans l'arene
             et on return True, et False sinon"""
 
         x,y,z = robot.position
-        long,larg,haut = robot.dimension
+        larg,long,haut = robot.dimension
         
         bx = 0<x and x < self.lx
         by = 0<y and y < self.ly
@@ -139,9 +147,9 @@ class Arene :
 def Creation_Arene() :
     """ Test d'une creation d'Arene vide"""
     liste_cube = [] #liste vide pour créer une arène vide
-    lx = 10
-    ly = 10
-    lz = 10 # valeurs limites de l'arène
+    lx = 500
+    ly = 500
+    lz = 500 # valeurs limites de l'arène
 
     arene = Arene(lx,ly,lz,liste_cube)
 
