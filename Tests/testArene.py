@@ -32,15 +32,15 @@ a1.ajouter_robot(r1)
 a1.afficher()
 print('\n')
 
-"""
-r1 = Creation_Robot(a1)
-"Robot(Pos (175, 242, 1) ,Dir (0, 1, 0) ,Dim (10, 10, 10) ,Vit( 0 ))"
-r1._Robot__setVitesse(1)
-r1.safficher()
-"Robot(Pos (175, 242, 1) ,Dir (0, 1, 0) ,Dim (10, 10, 10) ,Vit( 1 ))"
-r1.move()
-r1.safficher()
-"Robot(Pos (175, 242, 1) ,Dir (0, 1, 0) ,Dim (10, 10, 10) ,Vit( 1 ))"
-#pb dans le move
 
-"""
+
+r1 = Creation_Robot(a1)
+r1.safficher()
+#affichage : "Robot(Pos (175, 242, 1) ,Dir (0, 1, 0) ,Dim (10, 10, 10) ,Vit( 0 ))"
+r1._Robot__setVitesse(1)    #OK
+r1.safficher()
+#affichage : "Robot(Pos (175, 242, 1) ,Dir (0, 1, 0) ,Dim (10, 10, 10) ,Vit( 1 ))"
+r1.move()                   #ERROR
+r1.safficher()
+#affichage : "Robot(Pos (175, 242, 1) ,Dir (0, 1, 0) ,Dim (10, 10, 10) ,Vit( 1 ))"
+#pb dans le move() pas de modif de la position
