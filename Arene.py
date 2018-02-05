@@ -165,25 +165,14 @@ def Creation_Arene_Alea(): #en cours de creation
 
     arene = Arene(lx, ly, lz, liste_cube)    
     #boucle creation murs
-    i=0
-    while i<lx-5 : 
-        liste_cube.append(Mur(i+5, 0, 0, 10, 1, 0))
-        liste_cube.append(Mur(i+5, ly-1, 0, 10, 1, 0))
-        i+=5
-    i=0
-    while i<ly-5:
-        while i<lx-5 : 
-            liste_cube.append(Mur(0, i+5, 0, 1, 10, 0))
-            liste_cube.append(Mur(lx-1, i+5, 0, 1, 10, 0))
-            i+=5    
-    #boucle sol
-    i = j = 0
-    while i<lx:
-        while j<ly:
-            if not(Arene.isCube(arene,i,j,0)):
-                liste_cube.append(Sol(i,j,0, i, j))
-            j+=1
-        i+=1
+    liste_cube.append(Mur(lx/2, 0, 0, lx, 1, 0))
+    liste_cube.append(Mur(lx/2, ly-1, 0, lx, 1, 0))
+    liste_cube.append(Mur(0, ly/2, 0, 1, ly, 0))
+    liste_cube.append(Mur(lx-1, ly/2, 0, 1, ly, 0))
+
+    #creation sol
+    liste_cube.append(Sol(lx/2, ly/2, lx-1, ly-1))
+
     #boucle obstacles (cube) aleatoire
     alea = randrange(0, 16)
     i=0
@@ -198,7 +187,6 @@ def Creation_Arene_Alea(): #en cours de creation
     #creation de l'arene avec les parametres initialises de maniere aleatoire
     arene.liste_cube = liste_cube
     return arene
-
 
 #newarene = Creation_Arene_Alea()
 #Arene.afficher(newarene) #pour test mais crée des bug
