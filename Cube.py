@@ -50,7 +50,7 @@ def Creation_Cube(arene):
     return Cube(x, y, z, larg, long, haut)
 
 #constructeur temporaire necessaire a tkinter (affichage graphique)
-def Creation_Cube_xy(x, y):
+def Creation_Cube_xy(x, y, arene):
     """Creation d'un cube de taille aleatoire"""
     x = x
     y = y

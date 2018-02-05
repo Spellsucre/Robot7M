@@ -141,7 +141,17 @@ class Arene :
         if(sgn < 0):
             return -1*teta
         return teta
-    
+
+    def possede_sol(self):
+        """Cherche si l'arene possède un sol ou non"""
+        if len(self.liste_cube) == 0:
+            return False
+        else:
+            for i in self.liste_cube:
+                if isinstance(i, Sol):
+                    return True
+            return False
+
 
 
 def Creation_Arene() :
@@ -155,45 +165,7 @@ def Creation_Arene() :
 
     return arene
 
-def Creation_Arene_Alea(): #en cours de creation
-    """ Test d'une creation d'Arene aleatoire"""
-    liste_cube = list() #creation liste vide
-    #initialisation des limites aleatoires
-    sizecoeff = randrange(0,51)
-    size = sizecoeff*10
-    lx, ly, lz = size , size , size
-
-    arene = Arene(lx, ly, lz, liste_cube)    
-    #boucle creation murs
-    liste_cube.append(Mur(lx/2, 0, 0, lx, 1, 0))
-    liste_cube.append(Mur(lx/2, ly-1, 0, lx, 1, 0))
-    liste_cube.append(Mur(0, ly/2, 0, 1, ly, 0))
-    liste_cube.append(Mur(lx-1, ly/2, 0, 1, ly, 0))
-
-    #creation sol
-    liste_cube.append(Sol(lx/2, ly/2, lx-1, ly-1))
-
-    #boucle obstacles (cube) aleatoire
-    alea = randrange(0, 16)
-    i=0
-    while i<alea :
-        if(randrange(0., 1.)<0.50):
-            randcubesize = randrange(0, lx/10)
-            randcube = Cube(randrange(0,lx), randrange(0,ly), 0,
-                randcubesize, randcubesize, randcubesize)
-            liste_cube.append(Arene.ajouter_cube(arene,randcube))
-        i+=1
-
-    #creation de l'arene avec les parametres initialises de maniere aleatoire
-    arene.liste_cube = liste_cube
-    return arene
-
-#newarene = Creation_Arene_Alea()
-#Arene.afficher(newarene) #pour test mais crée des bug
-
-
 
 
 "Arene.py 1ere soumission (Daoud)"           
 "Arene.py 2eme soumission (Vinson)" 
-"Arene.py 3eme soumission (Ronald)"

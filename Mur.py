@@ -35,16 +35,17 @@ def Creation_Mur(arene):
 
 
 #creation d'u constructeur temporaire pour l'affichage tkinter
-def Creation_Mur_xy(x, y):
+def Creation_Mur_xy(x, y, arene):
     """Création d'un mur avec une hauteur et une epaisseur fixé par les limites de l'Arene"""
 
     x = x
     y = y
     z = 1  # un mur est posé au sol
 
-    larg = random.randint(50, 250)
+    larg = random.randint(50, arene.lx)
     long = 20
     haut = 499  # un mur monte jusqu'au plafond
 
     return Mur(x, y, z, larg, long, haut)
+    
     
