@@ -121,7 +121,7 @@ class Arene :
         l = 0<long and long < self.ly
         h = 0<haut and haut < self.lx
         
-        if bx and by and bz and L and l and h:
+        if bx and by and bz and L and l and h and len(self.liste_robot)==0:
             self.liste_robot.append(robot)
             return True
         return False
