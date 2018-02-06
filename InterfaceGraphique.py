@@ -9,6 +9,9 @@ from Sol import *
 import random
 
 #code
+
+#_________________________CREATION DU ARENE DE BASE ~> PAS TRES PROPRE__________________________
+
 a1 = Creation_Arene()
 
 def gen_aleatoire():
@@ -21,7 +24,7 @@ def gen_aleatoire():
     dessiner_cube(Cube(469,0,0,30,499,30),a1)
 
 
-
+#___________________________________GESTION DES CLICS (G & D)___________________________________
 
 #fonction detection du clic gauche (ajout d'un obstacle de type cube)
 def clicgauche(event):
@@ -44,7 +47,8 @@ def clicdroit(event):
     else:
         print("Error : object 'Mur' outside arena ")
 
-#fonction detection du clic molette (ajout d'un sol)
+#___________________________________AJOUT D'UN SOL VIA LE BOUTON___________________________________
+        
 def ajout_sol():
     s1 = Creation_Sol(a1)
     #if a1.ajouter_cube(s1):
