@@ -23,13 +23,13 @@ class Arene :
     def ajouter_cube(self,cube) :
         """Si c'est possible on ajoute un cube dans l'arene
             et on return True, et False sinon"""
-        bx = 0<cube.x and cube.x < self.lx
-        by = 0<cube.y and cube.y < self.ly
-        bz = 0<=cube.z and cube.z < self.lz
+        bx = 0<=cube.x and cube.x <= self.lx
+        by = 0<=cube.y and cube.y <= self.ly
+        bz = 0<=cube.z and cube.z <= self.lz
 
-        L = 0<cube.larg and cube.larg < self.lx
-        l = 0<cube.long and cube.long < self.ly
-        h = 0<cube.haut and cube.haut < self.lx
+        L = 0<=cube.x + cube.larg and cube.x + cube.larg <= self.lx
+        l = 0<=cube.y + cube.long and cube.y + cube.long <= self.ly
+        h = 0<=cube.z + cube.haut and cube.z + cube.haut <= self.lx
         
         if bx and by and bz and L and l and h:
             self.liste_cube.append(cube)

@@ -51,8 +51,8 @@ def clicdroit(event):
 def ajout_sol():
     if not a1.possede_sol():
         s1 = Creation_Sol(a1)
-        a1.ajouter_cube(s1)
-        dessiner_sol(s1)
+        if a1.ajouter_cube(s1):
+            dessiner_sol(s1)
     else:
         print("Il y a déjà un sol !")
 
@@ -74,13 +74,11 @@ frame1.pack(side=TOP, padx=5, pady=5)
 #label_frame1
 Label(frame1, text="Carré gris = Arene 500 x 500px").pack()
 
-
 #creation d'un canvas (toile ou tableau) dans la fenetre
 canvas1 = Canvas(frame1, width=a1.lx, height=a1.ly)
 canvas1.bind('<Button-1>', clicgauche)
 canvas1.bind('<Button-3>', clicdroit)
 canvas1.pack()
-
 
 #___________________________________NETTOYAGE DU CANEVAS___________________________________
 
