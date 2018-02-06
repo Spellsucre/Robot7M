@@ -18,9 +18,15 @@ a1 = Creation_Arene()
 
 #___________________________________GENERATEUR DE MUR___________________________________
 
-def gen_aleatoire():
-    #mur_horizontal = Mur(X,Y,0,longueur,largeur,arene.lz)
-    #mur_vertical = Mur(X,Y,0,largeur,longueur,arene.lz)
+def gen_quad_mur():
+    """
+    manque:
+        -l'ajout de ces mur a la liste_cude de l'arene
+        -empecher generation si pas de sol
+        -empecher regeneration
+    """    
+    #cube_horizontal = Cube(X,Y,0,longueur,largeur,30)
+    #cube_vertical = Cube(X,Y,0,largeur,longueur,30)
 
     dessiner_mur(Mur(0,0,0,499,30,30),a1) #mur du haut
     dessiner_mur(Mur(0,0,0,30,499,30),a1) #mur gauche
@@ -73,7 +79,7 @@ def ajout_sol():
 
 fenetre = Tk()
 fenetre.title("_______Robot 2i013_______")
-fenetre.resizable(width=True, height=False)
+fenetre.resizable(width=True, height=True)
 #affichage d'un texte dans la fenetre principale
 label = Label(fenetre, text = "Clic gauche ~> ajout d'un cube\nClic droit  ~> ajout d'un mur").pack()
 
@@ -130,7 +136,7 @@ bouton4 = Button(fenetre, text= "Nouveau Sol", command=ajout_sol).pack(side=LEFT
 bouton5 = Button(fenetre, text= "Etat Arene", command=a1.afficher).pack(side=RIGHT)
 
 #creation bouton qui genere des murs tout autour de l'arene ainsi que des obstacles
-bouton = Button(fenetre, text= "Generation Aleatoire", command=gen_aleatoire).pack(side=LEFT)
+bouton = Button(fenetre, text= "Generation Salle(WIP)", command=gen_quad_mur).pack(side=LEFT)
 
 
 #___________________________________FONCTIONS DRAW___________________________________
@@ -153,4 +159,3 @@ def dessiner_sol(s1):
 #___________________________________MAINLOOP___________________________________
 
 fenetre.mainloop()
-
