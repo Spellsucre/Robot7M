@@ -78,12 +78,12 @@ def Creation_Robot(arene):
         y = random.randint(0, arene.ly)
         z = 1   #un robot est posé sur le sol
 
-        dirx = 0
-        diry = 1
+        dirx = 20
+        diry = 20
         dirz = 0
 
-        larg = 10
-        long = 10
+        larg = 50
+        long = 50
         haut = 10
 
         return Robot((x, y, z), (dirx, diry, dirz), (larg, long, haut))
