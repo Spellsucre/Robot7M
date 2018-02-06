@@ -87,7 +87,19 @@ def ajout_sol():
     #if a1.ajouter_cube(s1):
     dessiner_sol(s1)
 
+#___________________________________AJOUT D'UN ROBOT VIA LE BOUTON___________________________________
 
+def ajout_robot():
+    robot=Creation_Robot(a1)
+    if a1.ajouter_robot(robot): #il faudra modifier la methode ajouter_robot pour qu'on ne puisse ajouter qu'un seul robot
+        dessiner_robot(robot)
+    else:
+        if not a1.possede_sol:
+            print("Ajouter un sol avant de placer un robot !")
+
+        else:
+            print("Impossible d'ajouter un robot, il en existe déjà un")
+            
 fenetre = Tk()
 fenetre.title("_______Robot 2i013_______")
 fenetre.resizable(width=False, height=False)
@@ -164,6 +176,10 @@ bouton = Button(fenetre, text= "Nouveau Sol", command=ajout_sol).pack(side=LEFT)
 #creation bouton qui genere des murs tout autour de l'arene ainsi que des obstacles
 bouton = Button(fenetre, text= "Generation Aleatoire", command=gen_aleatoire).pack(side=LEFT)
 
+#creation d'un bouton qui ajoute un robot à l'arene
+bouton = Button(fenetre, text= "Ajout Robot", command=ajout_robot).pack(side=RIGHT)
+
+
 
 def dessiner_cube(cube,arene):
     if isinstance(cube,Cube) and cube.x + cube.larg < arene.lx and cube.y + cube.long < arene.ly:
@@ -177,6 +193,17 @@ def dessiner_mur(mur,arene):
              
 def dessiner_sol(s1):
     canvas1.create_rectangle(s1.x,s1.y, s1.x + s1.larg,s1.y + s1.long, fill="grey")
+
+def dessiner_robot(robot):
+    
+    x, y, z= robot.position
+    long, larg, haut= robot.dimension
+    dirx, diry, dirz =robot.direction
+    canvas1.create_rectangle(x, y, x+larg, y+long, fill="blue")
+    canvas1.create_text(x + larg / 2, y+long / 2, text="Robot", fill="blue", activefill="black")
+    canvas1.create_line(x + larg/2, y, x + dirx, y - diry , fill="black",arrow='last') # creation d'une fleche indiquant la direction du robot
+    canvas1.create_oval(x+ 2*larg/3, y- long/4, x+ larg/3, y+ long/4, outline="black") # creation d'un cercle representant la tete du robot    
+    
 
 
 
