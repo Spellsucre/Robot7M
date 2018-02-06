@@ -10,6 +10,7 @@ import random
 
 #code
 
+
 #_________________________CREATION DU ARENE DE BASE ~> PAS TRES PROPRE__________________________
 
 a1 = Creation_Arene()
@@ -18,13 +19,13 @@ a1 = Creation_Arene()
 #___________________________________GENERATEUR DE MUR___________________________________
 
 def gen_aleatoire():
-    #cube_horizontal = Cube(X,Y,0,longueur,largeur,30)
-    #cube_vertical = Cube(X,Y,0,largeur,longueur,30)
+    #mur_horizontal = Mur(X,Y,0,longueur,largeur,arene.lz)
+    #mur_vertical = Mur(X,Y,0,largeur,longueur,arene.lz)
 
-    dessiner_cube(Mur(0,0,0,499,30,30),a1) #mur du haut
-    dessiner_cube(Mur(0,0,0,30,499,30),a1) #mur gauche
-    dessiner_cube(Mur(0,469,0,499,30,30),a1) #mur du bas
-    dessiner_cube(Mur(469,0,0,30,499,30),a1) #mur droit
+    dessiner_mur(Mur(0,0,0,499,30,30),a1) #mur du haut
+    dessiner_mur(Mur(0,0,0,30,499,30),a1) #mur gauche
+    dessiner_mur(Mur(0,469,0,499,30,30),a1) #mur du bas
+    dessiner_mur(Mur(469,0,0,30,499,30),a1) #mur droit
 
 
 #___________________________________GESTION DES CLICS (G & D)___________________________________
@@ -42,6 +43,7 @@ def clicgauche(event):
     else:
         print("Ajoutez un sol avant de poser des blocs !")
 
+
 #fonction detection du clic droit (ajout d'un mur)
 def clicdroit(event):
     if a1.possede_sol():
@@ -55,12 +57,16 @@ def clicdroit(event):
     else:
         print("Ajoutez un sol avant de poser des blocs !")
 
+
 #___________________________________AJOUT D'UN SOL VIA LE BOUTON___________________________________
-        
+
 def ajout_sol():
-    s1 = Creation_Sol(a1)
-    #if a1.ajouter_cube(s1):
-    dessiner_sol(s1)
+    if not a1.possede_sol():
+        s1 = Creation_Sol(a1)
+        if a1.ajouter_cube(s1):
+            dessiner_sol(s1)
+    else:
+        print("Il y a déjà un sol !")
 
 
 #___________________________________FENETRE PRINCIPALE___________________________________
@@ -89,12 +95,12 @@ canvas1.pack()
 
 #___________________________________NETTOYAGE DU CANEVAS___________________________________
 
-#Fonction pour effacer le canvas
 def effacer():
     """efface tout le canvas"""
     canvas1.delete(ALL)
     while len(a1.liste_cube) > 0:
         a1.liste_cube.pop(-1)
+
 
 def effacerdernier():
     """ Efface le dernier objet"""
@@ -147,3 +153,4 @@ def dessiner_sol(s1):
 #___________________________________MAINLOOP___________________________________
 
 fenetre.mainloop()
+
