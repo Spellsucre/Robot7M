@@ -35,12 +35,17 @@ print('\n')
 
 
 r1 = Creation_Robot(a1)
+print("avant mouvement:")
 r1.safficher()
-#affichage : "Robot(Pos (175, 242, 1) ,Dir (0, 1, 0) ,Dim (10, 10, 10) ,Vit( 0 ))"
-r1._Robot__setVitesse(1)    #OK
+
+r1._Robot__setVitesse(100)
+print("set vitesse à",r1.getVitesse(),":")
 r1.safficher()
-#affichage : "Robot(Pos (175, 242, 1) ,Dir (0, 1, 0) ,Dim (10, 10, 10) ,Vit( 1 ))"
-r1.move()                   #ERROR
+
+print("après mouvement:")
+r1.move()
 r1.safficher()
-#affichage : "Robot(Pos (175, 242, 1) ,Dir (0, 1, 0) ,Dim (10, 10, 10) ,Vit( 1 ))"
-#pb dans le move() pas de modif de la position
+
+print("rotation de 180°")
+r1.rotation(180)
+r1.safficher()	#rotation de seulement 90°??? ~> Error
