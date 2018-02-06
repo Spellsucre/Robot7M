@@ -62,7 +62,7 @@ class Robot:
 
 	"""-----------------------SETTER-------------------------"""
 	def __setPosition(self, position):
-		self.positon = position
+		self.position = position
 
 	def __setDirection(self, direction):
 		self.direction = direction
