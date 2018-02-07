@@ -29,7 +29,7 @@ def gen_aleatoire():
     dessiner_mur(Mur(0,taille-larg_mur-1,0,taille-1,larg_mur,larg_mur),a1) #mur du bas
     dessiner_mur(Mur(taille-larg_mur-1,0,0,larg_mur,taille-1,larg_mur),a1) #mur droit
 
-    ###   Création d'une liste d'obstacles (murs) que l'on va tirer aléatoirement   ###
+    ###   Création d'obstacles (murs) que l'on va tirer aléatoirement   ###
 
     # les coordonnées x et y doivent être comprises entre larg_mur et taille-larg_mur-1 soit ici entre 30 et 469
 
