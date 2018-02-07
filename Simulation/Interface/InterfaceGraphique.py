@@ -26,9 +26,9 @@ a1 = Creation_Arene()
 
 """
     MANQUE:
-        - l'ajout des 4 murs de l'arene à la liste de cube de l'arene (pour dans le futur faire un move du robot detectant les obstacles)
+       OK - l'ajout des 4 murs de l'arene à la liste de cube de l'arene (pour dans le futur faire un move du robot detectant les obstacles)
         
-        - l'ajout des blocs random à la liste de cube de l'arene
+       OK - l'ajout des blocs random à la liste de cube de l'arene 
         
         - soit separer la fonction en deux fonctions distinctes (ajouter un autre bouton),
           une pour la generation des murs de l'arene et une pour les blocs
@@ -45,13 +45,25 @@ def gen_aleatoire():
 
     ###   Initialise le contour de l'arene avec des murs ###
 
+    ajout_sol()
+
     taille = 500  # taille de l'arene
     larg_mur = 30  # largeur des murs de contour
 
-    dessiner_mur(Mur(0, 0, 0, taille - 1, larg_mur, larg_mur), a1)  # mur du haut
-    dessiner_mur(Mur(0, 0, 0, larg_mur, taille - 1, 30), a1)  # mur gauche
-    dessiner_mur(Mur(0, taille - larg_mur - 1, 0, taille - 1, larg_mur, larg_mur), a1)  # mur du bas
-    dessiner_mur(Mur(taille - larg_mur - 1, 0, 0, larg_mur, taille - 1, larg_mur), a1)  # mur droit
+    m1 = Mur(0, 0, 0, taille - 1, larg_mur, larg_mur)
+    m2 = Mur(0, 0, 0, larg_mur, taille - 1, 30)
+    m3 = Mur(0, taille - larg_mur - 1, 0, taille - 1, larg_mur, larg_mur)
+    m4 = Mur(taille - larg_mur - 1, 0, 0, larg_mur, taille - 1, larg_mur)
+
+    a1.ajouter_cube(m1)
+    a1.ajouter_cube(m2)
+    a1.ajouter_cube(m3)
+    a1.ajouter_cube(m4)
+    
+    dessiner_mur(m1, a1)  # mur du haut
+    dessiner_mur(m2, a1)  # mur gauche
+    dessiner_mur(m3, a1)  # mur du bas
+    dessiner_mur(m4, a1)  # mur droit
 
     ###   Création d'obstacles (murs) que l'on va tirer aléatoirement   ###
 
@@ -73,7 +85,9 @@ def gen_aleatoire():
             print("ajout obstacle impossible : cube déja présent à cette position")
 
         else:
-            dessiner_mur(Mur(x, y, 0, long, larg, 0), a1)
+            m = Mur(x, y, 0, long, larg, 0)
+            a1.ajouter_cube(m)
+            dessiner_mur(m, a1)
         i = i + 1
 
 # ___________________________________GESTION DES CLICS (G & D)___________________________________
