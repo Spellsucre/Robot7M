@@ -1,4 +1,10 @@
 
+
+###################################################################
+#ATTENTION CE N'EST PAS LA DERNIERE VERSION A JOUR ! (COMING SOON)#
+###################################################################
+
+
 #import
 
 from tkinter import *
