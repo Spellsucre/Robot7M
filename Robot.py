@@ -33,8 +33,9 @@ class Robot:
 	def rotation(self, teta):
 		teta = math.radians(teta)
 		a, b, c = self.getDirection()
+		temp = a
 		a = a*math.cos(teta) - b*math.sin(teta)
-		y = a*math.sin(teta) + b*math.cos(teta)
+		b = temp*math.sin(teta) + b*math.cos(teta)
 		self.__setDirection((a, b, c))
 
 	def toString(self):
