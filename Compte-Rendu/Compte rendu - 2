@@ -1,0 +1,21 @@
+﻿PROJET 2I013  P5: les 8 ou 9 (je ne sais plus) mercenaires
+
+-CR2 :
+
+ [Semaine du 5/02/18] : Suite du développement des différentes fonctionnalités:
+	-L'interface 2D est presque complète, il manque un bouton pour déplacer le robot et quelques fix de bug tels que la superposition de blocs.
+
+	-Classe robot ok ~> on peut créer, ajouter et déplacer un robot dans une Arène.
+	 On a fait le choix de ne pouvoir créer qu'un robot par Arène (judicieux? à voir)
+ 
+ 	-Tous les blocs ajoutables à une Arène sont fonctionnels.
+
+	-Profonde réorganisation du Git hub ~> gros problème d'écrasement de fichiers qui nous a fait perdre un temps infini.
+	 (Principalement pour retrouver la dernière version fonctionnelle du fichier InterfaceGraphique.py)
+
+	-La 3D n'avance pas beaucoup, plusieurs petits programmes basiques ont été développés mais rien d'aussi poussé que l'interface tkinter.
+	 ~> Problèmes de prise en main de la bibliothèque pyglet + OpenGL?
+
+	- Abandon de la création des class VueRobot, VueCube, etc... Car il n'y a pas de support pyglet
+
+
