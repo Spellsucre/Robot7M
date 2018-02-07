@@ -244,12 +244,16 @@ def dessiner_robot(robot):
     x, y, z = robot.position
     long, larg, haut = robot.dimension
     dirx, diry, dirz = robot.direction
+    
     canvas1.create_rectangle(x, y, x + larg, y + long, fill="blue")
-    canvas1.create_text(x + larg / 2, y + long / 2, text="Robot", fill="blue", activefill="black")
-    canvas1.create_line(x + larg / 2, y, x + dirx, y - diry, fill="black",
-                        arrow='last')  # creation d'une fleche indiquant la direction du robot      ~> trop petite
+    canvas1.create_text(x + larg / 2, y + long / 2, text="Robot", fill="blue", activefill="black")   
     canvas1.create_oval(x + 2 * larg / 3, y - long / 4, x + larg / 3, y + long / 4,
                         outline="black")  # creation d'un cercle representant la tete du robot
+    
+    vecdirec_x=(x+larg/2)-dirx
+    vecdirec_y=(y-long / 4)-diry #calcul du vecteur direction
+    canvas1.create_line(x + larg / 2, y - long / 4, vecdirec_x , vecdirec_y, fill="black",
+                       arrow='last')  # creation d'une fleche indiquant la direction du robot 
 
 
 # ___________________________________MAINLOOP___________________________________
