@@ -1,9 +1,9 @@
 from math import acos
 from math import sqrt
-from Cube import *
-from Mur import *
-from Sol import *
-from Robot import *
+from Basiques.Cube import *
+from Basiques.Mur import *
+from Basiques.Sol import *
+from Structures.Robot import *
 
 class Arene :
     """ Classe Arene caracterisée par les attributs:
