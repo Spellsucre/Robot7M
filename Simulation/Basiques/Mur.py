@@ -1,4 +1,4 @@
-from Cube import Cube
+from Basiques.Cube import Cube
 import random
 
 class Mur(Cube):
