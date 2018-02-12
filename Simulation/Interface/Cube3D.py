@@ -17,8 +17,7 @@ class Window(pyglet.window.Window):
         self.y = y
         self.cube = cube
         glEnable(GL_DEPTH_TEST)
-
-
+        
 
     def on_draw(self):
         # Clear the current GL Window
@@ -135,35 +134,39 @@ class Window(pyglet.window.Window):
 
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
-        glTranslatef(self.x, self.y, -800) # (x,y,z) x gere la position horizontale de la camera, y gere sa position verticale, et z gere le zoom
+        glTranslatef(self.cube.xx, self.cube.yy, -800) # (x,y,z) x gere la position horizontale de la camera, y gere sa position verticale, et z gere le zoom
         # plus x augmente plus le cube monte et plus y monte plus le cube monte (0,0,-800)
 
     ## touche du clavier pour deplacer le cube ##
-    
-    def on_text_motion(self, motion):
-        
-        if motion == key.UP:
-            self.xRotation -= INCREMENT
-        elif motion == key.DOWN:
-            self.xRotation += INCREMENT
-        elif motion == key.LEFT:
-            self.yRotation -= INCREMENT
-        elif motion == key.RIGHT:
-            self.yRotation += INCREMENT
 
-        ## test pour deplacer le cube ##
-        """if motion == key.LEFT: # cube va vers la gauche
-            self.cube.xx= self.cube.xx -1
-            glTranslatef(self.cube.xx, self.cube.yy, -800)
-        elif motion == key.RIGHT: # cube va vers la droite
-            self.cube.xx == self.cube.xx +1
-            glTranslatef(self.cube.xx, self.cube.yy, -800)
-        elif motion == key.UP: # cube va vers le haut
-            self.cube.yy = self.cube.yy + 10
-        elif motion == key.DOWN: # cube va vers le bas
-            self.cube.yy = self.cube.yy -10"""
-        
-            
+    def on_key_press(self, symbol, modifiers):
+        if symbol == key.UP:
+            self.xRotation -= INCREMENT
+        elif symbol == key.DOWN:
+            self.xRotation += INCREMENT
+        elif symbol == key.LEFT:
+            self.yRotation -= INCREMENT
+        elif symbol == key.RIGHT:
+            self.yRotation += INCREMENT
+        elif symbol == key.Q: # cube va vers la gauche
+            self.clear()
+            glTranslatef(-10, 0, 0)
+        elif symbol == key.D: # cube va vers la droite
+            self.clear()
+            glTranslatef(10, 0, 0)
+        elif symbol == key.Z: # cube va vers le haut
+            self.clear()
+            glTranslatef(0,10,0)
+        elif symbol == key.S: # cube va vers le bas
+            self.clear()
+            glTranslatef(0,-10,0)
+        elif symbol == key.P:
+            self.clear()
+            glTranslatef(0,0,10)
+        elif symbol == key.M:
+            self.clear()
+            glTranslatef(0,0,-10)
+
 class Cube3D():
     def __init__(self,xx,yy,zz,taille):
         self.xx = xx
