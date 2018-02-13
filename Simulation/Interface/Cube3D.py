@@ -15,8 +15,14 @@ class Window(pyglet.window.Window):
         self.t = t
         self.x = x
         self.y = y
-        self.cube = cube
+        self.cube = cube 
         glEnable(GL_DEPTH_TEST)
+        self.label = pyglet.text.Label('x : %d y : '%cube.xx, 
+                          font_name='Times New Roman', 
+                          font_size=20,
+                          x=-200, y=200)
+        
+        
         
 
     def on_draw(self):
@@ -116,10 +122,15 @@ class Window(pyglet.window.Window):
         
 
         glEnd() # marque la fin de la construction
+        a=5
+        
+        
+        self.label.draw()
 
         # Pop Matrix off stack
         glPopMatrix()
 
+    
 
     def on_resize(self, width, height):
         # set the Viewport
@@ -151,21 +162,27 @@ class Window(pyglet.window.Window):
         elif symbol == key.Q: # cube va vers la gauche
             self.clear()
             glTranslatef(-10, 0, 0)
+            self.cube.xx = self.cube.xx -10
         elif symbol == key.D: # cube va vers la droite
             self.clear()
             glTranslatef(10, 0, 0)
+            self.cube.xx = self.cube.xx +10
         elif symbol == key.Z: # cube va vers le haut
             self.clear()
             glTranslatef(0,10,0)
+            self.cube.yy = self.cube.yy +10
         elif symbol == key.S: # cube va vers le bas
             self.clear()
             glTranslatef(0,-10,0)
+            self.cube.yy = self.cube.yy -10
         elif symbol == key.P:
             self.clear()
             glTranslatef(0,0,10)
+            self.cube.zz = self.cube.zz +10
         elif symbol == key.M:
             self.clear()
             glTranslatef(0,0,-10)
+            self.cube.zz = self.cube.zz -10
 
 class Cube3D():
     def __init__(self,xx,yy,zz,taille):
