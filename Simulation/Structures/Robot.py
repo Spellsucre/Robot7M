@@ -31,6 +31,7 @@ class Robot:
 
 	#teta: int en degré
 	def rotation(self, teta):
+	"""la rotation est effectuée dans le sens anti-horaire"""
 		teta = math.radians(teta)
 		a, b, c = self.getDirection()
 		temp = a
