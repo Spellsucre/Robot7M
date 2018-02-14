@@ -37,9 +37,9 @@ class Robot:
 		a = math.ceil(a*math.cos(teta) - b*math.sin(teta))
 		b = math.ceil(temp*math.sin(teta) + b*math.cos(teta))
 		if(a == -0.0):
-			a = 0.0
+			a = abs(a)
 		if(b == -0.0):
-			b = 0.0
+			b = abs(b)
 		self.__setDirection((a, b, c))
 
 	def toString(self):
