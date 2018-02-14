@@ -70,6 +70,12 @@ class Robot:
 
 	def __setVitesse(self, vitesse):
 		self.vitesse = vitesse
+		
+	
+	"""-----------------------SAVER-------------------------"""
+	def toSaveF(self, f):
+	    """Ecrit les coordonnees du robot dans le fichier ouvert passe en argument, avec ';' comme separation"""
+	    f.write('Robot;' + str(self.position) + ';' +  str(self.direction) + ';' + str(self.dimension) + ';' + str(self.vitesse) + ';\n')
 
 
 def Creation_Robot(arene):

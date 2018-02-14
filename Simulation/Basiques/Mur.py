@@ -18,7 +18,10 @@ class Mur(Cube):
         """
         print("Mur(x=%.2f,y=%.2f,z=%.2f, larg=%.2f,long=%.2f,haut=%.2f)"%(self.x, self.y, self.z, self.larg, self.long, self.haut))
 
-
+    def toSaveF(self, f):
+        """Ecrit les coordonnees du mur dans le fichier ouvert passe en argument, avec ';' comme separation"""
+        f.write('Mur;' + str(self.x) + ';' + str(self.y) + ';' + str(self.z) + ';' + str(self.larg) + ';' + str(self.long) + ';' + str(self.haut) + ';\n' )
+			
 def Creation_Mur(arene):
     """Création d'un mur avec une hauteur et une epaisseur fixé par les limites de l'Arene"""
 
