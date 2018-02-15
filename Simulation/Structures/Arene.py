@@ -1,6 +1,6 @@
 from math import acos
 from math import sqrt
-from Cube import *
+from Basiques.Cube import *
 from Basiques.Mur import *
 from Basiques.Sol import *
 from Structures.Robot import *
@@ -126,7 +126,7 @@ class Arene :
             return True
         return False
 
-     def retourne_angle(self,x,y,xx,yy) :
+    def retourne_angle(self,x,y,xx,yy) :
         """ retourne un angle teta en radian selon une direction initale d'un
             vecteur u(x,y) et une les coordonées du vecteur de la prochaine
             direction d'un vecteur v(xx,yy) en paramètres """
