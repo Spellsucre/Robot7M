@@ -2,7 +2,7 @@
 
 import random
 import math
-
+form TeteRobot import*
 #code
 
 class Robot:
