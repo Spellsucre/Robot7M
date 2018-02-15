@@ -85,7 +85,7 @@ class Robot:
     def __setDirection(self, direction):
         self.direction = direction
 
-    def __setVitesse(self, vitesse):
+    def setVitesse(self, vitesse):
         self.vitesse = vitesse
         
     
