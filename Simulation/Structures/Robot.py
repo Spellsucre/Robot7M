@@ -6,81 +6,81 @@ import math
 #code
 
 class Robot:
-	"""
-		Classe caractérisé par:
-		Sa Position: triplet(x, y, z)
-		Sa direction: triplet(a, b, c)
-		Sa dimension(final): triplet(longueur, largeur, hauteur)
-		Sa vitesse: entier
-	"""
+    """
+        Classe caractérisé par:
+        Sa Position: triplet(x, y, z)
+        Sa direction: triplet(a, b, c)
+        Sa dimension(final): triplet(longueur, largeur, hauteur)
+        Sa vitesse: entier
+    """
 
-	def __init__(self, position, direction, dimension):
-		self.position = position
-		self.direction = direction
-		self.dimension = dimension
-		self.vitesse = 0
+    def __init__(self, position, direction, dimension):
+        self.position = position
+        self.direction = direction
+        self.dimension = dimension
+        self.vitesse = 0
 
-	def move(self):
-		x, y, z = self.getPosition()
-		a, b, c = self.getDirection()
-		vitesse = self.getVitesse()
-		x += a*vitesse
-		y += b*vitesse
-		z += c*vitesse
-		self.__setPosition((x, y, z))
+    def move(self):
+        x, y, z = self.getPosition()
+        a, b, c = self.getDirection()
+        vitesse = self.getVitesse()
+        x += a*vitesse
+        y += b*vitesse
+        z += c*vitesse
+        self.__setPosition((x, y, z))
 
-	#teta: int en degré
-	def rotation(self, teta):
-	"""la rotation est effectuée dans le sens anti-horaire"""
-		teta = math.radians(teta)
-		a, b, c = self.getDirection()
-		temp = a
-		a = math.ceil(a*math.cos(teta) - b*math.sin(teta))
-		b = math.ceil(temp*math.sin(teta) + b*math.cos(teta))
-		if(a == -0.0):
-			a = abs(a)
-		if(b == -0.0):
-			b = abs(b)
-		self.__setDirection((a, b, c))
+    #teta: int en degré
+    def rotation(self, teta):
+        """la rotation est effectuée dans le sens anti-horaire"""
+        teta = math.radians(teta)
+        a, b, c = self.getDirection()
+        temp = a
+        a = math.ceil(a*math.cos(teta) - b*math.sin(teta))
+        b = math.ceil(temp*math.sin(teta) + b*math.cos(teta))
+        if(a == -0.0):
+            a = abs(a)
+        if(b == -0.0):
+            b = abs(b)
+        self.__setDirection((a, b, c))
 
-	def toString(self):
-		return "position: {0}, direction: {1}, vitesse: {2}".format(self.getPosition(),self.getDirection(),self.getVitesse())
+    def toString(self):
+        return "position: {0}, direction: {1}, vitesse: {2}".format(self.getPosition(),self.getDirection(),self.getVitesse())
 
-	def safficher(self):
+    def safficher(self):
                 """Methode d'affichage d'un robot au format :
                 Robot[position, direction, taille, vitesse]
                 """
                 print("Robot(Pos",self.position,",Dir",self.direction,",Dim",self.dimension,",Vit(",self.vitesse,"))")
                 
 
-	"""-----------------------GETTTER-------------------------"""
-	def getPosition(self):
-		return self.position
+    """-----------------------GETTTER-------------------------"""
+    def getPosition(self):
+        return self.position
 
-	def getDirection(self):
-		return self.direction
+    def getDirection(self):
+        return self.direction
 
-	def getDimension(self):
-		return self.dimension
+    def getDimension(self):
+        return self.dimension
 
-	def getVitesse(self):
-		return self.vitesse
+    def getVitesse(self):
+        return self.vitesse
 
-	"""-----------------------SETTER-------------------------"""
-	def __setPosition(self, position):
-		self.position = position
+    """-----------------------SETTER-------------------------"""
+    def __setPosition(self, position):
+        self.position = position
 
-	def __setDirection(self, direction):
-		self.direction = direction
+    def __setDirection(self, direction):
+        self.direction = direction
 
-	def __setVitesse(self, vitesse):
-		self.vitesse = vitesse
-		
-	
-	"""-----------------------SAVER-------------------------"""
-	def toSaveF(self, f):
-	    """Ecrit les coordonnees du robot dans le fichier ouvert passe en argument, avec ';' comme separation"""
-	    f.write('Robot;' + str(self.position) + ';' +  str(self.direction) + ';' + str(self.dimension) + ';' + str(self.vitesse) + ';\n')
+    def __setVitesse(self, vitesse):
+        self.vitesse = vitesse
+        
+    
+    """-----------------------SAVER-------------------------"""
+    def toSaveF(self, f):
+        """Ecrit les coordonnees du robot dans le fichier ouvert passe en argument, avec ';' comme separation"""
+        f.write('Robot;' + str(self.position) + ';' +  str(self.direction) + ';' + str(self.dimension) + ';' + str(self.vitesse) + ';\n')
 
 
 def Creation_Robot(arene):
@@ -101,3 +101,4 @@ def Creation_Robot(arene):
         return Robot((x, y, z), (dirx, diry, dirz), (larg, long, haut))
 
         
+

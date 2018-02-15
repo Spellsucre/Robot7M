@@ -132,12 +132,11 @@ class Arene :
             direction d'un vecteur v(xx,yy) en paramètres """
 
         sgn = (x*yy)+(xx*y)
+        u = sqrt((x*x)+(y*y)) #norme de u
+        v = sqrt((xx*xx)+(yy*yy)) #norme de v
         
-        nu = sqrt((x*x)+(y*y)) #norme de u
-        nv = sqrt((xx*xx)+(yy*yy)) #norme de v
-        uv = (x*xx) + (y*yy)
-
-        teta = acos(uv/(nu*nv))
+        tmp = ((x*xx)+(y*yy))/(u+v)
+        teta = acos(tmp)
 
         if(sgn < 0):
             return -1*teta
@@ -155,11 +154,11 @@ class Arene :
 
     def toSaveF(self, f):
         """Ecrit les coordonnees de l'arene dans le fichier ouvert passe en argument, avec ';' comme separation"""
+        f.write('Arene;' + str(self.lx) + ';' + str(self.ly) + ';' + str(self.lz) + ';\n')
         for cube in self.liste_cube:
             cube.toSaveF(f)
         for rob in self.liste_robot:
             rob.toSaveF(f)
-        f.write('Arene;' + str(self.lx) + ';' + str(self.ly) + ';' + str(self.lz) + ';\n')
     
 def Creation_Arene() :
     """ Test d'une creation d'Arene vide"""
@@ -173,31 +172,33 @@ def Creation_Arene() :
     return arene
 
 def sauvegardeEnv(arene,nomfichier):
-    with open(nomfichier,"w") as f:
+    with open(nomfichier,'w') as f:
         arene.toSaveF(f)
+        print("Arene sauvegardée.")
+        
 	       
-"""def chargerEnv(nomfichier):
-    with open(nomfichier,"r") as f:
+def chargerEnv(nomfichier):
+    """Fonction de chargement, ouverture du fichier en mode lecture"""
+    with open(nomfichier,'r') as f:
         liste_cube = list()
         liste_robot = list()
+        """deux listes vides pour contenir les objets charges"""
         for line in f:
-            ligne=split(str=";")
-            if ligne[0] == 'Cube':
-                print(ligne)
-                liste_cube.append(Cube.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
-            elif ligne[0] == 'Mur':
-                print(ligne)
-                liste_cube.append(Mur.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
-            elif ligne[0] == 'Sol':
-                print(ligne)
-                liste_cube.append(Sol.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
-            elif ligne[0] == 'Robot':
-                print(ligne)
-                liste_robot.append(Robot.__init__(ligne[1],ligne[2],ligne[3])
-            elif ligne[0] == 'Arene':
-                arene = Arene.__init__(ligne[1],ligne[2],ligne[3],liste_cube)
+            ligne=line.split(";")
+            if ligne[0] == 'Arene':
+                """On cree une nouvelle arene avec les parametres trouves sur la ligne, separes par des ';' """
+                arene = Arene(ligne[1],ligne[2],ligne[3],liste_cube)
                 arene.liste_robot=liste_robot
-                print("Arene chargée")"""
+            elif ligne[0] == 'Cube':
+                """On ajoute le cube a la liste de cube de l'arene, avec parametres trouves sur la ligne"""
+                arene.liste_cube.append(Cube(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6]))
+            elif ligne[0] == 'Mur':
+                arene.liste_cube.append(Mur(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6]))
+            elif ligne[0] == 'Sol':
+                arene.liste_cube.append(Sol(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5]))
+            elif ligne[0] == 'Robot':
+                arene.liste_robot.append(Robot(ligne[1],ligne[2],ligne[3]))
+        print("Arene chargée.")
                   
 	     
 

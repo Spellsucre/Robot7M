@@ -27,8 +27,24 @@ a1.ajouter_robot(r1)
 a1.afficher()
 print('\n')
 
-
-
+print('_________________________________________________________')
+print("Avant sauvegarde")
+c1.safficher()
+s1.safficher()
+m1.safficher()
+r1.safficher()
+#Avant sauvegarde
+print('_________________________________________________________')
+sauvegardeEnv(a1,'save.txt')
+chargerEnv('save.txt')
+print('_________________________________________________________')
+print("Après chargement")
+c1.safficher()
+s1.safficher()
+m1.safficher()
+r1.safficher()
+#Après sauvegarde
+print('_________________________________________________________')
 r1 = Creation_Robot(a1)
 print("avant mouvement:")
 r1.safficher()
@@ -45,17 +61,3 @@ print("rotation de 180°")
 r1.rotation(180)
 r1.safficher()	#rotation de seulement 90°??? ~> Error
 
-c1.safficher()
-s1.safficher()
-m1.safficher()
-r1.safficher()
-#Avant sauvegarde
-
-sauvegardeEnv(a1,'save.txt')
-chargerEnv('save.txt')
-
-c1.safficher()
-s1.safficher()
-m1.safficher()
-r1.safficher()
-#Après sauvegarde
