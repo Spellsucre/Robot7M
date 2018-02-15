@@ -3,35 +3,45 @@ from Structures.Arene import *
 from Structures.Robot import *
 
 arene = Creation_Arene()
-robot = Creation_Robot(arene)
+arene.ajouter_robot(Creation_Robot(arene))
 
 def on_press(key):
 	try:
 		#print('{0} released'.format(key))
 		if(key == keyboard.Key.esc):
 			return False
-		elif (key.char == "z"):
-			print(robot.toString())
-			robot.setVitesse(3)
-			robot.move()
-			print(robot.toString())
-		elif (key.char == "s"):
-			print(robot.toString())
-			robot.setVitesse(3)
-			robot.move()
-			print(robot.toString())
-		elif (key.char == "q"):
-			print(robot.toString())
-			robot.setVitesse(0)
-			robot.rotation(90)
-			robot.move()
-			print(robot.toString())
-		elif (key.char == "d"):
-			print(robot.toString())
-			robot.setVitesse(0)
-			robot.rotation(-90)
-			robot.move()
-			print(robot.toString())
+		elif(key == keyboard.Key.left):
+			print(arene.liste_robot[0].toString())
+			arene.liste_arene.liste_robot[0][0].rotation_tete(30)
+			arene.liste_robot[0].move()
+			print(arene.liste_robot[0].toString())
+		elif(key == keyboard.Key.right):
+			print(arene.liste_robot[0].toString())
+			arene.liste_robot[0].rotation_tete(30)
+			arene.liste_robot[0].move()
+			print(arene.liste_robot[0].toString())
+		elif(key.char == "z"):
+			print(arene.liste_robot[0].toString())
+			arene.liste_robot[0].setVitesse(arene.liste_robot[0].getVitesse()+3)
+			arene.liste_robot[0].move()
+			print(arene.liste_robot[0].toString())
+		elif(key.char == "s"):
+			print(arene.liste_robot[0].toString())
+			arene.liste_robot[0].setVitesse(arene.liste_robot[0].getVitesse()-3)
+			arene.liste_robot[0].move()
+			print(arene.liste_robot[0].toString())
+		elif(key.char == "q"):
+			print(arene.liste_robot[0].toString())
+			arene.liste_robot[0].setVitesse(0)
+			arene.liste_robot[0].rotation(90)
+			arene.liste_robot[0].move()
+			print(arene.liste_robot[0].toString())
+		elif(key.char == "d"):
+			print(arene.liste_robot[0].toString())
+			arene.liste_robot[0].setVitesse(0)
+			arene.liste_robot[0].rotation(-90)
+			arene.liste_robot[0].move()
+			print(arene.liste_robot[0].toString())
 		else:
 			print("0")
 	except AttributeError:
