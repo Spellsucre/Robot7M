@@ -1,6 +1,6 @@
 import random
 import math
-from Robot import *
+from Structures.Robot import *
 
 class TeteRobot:
     """
@@ -27,6 +27,7 @@ class TeteRobot:
         print("Robot(Pos",self.position,",Dir",self.orientation,",Dim",self.dimension,"))")
 
     def rotation(self, teta):
+        """Methode de rotation de tete, retourne True s'il est possible de tourner la tete, sinon retourne False """
         teta = math.radians(teta)
         orx, ory = self.orientation
         x , y, z = self.position

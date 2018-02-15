@@ -2,7 +2,7 @@
 
 import random
 import math
-
+from Structures.TeteRobot import*
 #code
 
 class Robot:
@@ -12,6 +12,7 @@ class Robot:
         Sa direction: triplet(a, b, c)
         Sa dimension(final): triplet(longueur, largeur, hauteur)
         Sa vitesse: entier
+        sa tete: Class TeteRobot
     """
 
     def __init__(self, position, direction, dimension):
@@ -19,15 +20,24 @@ class Robot:
         self.direction = direction
         self.dimension = dimension
         self.vitesse = 0
-
+        self.tete= Creation_TeteRobot(self)
+    
     def move(self):
         x, y, z = self.getPosition()
         a, b, c = self.getDirection()
         vitesse = self.getVitesse()
+        xt, yt, zt = (self.tete).getPosition()
+        longr, larg, haut = self.getDimension()
+        
         x += a*vitesse
         y += b*vitesse
         z += c*vitesse
         self.__setPosition((x, y, z))
+        
+        xt= x + larg/2
+        yt= y
+        zt= z + haut/2
+        (self.tete).setPosition((xt, yt, zt))
 
     #teta: int en degré
     def rotation(self, teta):
@@ -42,6 +52,9 @@ class Robot:
         if(b == -0.0):
             b = abs(b)
         self.__setDirection((a, b, c))
+       
+    def rotation_tete(self, teta):
+        self.tete.rotation(teta)
 
     def toString(self):
         return "position: {0}, direction: {1}, vitesse: {2}".format(self.getPosition(),self.getDirection(),self.getVitesse())
@@ -73,7 +86,7 @@ class Robot:
     def __setDirection(self, direction):
         self.direction = direction
 
-    def __setVitesse(self, vitesse):
+    def setVitesse(self, vitesse):
         self.vitesse = vitesse
         
     

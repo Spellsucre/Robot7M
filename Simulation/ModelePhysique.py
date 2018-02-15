@@ -3,7 +3,7 @@ from Structures.Arene import *
 from Structures.Robot import *
 
 arene = Creation_Arene()
-robot = Robot((arene.lx, arene.ly, arene.lz), (1, 1, 0), (50, 50, 10))
+robot = Creation_Robot(arene)
 
 def on_press(key):
 	try:
