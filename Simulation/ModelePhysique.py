@@ -3,7 +3,7 @@ from Structures.Arene import *
 from Structures.Robot import *
 
 arene = Creation_Arene()
-robot = Robot((arene.lx, arene.ly, arene.lz), (1, 1, 0), (50, 50, 10))
+robot = Creation_Robot(arene)
 
 def on_press(key):
 	try:
@@ -32,4 +32,6 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
 		listener.join()
 	except MyException as e:
 		print('{0} was pressed'.format(e.args[0]))
+
+print('a')
 			
