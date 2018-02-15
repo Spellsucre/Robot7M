@@ -17,6 +17,9 @@ class Sol(Cube):
         """
         print("Sol(x=%.2f,y=%.2f,z=%.2f, larg=%.2f,long=%.2f,haut=%.2f)"%(self.x, self.y, self.z, self.larg, self.long, self.haut))
 
+    def toSaveF(self, f):
+        """Ecrit les coordonnees du sol dans le fichier ouvert passe en argument, avec ';' comme separation"""
+        f.write('Sol;' + str(self.x) + ';' + str(self.y) + ';' + str(self.z) + ';' + str(self.larg) + ';' + str(self.long) + ';' + str(self.haut) + ';\n' )
 
 def Creation_Sol(arene): #parametre obligatoire pour pouvoir recupérer les dimensions de l'arene
     """Création d'un sol avec une hauteur = 1 et une taille (larg, long) par les limites de l'Arene"""

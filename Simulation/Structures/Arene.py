@@ -152,8 +152,14 @@ class Arene :
                     return True
             return False
 
-
-
+    def toSaveF(self, f):
+        """Ecrit les coordonnees de l'arene dans le fichier ouvert passe en argument, avec ';' comme separation"""
+        for cube in self.liste_cube:
+            cube.toSaveF(f)
+        for rob in self.liste_robot:
+            rob.toSaveF(f)
+        f.write('Arene;' + str(self.lx) + ';' + str(self.ly) + ';' + str(self.lz) + ';\n')
+    
 def Creation_Arene() :
     """ Test d'une creation d'Arene vide"""
     liste_cube = [] #liste vide pour créer une arène vide
@@ -165,7 +171,34 @@ def Creation_Arene() :
 
     return arene
 
-
+def sauvegardeEnv(arene,nomfichier):
+    with open(nomfichier,"w") as f:
+        arene.toSaveF(f)
+	       
+"""def chargerEnv(nomfichier):
+    with open(nomfichier,"r") as f:
+        liste_cube = list()
+        liste_robot = list()
+        for line in f:
+            ligne=split(str=";")
+            if ligne[0] == 'Cube':
+                print(ligne)
+                liste_cube.append(Cube.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
+            elif ligne[0] == 'Mur':
+                print(ligne)
+                liste_cube.append(Mur.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
+            elif ligne[0] == 'Sol':
+                print(ligne)
+                liste_cube.append(Sol.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
+            elif ligne[0] == 'Robot':
+                print(ligne)
+                liste_robot.append(Robot.__init__(ligne[1],ligne[2],ligne[3])
+            elif ligne[0] == 'Arene':
+                arene = Arene.__init__(ligne[1],ligne[2],ligne[3],liste_cube)
+                arene.liste_robot=liste_robot
+                print("Arene chargée")"""
+                  
+	     
 
 "Arene.py 1ere soumission (Daoud)"           
 "Arene.py 2eme soumission (Vinson)" 
