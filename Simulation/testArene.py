@@ -36,7 +36,7 @@ r1.safficher()
 #Avant sauvegarde
 print('_________________________________________________________')
 sauvegardeEnv(a1,'save.txt')
-chargerEnv('save.txt')
+a1=chargerEnv('save.txt')
 print('_________________________________________________________')
 print("Après chargement")
 c1.safficher()

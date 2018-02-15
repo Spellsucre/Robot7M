@@ -1,5 +1,6 @@
 from math import acos
 from math import sqrt
+from ast import literal_eval
 from Basiques.Cube import *
 from Basiques.Mur import *
 from Basiques.Sol import *
@@ -37,6 +38,7 @@ class Arene :
         return False
     
     def afficher(self):
+
         """Methode d'affichage d'une arene au format :
         Arene(limiteX= , limiteY= , limiteZ= )
         Liste d'objet [    ,    ,    ]
@@ -187,17 +189,20 @@ def chargerEnv(nomfichier):
             ligne=line.split(";")
             if ligne[0] == 'Arene':
                 """On cree une nouvelle arene avec les parametres trouves sur la ligne, separes par des ';' """
-                arene = Arene(ligne[1],ligne[2],ligne[3],liste_cube)
+                arene = Arene(int(ligne[1]),int(ligne[2]),int(ligne[3]),liste_cube)
                 arene.liste_robot=liste_robot
             elif ligne[0] == 'Cube':
                 """On ajoute le cube a la liste de cube de l'arene, avec parametres trouves sur la ligne"""
-                arene.liste_cube.append(Cube(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6]))
+                arene.liste_cube.append(Cube(int(ligne[1]),int(ligne[2]),int(ligne[3]),int(ligne[4]),int(ligne[5]),int(ligne[6])))
             elif ligne[0] == 'Mur':
-                arene.liste_cube.append(Mur(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6]))
+                arene.liste_cube.append(Mur(int(ligne[1]),int(ligne[2]),int(ligne[3]),int(ligne[4]),int(ligne[5]),int(ligne[6])))
             elif ligne[0] == 'Sol':
-                arene.liste_cube.append(Sol(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5]))
+                arene.liste_cube.append(Sol(int(ligne[1]),int(ligne[2]),int(ligne[3]),int(ligne[4]),int(ligne[5])))
             elif ligne[0] == 'Robot':
-                arene.liste_robot.append(Robot(ligne[1],ligne[2],ligne[3]))
+                (x,y,z)=literal_eval(ligne[1])
+                (a,b,c)=literal_eval(ligne[2])
+                (lo,la,ha)=literal_eval(ligne[3])
+                arene.liste_robot.append(Robot((x,y,z),(a,b,c),(lo,la,ha)))
         print("Arene chargée.")
         return arene
                   
