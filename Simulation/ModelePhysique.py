@@ -7,16 +7,37 @@ robot = Creation_Robot(arene)
 
 def on_press(key):
 	try:
-		print('{0} released'.format(key))
+		#print('{0} released'.format(key))
 		if(key == keyboard.Key.esc):
 			return False
-		elif (key.char == "a"):
-			print("1")
+		elif (key.char == "z"):
+			print(robot.toString())
+			robot.setVitesse(3)
+			robot.move()
+			print(robot.toString())
+		elif (key.char == "s"):
+			print(robot.toString())
+			robot.setVitesse(3)
+			robot.move()
+			print(robot.toString())
+		elif (key.char == "q"):
+			print(robot.toString())
+			robot.setVitesse(0)
+			robot.rotation(90)
+			robot.move()
+			print(robot.toString())
+		elif (key.char == "d"):
+			print(robot.toString())
+			robot.setVitesse(0)
+			robot.rotation(-90)
+			robot.move()
+			print(robot.toString())
 		else:
 			print("0")
 	except AttributeError:
 		print('special key {0} pressed'.format(key))
 
+"""
 def on_release(key):
 	try:
 		print('{0} released'.format(key))
@@ -26,8 +47,9 @@ def on_release(key):
 			print("false")
 	except AttributeError:
 		print('special key {0} pressed'.format(key))
+"""
 
-with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+with keyboard.Listener(on_press=on_press) as listener:
 	try:
 		listener.join()
 	except MyException as e:
