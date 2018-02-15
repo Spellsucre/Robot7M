@@ -1,6 +1,6 @@
 import random
 import math
-from Robot import *
+from Structures.Robot import *
 
 class TeteRobot:
     """
