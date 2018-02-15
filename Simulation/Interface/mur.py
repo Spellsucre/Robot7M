@@ -98,7 +98,7 @@ class Window(pyglet.window.Window):
         # methodes et variables de champ fenetre
         glClearColor(0.7, 0.2, 0.5, 1)
 
-    glEnable(GL_DEPTH_TEST)
+        glEnable(GL_DEPTH_TEST)
     xRotation = yRotation = 30
 
     def addmur(self, x, y, z, h, l, p, setcolor):
