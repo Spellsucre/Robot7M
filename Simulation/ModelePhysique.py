@@ -11,34 +11,34 @@ def on_press(key):
 		if(key == keyboard.Key.esc):
 			return False
 		elif(key == keyboard.Key.left):
-			print(arene.liste_robot[0].toString())
-			arene.liste_arene.liste_robot[0][0].rotation_tete(30)
+			#print(arene.liste_robot[0].toString())
+			arene.liste_robot[0].rotation_tete(30)
 			arene.liste_robot[0].move()
 			print(arene.liste_robot[0].toString())
 		elif(key == keyboard.Key.right):
-			print(arene.liste_robot[0].toString())
+			#print(arene.liste_robot[0].toString())
 			arene.liste_robot[0].rotation_tete(30)
 			arene.liste_robot[0].move()
 			print(arene.liste_robot[0].toString())
 		elif(key.char == "z"):
-			print(arene.liste_robot[0].toString())
-			arene.liste_robot[0].setVitesse(arene.liste_robot[0].getVitesse()+3)
+			#print(arene.liste_robot[0].toString())
+			arene.liste_robot[0].setVitesse(+3)
 			arene.liste_robot[0].move()
-			print(arene.liste_robot[0].toString())
-		elif(key.char == "s"):
-			print(arene.liste_robot[0].toString())
-			arene.liste_robot[0].setVitesse(arene.liste_robot[0].getVitesse()-3)
-			arene.liste_robot[0].move()
-			print(arene.liste_robot[0].toString())
-		elif(key.char == "q"):
 			print(arene.liste_robot[0].toString())
 			arene.liste_robot[0].setVitesse(0)
+		elif(key.char == "s"):
+			#print(arene.liste_robot[0].toString())
+			arene.liste_robot[0].setVitesse(-3)
+			arene.liste_robot[0].move()
+			print(arene.liste_robot[0].toString())
+			arene.liste_robot[0].setVitesse(0)
+		elif(key.char == "q"):
+			#print(arene.liste_robot[0].toString())
 			arene.liste_robot[0].rotation(90)
 			arene.liste_robot[0].move()
 			print(arene.liste_robot[0].toString())
 		elif(key.char == "d"):
-			print(arene.liste_robot[0].toString())
-			arene.liste_robot[0].setVitesse(0)
+			#print(arene.liste_robot[0].toString())
 			arene.liste_robot[0].rotation(-90)
 			arene.liste_robot[0].move()
 			print(arene.liste_robot[0].toString())
