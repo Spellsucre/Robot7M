@@ -10,23 +10,33 @@ def on_press(key):
 		#print('{0} released'.format(key))
 		if(key == keyboard.Key.esc):
 			return False
-		elif (key.char == "z"):
+		elif(key == keyboard.Key.left):
 			print(robot.toString())
-			robot.setVitesse(3)
+			robot.rotation_tete(30)
 			robot.move()
 			print(robot.toString())
-		elif (key.char == "s"):
+		elif(key == keyboard.Key.right):
 			print(robot.toString())
-			robot.setVitesse(3)
+			robot.rotation_tete(30)
 			robot.move()
 			print(robot.toString())
-		elif (key.char == "q"):
+		elif(key.char == "z"):
+			print(robot.toString())
+			robot.setVitesse(robot.getVitesse()+3)
+			robot.move()
+			print(robot.toString())
+		elif(key.char == "s"):
+			print(robot.toString())
+			robot.setVitesse(robot.getVitesse()-3)
+			robot.move()
+			print(robot.toString())
+		elif(key.char == "q"):
 			print(robot.toString())
 			robot.setVitesse(0)
 			robot.rotation(90)
 			robot.move()
 			print(robot.toString())
-		elif (key.char == "d"):
+		elif(key.char == "d"):
 			print(robot.toString())
 			robot.setVitesse(0)
 			robot.rotation(-90)
