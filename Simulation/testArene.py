@@ -45,6 +45,17 @@ print("rotation de 180°")
 r1.rotation(180)
 r1.safficher()	#rotation de seulement 90°??? ~> Error
 
-sauvegardeEnv(a1,'save.txt')
+c1.safficher()
+s1.safficher()
+m1.safficher()
+r1.safficher()
+#Avant sauvegarde
 
+sauvegardeEnv(a1,'save.txt')
 chargerEnv('save.txt')
+
+c1.safficher()
+s1.safficher()
+m1.safficher()
+r1.safficher()
+#Après sauvegarde

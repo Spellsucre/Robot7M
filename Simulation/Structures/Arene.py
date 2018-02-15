@@ -175,28 +175,24 @@ def sauvegardeEnv(arene,nomfichier):
     with open(nomfichier,"w") as f:
         arene.toSaveF(f)
 	       
-"""def chargerEnv(nomfichier):
+def chargerEnv(nomfichier):
     with open(nomfichier,"r") as f:
         liste_cube = list()
         liste_robot = list()
         for line in f:
-            ligne=split(str=";")
+            ligne=line.split(";")
             if ligne[0] == 'Cube':
-                print(ligne)
-                liste_cube.append(Cube.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
+                liste_cube.append(Cube(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6]))
             elif ligne[0] == 'Mur':
-                print(ligne)
-                liste_cube.append(Mur.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
+                liste_cube.append(Mur(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6]))
             elif ligne[0] == 'Sol':
-                print(ligne)
-                liste_cube.append(Sol.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
+                liste_cube.append(Sol(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5]))
             elif ligne[0] == 'Robot':
-                print(ligne)
-                liste_robot.append(Robot.__init__(ligne[1],ligne[2],ligne[3])
+                liste_robot.append(Robot(ligne[1],ligne[2],ligne[3]))
             elif ligne[0] == 'Arene':
-                arene = Arene.__init__(ligne[1],ligne[2],ligne[3],liste_cube)
+                arene = Arene(ligne[1],ligne[2],ligne[3],liste_cube)
                 arene.liste_robot=liste_robot
-                print("Arene chargée")"""
+                print("Arene chargée\n")
                   
 	     
 
