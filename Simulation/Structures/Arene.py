@@ -199,6 +199,7 @@ def chargerEnv(nomfichier):
             elif ligne[0] == 'Robot':
                 arene.liste_robot.append(Robot(ligne[1],ligne[2],ligne[3]))
         print("Arene chargée.")
+        return arene
                   
 	     
 
