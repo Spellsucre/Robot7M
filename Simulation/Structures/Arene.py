@@ -190,7 +190,7 @@ def chargerEnv(nomfichier):
                 arene = Arene(ligne[1],ligne[2],ligne[3],liste_cube)
                 arene.liste_robot=liste_robot
             elif ligne[0] == 'Cube':
-                """On ajoute le cube a la liste de cube de l'arene, avec paramettres trouves sur la ligne"""
+                """On ajoute le cube a la liste de cube de l'arene, avec parametres trouves sur la ligne"""
                 arene.liste_cube.append(Cube(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6]))
             elif ligne[0] == 'Mur':
                 arene.liste_cube.append(Mur(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6]))
