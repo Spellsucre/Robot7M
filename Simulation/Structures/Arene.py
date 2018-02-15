@@ -1,6 +1,6 @@
 from math import acos
 from math import sqrt
-from Basiques.Cube import *
+from Cube import *
 from Basiques.Mur import *
 from Basiques.Sol import *
 from Structures.Robot import *
@@ -126,17 +126,18 @@ class Arene :
             return True
         return False
 
-    def retourne_angle(self,x,y,xx,yy) :
+     def retourne_angle(self,x,y,xx,yy) :
         """ retourne un angle teta en radian selon une direction initale d'un
             vecteur u(x,y) et une les coordonées du vecteur de la prochaine
             direction d'un vecteur v(xx,yy) en paramètres """
 
         sgn = (x*yy)+(xx*y)
-        u = sqrt((x*x)+(y*y)) #norme de u
-        v = sqrt((xx*xx)+(yy*yy)) #norme de v
         
-        tmp = ((x*xx)+(y*yy))/(u+v)
-        teta = acos(tmp)
+        nu = sqrt((x*x)+(y*y)) #norme de u
+        nv = sqrt((xx*xx)+(yy*yy)) #norme de v
+        uv = (x*xx) + (y*yy)
+
+        teta = acos(uv/(nu*nv))
 
         if(sgn < 0):
             return -1*teta
@@ -175,24 +176,28 @@ def sauvegardeEnv(arene,nomfichier):
     with open(nomfichier,"w") as f:
         arene.toSaveF(f)
 	       
-def chargerEnv(nomfichier):
+"""def chargerEnv(nomfichier):
     with open(nomfichier,"r") as f:
         liste_cube = list()
         liste_robot = list()
         for line in f:
-            ligne=line.split(";")
+            ligne=split(str=";")
             if ligne[0] == 'Cube':
-                liste_cube.append(Cube(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6]))
+                print(ligne)
+                liste_cube.append(Cube.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
             elif ligne[0] == 'Mur':
-                liste_cube.append(Mur(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6]))
+                print(ligne)
+                liste_cube.append(Mur.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
             elif ligne[0] == 'Sol':
-                liste_cube.append(Sol(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5]))
+                print(ligne)
+                liste_cube.append(Sol.__init__(ligne[1],ligne[2],ligne[3],ligne[4],ligne[5],ligne[6])
             elif ligne[0] == 'Robot':
-                liste_robot.append(Robot(ligne[1],ligne[2],ligne[3]))
+                print(ligne)
+                liste_robot.append(Robot.__init__(ligne[1],ligne[2],ligne[3])
             elif ligne[0] == 'Arene':
-                arene = Arene(ligne[1],ligne[2],ligne[3],liste_cube)
+                arene = Arene.__init__(ligne[1],ligne[2],ligne[3],liste_cube)
                 arene.liste_robot=liste_robot
-                print("Arene chargée\n")
+                print("Arene chargée")"""
                   
 	     
 
