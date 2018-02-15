@@ -2,7 +2,7 @@
 
 import random
 import math
-from TeteRobot import*
+from Structures.TeteRobot import*
 #code
 
 class Robot:
@@ -27,6 +27,7 @@ class Robot:
         a, b, c = self.getDirection()
         vitesse = self.getVitesse()
         xt, yt, zt = (self.tete).getPosition()
+        longr, larg, haut = self.getDimension()
         
         x += a*vitesse
         y += b*vitesse
