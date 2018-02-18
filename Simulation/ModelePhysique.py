@@ -4,6 +4,7 @@ from Structures.Robot import *
 
 arene = Creation_Arene()
 arene.ajouter_robot(Creation_Robot(arene))
+arene.afficher()
 
 def on_press(key):
 	try:
@@ -42,6 +43,8 @@ def on_press(key):
 			arene.liste_robot[0].rotation(-90)
 			arene.liste_robot[0].move()
 			print(arene.liste_robot[0].toString())
+		elif(key.char == "e"):
+			arene.afficher()
 		else:
 			print("0")
 	except AttributeError:
