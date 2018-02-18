@@ -18,14 +18,6 @@ class TeteRobot:
         self.dimension = dimension
         self.robot=robot
 
-
-
-    def safficher(self):
-        """Methode d'affichage d'un robot au format :
-        Robot[position, orientation, dimension]
-        """
-        print("Robot(Pos",self.position,",Dir",self.orientation,",Dim",self.dimension,"))")
-
     def rotation(self, teta):
         """Methode de rotation de tete, retourne True s'il est possible de tourner la tete, sinon retourne False """
         teta = math.radians(teta)
@@ -41,6 +33,14 @@ class TeteRobot:
             return True
         return False
 
+    def toString(self):
+        return "ROBOT[tete]|position: {0}, orientation: {1}, dimension: {2}".format(self.position, self.orientation, self.dimension)
+
+    def safficher(self):
+        """Methode d'affichage d'un robot au format :
+        Robot[position, orientation, dimension]
+        """
+        print("Robot(Pos",self.position,",Dir",self.orientation,",Dim",self.dimension,"))")
 #________________________________GETTER_______________________________________
 
 
