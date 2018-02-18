@@ -25,8 +25,8 @@ class TeteRobot:
         x , y, z = self.position
         
         tmp = orx
-        orx = orx*math.cos(teta) - ory*math.sin(teta)
-        ory = tmp*math.sin(teta) + ory*math.cos(teta)
+        orx = math.ceil(orx*math.cos(teta) - ory*math.sin(teta))
+        ory = math.ceil(tmp*math.sin(teta) + ory*math.cos(teta))
 
         if ( ory>= y and orx>=0):
             self.setOrientation((orx, ory))
@@ -34,13 +34,13 @@ class TeteRobot:
         return False
 
     def toString(self):
-        return "ROBOT[tete]|position: {0}, orientation: {1}, dimension: {2}".format(self.position, self.orientation, self.dimension)
+        return "ROBOT[Tete] |position: {0}, direction: {1}, dimension: {2}".format(self.position, self.orientation, self.dimension)
 
     def safficher(self):
         """Methode d'affichage d'un robot au format :
         Robot[position, orientation, dimension]
         """
-        print("Robot(Pos",self.position,",Dir",self.orientation,",Dim",self.dimension,"))")
+        return "[Tete] position: {0}, direction: {1}, dimension: {2}".format(self.position, self.orientation, self.dimension)
 #________________________________GETTER_______________________________________
 
 
