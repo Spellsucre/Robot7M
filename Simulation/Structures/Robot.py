@@ -57,7 +57,7 @@ class Robot:
         self.tete.rotation(teta)
 
     def toString(self):
-        return "position: {0}, direction: {1}, vitesse: {2}".format(self.getPosition(),self.getDirection(),self.getVitesse())
+        return "ROBOT[corps]|position: {0}, direction: {1}, vitesse: {2}, dimension{3}".format(self.getPosition(),self.getDirection(),self.getVitesse(),self.getDimension())+"\n"+self.tete.toString()
 
     def safficher(self):
                 """Methode d'affichage d'un robot au format :
