@@ -57,13 +57,13 @@ class Robot:
         self.tete.rotation(teta)
 
     def toString(self):
-        return "ROBOT[corps]|position: {0}, direction: {1}, dimension{2}, vitesse: {3}".format(self.getPosition(),self.getDirection(),self.getDimension(),self.getVitesse())+"\n"+self.tete.toString()
+        return "ROBOT[Corps]|position: {0}, direction: {1}, dimension{2}, vitesse: {3}".format(self.getPosition(),self.getDirection(),self.getDimension(),self.getVitesse())+"\n"+self.tete.toString()
 
     def safficher(self):
                 """Methode d'affichage d'un robot au format :
                 Robot[position, direction, taille, vitesse]
                 """
-                print("Robot(Pos",self.position,",Dir",self.direction,",Dim",self.dimension,",Vit(",self.vitesse,"))")
+                return "ROBOT([Corps] position: {0}, direction: {1}, dimension{2}, vitesse: {3}".format(self.getPosition(),self.getDirection(),self.getDimension(),self.getVitesse())+" ||| "+self.tete.safficher()+")"
                 
 
     """-----------------------GETTTER-------------------------"""
