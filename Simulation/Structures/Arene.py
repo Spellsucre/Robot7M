@@ -43,16 +43,16 @@ class Arene :
         Arene(limiteX= , limiteY= , limiteZ= )
         Liste d'objet [    ,    ,    ]
         """
-        print("______________________________________________________________________________\nArene(limiteX=%.2f,limiteY=%.2f,limiteZ=%.2f)"
+        print("-----------------------------------------------------------------------------------------------------------------------------------------------\nArene(limiteX=%.2f,limiteY=%.2f,limiteZ=%.2f)"
               %(self.lx, self.ly, self.lz))
-        print("LISTE OBJET [")
+        print("LISTE OBJET\n[")
         for i in self.liste_cube:
             print(i.safficher())
         print("]")
-        print("LISTE ROBOT [")
+        print("LISTE ROBOT\n[")
         for j in self.liste_robot:
-            print(j.safficher())
-        print("]\n______________________________________________________________________________")
+            print("\t"+j.safficher())
+        print("]\n-----------------------------------------------------------------------------------------------------------------------------------------------")
         
 
     def retirer_cube(self,x,y,z) :
