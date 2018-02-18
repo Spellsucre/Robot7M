@@ -17,8 +17,8 @@ def on_press(key):
 			arene.liste_robot[0].move()
 			print(arene.liste_robot[0].toString())
 		elif(key == keyboard.Key.right):
-			#print(arene.liste_robot[0].toString())
-			arene.liste_robot[0].rotation_tete(30)
+			#print(arene.liste_robot[0]szszszdq.toString())
+			arene.liste_robot[0].rotation_tete(-30)
 			arene.liste_robot[0].move()
 			print(arene.liste_robot[0].toString())
 		elif(key.char == "z"):
