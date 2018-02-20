@@ -16,28 +16,41 @@ class Mur:
         x, y, z = self.px, self.py, self.pz
         lm, hm, pm = l / 2, h / 2, p / 2
 
-        #setcolor mur simple
+        #setcolor murs
         if(setcolor==1):
-            colorf1 = ('c3f', (0.4, 0.2, 0.6,) * 4)
-            colorf2 = ('c3f', (0.5, 0.2, 0.4,) * 4)
-            colorf3 = ('c3f', (0.4, 0.2, 0.6,) * 4)
-            colorf4 = ('c3f', (0.5, 0.2, 0.4,) * 4)
-            colorf6 = ('c3f', (0.5, 0.2, 0.5,) * 4)
+            colorf1 = ('c3f', (0.6, 0.6, 0.6,) * 4)
+            colorf2 = ('c3f', (0.7, 0.7, 0.7,) * 4)
+            colorf3 = ('c3f', (0.7, 0.7, 0.7,) * 4)
+            colorf4 = ('c3f', (0.8, 0.8, 0.8,) * 4)
+            colorf5 = ('c3f', (0.5, 0.5, 0.5,) * 4)
+            colorf6 = ('c3f', (0.5, 0.5, 0.5,) * 4)
 
-        #setcolor mur complex
+        #setcolor cubes
         if(setcolor==2):
-            colorf1 = ('c3f', (0.9, 0., 0.5,) * 4)
-            colorf2 = ('c3f', (0.5, 0., 0.4,) * 4)
-            colorf3 = ('c3f', (0.9, 0.2, 0.5,) * 4)
-            colorf4 = ('c3f', (0.5, 0., 0.4,) * 4)
-            colorf6 = ('c3f', (1, 0., 0.,) * 4)
+            colorf1 = ('c3f', (0.8, 0.8, 0.8,) * 4)
+            colorf2 = ('c3f', (0.8, 0.8, 0.8,) * 4)
+            colorf3 = ('c3f', (0.8, 0.8, 0.8,) * 4)
+            colorf4 = ('c3f', (0.8, 0.8, 0.8,) * 4)
+            colorf5 = ('c3f', (0.8, 0.8, 0.8,) * 4)
+            colorf6 = ('c3f', (0.8, 0.8, 0.8,) * 4)
 
+        #setcolor robot
         if (setcolor == 3):
             colorf1 = ('c3f', (0., 0., 0.,) * 4)
             colorf2 = ('c3f', (0.5, 0., 0.4,) * 4)
             colorf3 = ('c3f', (0.9, 0.2, 0.5,) * 4)
             colorf4 = ('c3f', (0.5, 0., 0.4,) * 4)
+            colorf5 = ('c3f', (0.5, 0., 0.4,) * 4)
             colorf6 = ('c3f', (0., 0., 0.,) * 4)
+
+        #setcolor Arene
+        if (setcolor == 4):
+            colorf1 = ('c3f', (0.9, 0.9, 0.9,) * 4)
+            colorf2 = ('c3f', (0.9, 0.9, 0.9,) * 4)
+            colorf3 = ('c3f', (0.9, 0.9, 0.9,) * 4)
+            colorf4 = ('c3f', (0.9, 0.9, 0.9,) * 4)
+            colorf5 = ('c3f', (0.9, 0.9, 0.9,) * 4)
+            colorf6 = ('c3f', (0.9, 0.9, 0.9,) * 4)
 
         # creation des faces
         
@@ -68,7 +81,7 @@ class Mur:
         # f5
         self.batch.add(4, GL_QUADS, None, (
         'v3f', (x + lm, y - hm, z - pm, x + lm, y - hm, z + pm, x + lm, y + hm, z + pm, x + lm, y + hm, z - pm)),
-                       colorf6)
+                       colorf5)
         # face cote droit
         
         #(x + lm, y - hm, z - pm, x + lm, y + hm, z + pm, x + lm, y + hm, z + pm, x + lm, y + hm, z - pm))
@@ -100,7 +113,7 @@ class Window(pyglet.window.Window):
         glClearColor(0.7, 0.2, 0.5, 1)
 
         glEnable(GL_DEPTH_TEST)
-    xRotation = yRotation = 30
+    xRotation = yRotation = zRotation = 30
 
     def addmur(self, x, y, z, h, l, p, setcolor):
         self.listcube.append(Mur(x, y, z, h, l, p, setcolor))
@@ -141,7 +154,7 @@ class Window(pyglet.window.Window):
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
         # gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ)
-        gluLookAt(0, 0, 10, 5, 5, 5, 50, 50, 50)
+        #gluLookAt(0, 0, 10, 5, 5, 5, 50, 50, 50)
         it = 0
 
     # while it<len(self.listcube):
@@ -208,7 +221,7 @@ if __name__ == "__main__":
     #newwindow.addmur(0, 0, 0, 400, 300, 20,1)
     #newwindow.addmur(200, 0, 200, 20, 300, 400,2)
     #newwindow.addmur(200, 0, 600, 20, 300, 400,1)
-    newwindow.addmur(0, 50, 200, 50, 50, 50, 3)
+    #newwindow.addmur(0, 50, 200, 50, 50, 50, 3)
 
     pyglet.app.run()
 

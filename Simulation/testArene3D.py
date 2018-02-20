@@ -5,9 +5,13 @@ from Structures.Arene import *
 """Pour modifier les valeurs, allez dans save.txt"""
 a1 = chargerEnv('save.txt')
 a1.afficher()
-windowa = Window(1000,1000,'Arene')
+windowa = Window(1366,768,'Arene')
 for c in a1.liste_cube:
-    windowa.addmur(c.x,c.y,c.z,c.larg,c.long,c.haut,2)
+    if isinstance(c, Mur):
+        windowa.addmur(c.x,c.y,c.z,c.larg,c.long,c.haut,1)
+    else:
+        windowa.addmur(c.x,c.y,c.z,c.larg,c.long,c.haut,2)
+        
 for r in a1.liste_robot:
     x,y,z=r.position
     lx,ly,lz=r.dimension
