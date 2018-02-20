@@ -40,44 +40,45 @@ class Mur:
             colorf6 = ('c3f', (0., 0., 0.,) * 4)
 
         # creation des faces
-
+        
         # f1
         self.batch.add(4, GL_QUADS, None, (
         'v3f', (x + lm, y - hm, z + pm, x - lm, y - hm, z + pm, x - lm, y + hm, z + pm, x + lm, y + hm, z + pm)),
                        colorf1)
         # face avant
-
+        
         # f2
         self.batch.add(4, GL_QUADS, None, (
         'v3f', (x + lm, y - hm, z + pm, x - lm, y - hm, z + pm, x - lm, y - hm, z - pm, x + lm, y - hm, z - pm)),
                        colorf2)
         # face dessous
-
+        
         # f3
         self.batch.add(4, GL_QUADS, None, (
         'v3f', (x + lm, y - hm, z - pm, x - lm, y - hm, z - pm, x - lm, y + hm, z - pm, x + lm, y + hm, z - pm)),
                        colorf3)
         # face arriere
-
+        
         # f4
         self.batch.add(4, GL_QUADS, None, (
         'v3f', (x + lm, y + hm, z + pm, x - lm, y + hm, z + pm, x - lm, y + hm, z - pm, x + lm, y + hm, z - pm)),
                        colorf4)
         # face dessus
-
+        
         # f5
         self.batch.add(4, GL_QUADS, None, (
-        'v3f', (x + lm, y - hm, z - pm, x + lm, y + hm, z + pm, x + lm, y + hm, z + pm, x + lm, y + hm, z - pm)),
+        'v3f', (x + lm, y - hm, z - pm, x + lm, y - hm, z + pm, x + lm, y + hm, z + pm, x + lm, y + hm, z - pm)),
                        colorf6)
         # face cote droit
-
+        
+        #(x + lm, y - hm, z - pm, x + lm, y + hm, z + pm, x + lm, y + hm, z + pm, x + lm, y + hm, z - pm))
+        
         # f6
         self.batch.add(4, GL_QUADS, None, (
         'v3f', (x - lm, y - hm, z - pm, x - lm, y - hm, z + pm, x - lm, y + hm, z + pm, x - lm, y + hm, z - pm)),
                        colorf6)
-
-    # face cote gauche
-
+        # face cote gauche
+        
     def draw(self):
         self.batch.draw()
 
@@ -131,6 +132,7 @@ class Window(pyglet.window.Window):
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
 
+        
         aspectRatio = w / h
 
         gluPerspective(50, aspectRatio, 1, 2000)
@@ -139,7 +141,7 @@ class Window(pyglet.window.Window):
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
         # gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ)
-        # gluLookAt(0, 0, 10, 5, 5, 5, 50, 50, 50)
+        gluLookAt(0, 0, 10, 5, 5, 5, 50, 50, 50)
         it = 0
 
     # while it<len(self.listcube):
@@ -202,10 +204,10 @@ class Window(pyglet.window.Window):
 
 # securite pour que le script ne se lance pas n importe quand
 if __name__ == "__main__":
-    newwindow = Window(600, 500, "futuremur", resizable=False)
-    newwindow.addmur(0, 0, 0, 400, 300, 20,1)
-    newwindow.addmur(200, 0, 200, 20, 300, 400,2)
-    newwindow.addmur(200, 0, 600, 20, 300, 400,1)
+    newwindow = Window(1280, 720, "futuremur", resizable=False)
+    #newwindow.addmur(0, 0, 0, 400, 300, 20,1)
+    #newwindow.addmur(200, 0, 200, 20, 300, 400,2)
+    #newwindow.addmur(200, 0, 600, 20, 300, 400,1)
     newwindow.addmur(0, 50, 200, 50, 50, 50, 3)
 
     pyglet.app.run()
