@@ -1,0 +1,21 @@
+﻿PROJET 2I013  P5: les 9 mercenaires
+
+-CR4 :
+
+[Semaine du 19/02/18] : Suite du développement des différentes fonctionnalités:
+	-premiere version de l'arene en 3D
+	-generation de l'affichage 3D a partir de la fonction de sauvegarde d'une arene et de ses composants
+	-fix de l'affichage d'un cube en 3D ~> pb ordre de creation des sommets
+	
+	
+	-Opengl etat critique ~> même avec la documentation et les tutoriels sur yt on patauge:
+		-tentative de mise en place d'une camera ~> echec  (glulookat(....) ) 
+		-... :(
+		
+		-Toujours pas de communication "intensives" -> entraine ue production de code "périmée"
+		
+
+fin  CR4
+
+
+e.s ~> 0.3
