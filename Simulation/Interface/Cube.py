@@ -2,7 +2,7 @@ from pyglet.gl import *
 from pyglet.window import key
 
 
-class Mur:
+class Cube:
     def __init__(self, sx, sy, sz, l, h, p, setcolor):
         self.px = sx
         self.py = sy
@@ -24,7 +24,7 @@ class Mur:
             colorf4 = ('c3f', (0.8, 0.8, 0.8,) * 4)
             colorf5 = ('c3f', (0.5, 0.5, 0.5,) * 4)
             colorf6 = ('c3f', (0.5, 0.5, 0.5,) * 4)
-
+        """
         #setcolor cubes
         if(setcolor==2):
             colorf1 = ('c3f', (0.8, 0.8, 0.8,) * 4)
@@ -33,24 +33,24 @@ class Mur:
             colorf4 = ('c3f', (0.8, 0.8, 0.8,) * 4)
             colorf5 = ('c3f', (0.8, 0.8, 0.8,) * 4)
             colorf6 = ('c3f', (0.8, 0.8, 0.8,) * 4)
-
+        """
         #setcolor robot
         if (setcolor == 3):
-            colorf1 = ('c3f', (0., 0., 0.,) * 4)
+            colorf1 = ('c3f', (0.4, 0., 0.3,) * 4)
             colorf2 = ('c3f', (0.5, 0., 0.4,) * 4)
-            colorf3 = ('c3f', (0.9, 0.2, 0.5,) * 4)
-            colorf4 = ('c3f', (0.5, 0., 0.4,) * 4)
-            colorf5 = ('c3f', (0.5, 0., 0.4,) * 4)
-            colorf6 = ('c3f', (0., 0., 0.,) * 4)
+            colorf3 = ('c3f', (0.5, 0., 0.4,) * 4)
+            colorf4 = ('c3f', (0.6, 0., 0.5,) * 4)
+            colorf5 = ('c3f', (0.6, 0., 0.5,) * 4)
+            colorf6 = ('c3f', (0.5, 0., 0.4,) * 4)
 
-        #setcolor Arene
+        #setcolor Sol
         if (setcolor == 4):
-            colorf1 = ('c3f', (0.9, 0.9, 0.9,) * 4)
-            colorf2 = ('c3f', (0.9, 0.9, 0.9,) * 4)
-            colorf3 = ('c3f', (0.9, 0.9, 0.9,) * 4)
-            colorf4 = ('c3f', (0.9, 0.9, 0.9,) * 4)
-            colorf5 = ('c3f', (0.9, 0.9, 0.9,) * 4)
-            colorf6 = ('c3f', (0.9, 0.9, 0.9,) * 4)
+            colorf1 = ('c3f', (0.4, 0.4, 0.4,) * 4)
+            colorf2 = ('c3f', (0.4, 0.4, 0.4,) * 4)
+            colorf3 = ('c3f', (0.4, 0.4, 0.4,) * 4)
+            colorf4 = ('c3f', (0.4, 0.4, 0.4,) * 4)
+            colorf5 = ('c3f', (0.4, 0.4, 0.4,) * 4)
+            colorf6 = ('c3f', (0.4, 0.4, 0.4,) * 4)
 
         # creation des faces
         
@@ -113,10 +113,18 @@ class Window(pyglet.window.Window):
         glClearColor(0.7, 0.2, 0.5, 1)
 
         glEnable(GL_DEPTH_TEST)
+        
+        glMatrixMode(GL_MODELVIEW)
+        glLoadIdentity()
+        gluLookAt(
+            0.0, 800.0, 0.0,  # eye
+            0.0, -1.0, 0.0, # lookAt
+            0.0, 1.0, 0.0)  # up
+        
     xRotation = yRotation = zRotation = 30
 
-    def addmur(self, x, y, z, h, l, p, setcolor):
-        self.listcube.append(Mur(x, y, z, h, l, p, setcolor))
+    def addcube(self, x, y, z, h, l, p, setcolor):
+        self.listcube.append(Cube(x, y, z, h, l, p, setcolor))
         self.on_draw()
 
     # definition de la methode de dessin des vues sur la fenetre
@@ -213,7 +221,7 @@ class Window(pyglet.window.Window):
                 glTranslatef(0, 0, -10)
                 self.listcube[i].pz -= 10
                 i += 1
-
+        
 
 # securite pour que le script ne se lance pas n importe quand
 if __name__ == "__main__":
