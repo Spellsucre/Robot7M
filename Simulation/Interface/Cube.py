@@ -112,16 +112,22 @@ class Window(pyglet.window.Window):
         # methodes et variables de champ fenetre
         glClearColor(0.7, 0.2, 0.5, 1)
 
+        #for o in self.listcube:
+        #    if(o.setcolor==3):
+        #        glTranslatef(o.sx, o.sy, o.sz)
+
+
         glEnable(GL_DEPTH_TEST)
-        
+
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
         gluLookAt(
             0.0, 800.0, 0.0,  # eye
             0.0, -1.0, 0.0, # lookAt
             0.0, 1.0, 0.0)  # up
-        
+
     xRotation = yRotation = zRotation = 30
+
 
     def addcube(self, x, y, z, h, l, p, setcolor):
         self.listcube.append(Cube(x, y, z, h, l, p, setcolor))
@@ -226,10 +232,10 @@ class Window(pyglet.window.Window):
 # securite pour que le script ne se lance pas n importe quand
 if __name__ == "__main__":
     newwindow = Window(1280, 720, "futuremur", resizable=False)
-    #newwindow.addmur(0, 0, 0, 400, 300, 20,1)
-    #newwindow.addmur(200, 0, 200, 20, 300, 400,2)
-    #newwindow.addmur(200, 0, 600, 20, 300, 400,1)
-    #newwindow.addmur(0, 50, 200, 50, 50, 50, 3)
+    #newwindow.addcube(0, 0, 0, 400, 300, 20,1)
+    #newwindow.addcube(200, 0, 200, 20, 300, 400,4)
+    #newwindow.addcube(200, 0, 600, 20, 300, 400,1)
+    #newwindow.addcube(0, 50, 200, 50, 50, 50, 3)
 
     pyglet.app.run()
 
