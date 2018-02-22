@@ -29,9 +29,9 @@ class Robot:
         xt, yt, zt = (self.tete).getPosition()
         longr, larg, haut = self.getDimension()
         
-        x += a*vitesse
-        y += b*vitesse
-        z += c*vitesse
+        x = (x*a)+vitesse
+        y = (y*b)+vitesse
+        z = (z*c)+vitesse
         self.__setPosition((x, y, z))
         
         xt= x + larg/2
