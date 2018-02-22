@@ -2,7 +2,7 @@
 
 import random
 import math
-from Structures.TeteRobot import*
+from structures.TeteRobot import*
 #code
 
 class Robot:

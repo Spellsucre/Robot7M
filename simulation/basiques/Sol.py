@@ -1,4 +1,4 @@
-from Basiques.Cube import *
+from basiques.Cube import *
 
 class Sol(Cube):
     """Classe héritant de la classe Cube, caractérisée par:
