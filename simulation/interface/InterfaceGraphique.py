@@ -1,4 +1,3 @@
-
 ###############################
 #CECI EST LA DERNIERE VERSION #
 ###############################
@@ -26,9 +25,9 @@ a1 = Creation_Arene()
 
 """
     MANQUE:
-       OK - l'ajout des 4 murs de l'arene à la liste de cube de l'arene (pour dans le futur faire un move du robot detectant les obstacles)
+        - l'ajout des 4 murs de l'arene à la liste de cube de l'arene (pour dans le futur faire un move du robot detectant les obstacles)
         
-       OK - l'ajout des blocs random à la liste de cube de l'arene 
+        - l'ajout des blocs random à la liste de cube de l'arene
         
         - soit separer la fonction en deux fonctions distinctes (ajouter un autre bouton),
           une pour la generation des murs de l'arene et une pour les blocs
@@ -44,9 +43,7 @@ def gen_aleatoire():
     # cube_vertical = Cube(X,Y,0,largeur,longueur,30)
 
     ###   Initialise le contour de l'arene avec des murs ###
-
     ajout_sol()
-
     taille = 500  # taille de l'arene
     larg_mur = 30  # largeur des murs de contour
 
@@ -131,6 +128,7 @@ def clicdroit(event):
 # ___________________________________AJOUT D'UN SOL VIA LE BOUTON___________________________________
 
 def ajout_sol():
+    global s1
     if not a1.possede_sol():
         s1 = Creation_Sol(a1)
         if a1.ajouter_cube(s1):
@@ -158,7 +156,7 @@ def ajout_robot():
 # ___________________________________FENETRE PRINCIPALE___________________________________
 
 fenetre = Tk()
-fenetre.geometry("600x660")
+fenetre.geometry("800x800")
 fenetre.title("Robot 2i013 Alpha 3.1")
 fenetre.resizable(width=False, height=False)
 # affichage d'un texte dans la fenetre principale
@@ -186,11 +184,45 @@ canvas_console = Canvas(frame2, width=500, height=30)
 canvas_console.pack()
 
 
+#_________________________________TOUCHES CLAVIER_________________________________
+
+robot_rectangle=canvas1.create_rectangle(0, 0, 0, 0, fill="white")
+
+def clavier(event):
+    x,y,z = a1.liste_robot[0].position
+    long, larg, haut = a1.liste_robot[0].dimension
+    touche=event.keysym
+    print(touche)
+    if touche=='Up':
+        a1.liste_robot[0].rotation(90)
+        a1.liste_robot[0].move((0,-1,0))
+        x,y,z = a1.liste_robot[0].position
+        rafraichir(a1)
+    if touche =='Left':
+        a1.liste_robot[0].rotation(90)
+        a1.liste_robot[0].move((-1,0,0))
+        x,y,z = a1.liste_robot[0].position
+        rafraichir(a1)
+    if touche =='Right':
+        a1.liste_robot[0].rotation(270)
+        a1.liste_robot[0].move((1,0,0))
+        x,y,z = a1.liste_robot[0].position
+        rafraichir(a1)
+    if touche=='Down':
+        a1.liste_robot[0].rotation(180)
+        a1.liste_robot[0].move((0,1,0))
+        x,y,z = a1.liste_robot[0].position
+        rafraichir(a1)
+    canvas1.coords(robot_rectangle,x, y, x + larg, y + long)
+
+canvas1.bind_all('<Key>', clavier)
+
+
 # ___________________________________NETTOYAGE DU CANEVAS___________________________________
 
 def effacer():
     """efface tout le canvas"""
-    canvas1.delete(ALL)
+    canvas1.delete(ALL) 
     canvas_console.delete(ALL)
     while len(a1.liste_cube) > 0:
         a1.liste_cube.pop(-1)
@@ -200,6 +232,7 @@ def effacer():
 def effacerdernier():
     """ Efface le dernier objet"""
     for i in range(2):
+        canvas1.delete(ALL) 
         if len(canvas1.find_all()) >= 1:
             item = canvas1.find_all()[-1]
             canvas1.delete(item)
@@ -236,6 +269,23 @@ bouton = Button(fenetre, text= "Ajout Robot", command=ajout_robot).pack(side=LEF
 
 # ___________________________________FONCTIONS DRAW___________________________________
 
+def rafraichir(arene):
+    canvas1.delete(ALL) 
+    i = 0
+    dessiner_sol(s1)
+    while i < len(arene.liste_cube):
+        liste = arene.liste_cube[i]
+        if liste.is_Cube():
+            dessiner_cube(liste,arene)
+        elif liste.is_Mur():
+            dessiner_mur(liste,arene)
+            
+        i = i + 1
+
+    dessiner_robot(arene.liste_robot[0])
+    
+
+
 def dessiner_cube(cube, arene):
     if isinstance(cube, Cube) and cube.x + cube.larg < arene.lx and cube.y + cube.long < arene.ly:
         canvas1.create_rectangle(cube.x, cube.y, cube.x + cube.larg, cube.y + cube.long, fill="darkgrey")
@@ -258,18 +308,16 @@ def dessiner_robot(robot):
     x, y, z = robot.position
     long, larg, haut = robot.dimension
     dirx, diry, dirz = robot.direction
-    
     canvas1.create_rectangle(x, y, x + larg, y + long, fill="blue")
-    canvas1.create_text(x + larg / 2, y + long / 2, text="Robot", fill="blue", activefill="black")   
+    canvas1.create_text(x + larg / 2, y + long / 2, text="Robot", fill="blue", activefill="black")
+    canvas1.create_line(x + larg / 2, y, x + dirx, y - diry, fill="black",
+                        arrow='last')  # creation d'une fleche indiquant la direction du robot      ~> trop petite
     canvas1.create_oval(x + 2 * larg / 3, y - long / 4, x + larg / 3, y + long / 4,
                         outline="black")  # creation d'un cercle representant la tete du robot
-    
-    vecdirec_x=(x+larg/2)-dirx
-    vecdirec_y=(y-long / 4)-diry #calcul du vecteur direction
-    canvas1.create_line(x + larg / 2, y - long / 4, vecdirec_x , vecdirec_y, fill="black",
-                       arrow='last')  # creation d'une fleche indiquant la direction du robot 
 
 
 # ___________________________________MAINLOOP___________________________________
 
 fenetre.mainloop()
+
+
