@@ -1,5 +1,5 @@
 #imports
-from Structures.Arene import *
+from structures.Arene import *
 
 #main de test
 

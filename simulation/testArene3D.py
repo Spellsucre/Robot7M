@@ -1,7 +1,8 @@
 import random
-from Interface.Cube import *
-from Basiques.Cube import * 
-from Structures.Arene import *
+from interface.Cube import *
+from structures.Robot import *
+from basiques.Cube import * 
+from structures.Arene import *
 """Pour modifier les valeurs, allez dans save.txt"""
 a1 = chargerEnv('save.txt')
 a1.afficher()
@@ -18,3 +19,4 @@ for r in a1.liste_robot:
     lx,ly,lz=r.dimension
     wPrincipale.addcube(x,y,z,lx,ly,lz,3)
 pyglet.app.run()
+a1.liste_robot[0].move()
