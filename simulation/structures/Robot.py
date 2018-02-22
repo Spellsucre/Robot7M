@@ -2,7 +2,7 @@
 
 import random
 import math
-from structures.TeteRobot import*
+from TeteRobot import*
 #code
 
 class Robot:
@@ -19,19 +19,19 @@ class Robot:
         self.position = position
         self.direction = direction
         self.dimension = dimension
-        self.vitesse = 0
+        self.vitesse = 10
         self.tete= Creation_TeteRobot(self)
     
-    def move(self):
+    def move(self,direc):
         x, y, z = self.getPosition()
-        a, b, c = self.getDirection()
+        a, b, c = direc
         vitesse = self.getVitesse()
         xt, yt, zt = (self.tete).getPosition()
         longr, larg, haut = self.getDimension()
         
-        x = (x+vitesse)*math.cos(a)
-        y = (y+vitesse)*math.cos(b)
-        z = (z+vitesse)*math.cos(c)
+        x += a*vitesse
+        y += b*vitesse
+        z += c*vitesse
         self.__setPosition((x, y, z))
         
         xt= x + larg/2
@@ -39,8 +39,25 @@ class Robot:
         zt= z + haut/2
         (self.tete).setPosition((xt, yt, zt))
 
+    def retourne_angle(self,x,y,xx,yy) :
+        """ retourne un angle teta en radian selon une direction initale d'un
+            vecteur u(x,y) et une les coordonées du vecteur de la prochaine
+            direction d'un vecteur v(xx,yy) en paramètres """
+
+        sgn = (x*yy)+(xx*y)
+        u = sqrt((x*x)+(y*y)) #norme de u
+        v = sqrt((xx*xx)+(yy*yy)) #norme de v
+        
+        tmp = ((x*xx)+(y*yy))/(u+v)
+        teta = acos(tmp)
+
+        if(sgn < 0):
+            return -1*teta
+        return teta
+
     #teta: int en degré
     def rotation(self, teta):
+
         """la rotation est effectuée dans le sens anti-horaire"""
         teta = math.radians(teta)
         a, b, c = self.getDirection()
