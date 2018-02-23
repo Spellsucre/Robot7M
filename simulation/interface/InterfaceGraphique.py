@@ -47,20 +47,10 @@ def gen_aleatoire():
     taille = 500  # taille de l'arene
     larg_mur = 30  # largeur des murs de contour
 
-    m1 = Mur(0, 0, 0, taille - 1, larg_mur, larg_mur)
-    m2 = Mur(0, 0, 0, larg_mur, taille - 1, 30)
-    m3 = Mur(0, taille - larg_mur - 1, 0, taille - 1, larg_mur, larg_mur)
-    m4 = Mur(taille - larg_mur - 1, 0, 0, larg_mur, taille - 1, larg_mur)
-
-    a1.ajouter_cube(m1)
-    a1.ajouter_cube(m2)
-    a1.ajouter_cube(m3)
-    a1.ajouter_cube(m4)
-    
-    dessiner_mur(m1, a1)  # mur du haut
-    dessiner_mur(m2, a1)  # mur gauche
-    dessiner_mur(m3, a1)  # mur du bas
-    dessiner_mur(m4, a1)  # mur droit
+    dessiner_mur(Mur(0, 0, 0, taille - 1, larg_mur, larg_mur), a1)  # mur du haut
+    dessiner_mur(Mur(0, 0, 0, larg_mur, taille - 1, 30), a1)  # mur gauche
+    dessiner_mur(Mur(0, taille - larg_mur - 1, 0, taille - 1, larg_mur, larg_mur), a1)  # mur du bas
+    dessiner_mur(Mur(taille - larg_mur - 1, 0, 0, larg_mur, taille - 1, larg_mur), a1)  # mur droit
 
     ###   Création d'obstacles (murs) que l'on va tirer aléatoirement   ###
 
@@ -82,9 +72,7 @@ def gen_aleatoire():
             print("ajout obstacle impossible : cube déja présent à cette position")
 
         else:
-            m = Mur(x, y, 0, long, larg, 0)
-            a1.ajouter_cube(m)
-            dessiner_mur(m, a1)
+            dessiner_mur(Mur(x, y, 0, long, larg, 0), a1)
         i = i + 1
 
 # ___________________________________GESTION DES CLICS (G & D)___________________________________
@@ -156,9 +144,9 @@ def ajout_robot():
 # ___________________________________FENETRE PRINCIPALE___________________________________
 
 fenetre = Tk()
-fenetre.geometry("800x800")
+fenetre.geometry("800x700")
 fenetre.title("Robot 2i013 Alpha 3.1")
-fenetre.resizable(width=False, height=False)
+fenetre.resizable(width=True, height=True)
 # affichage d'un texte dans la fenetre principale
 label = Label(fenetre, text="Clic gauche ~> ajout d'un cube\nClic droit  ~> ajout d'un mur").pack()
 
@@ -213,6 +201,17 @@ def clavier(event):
         a1.liste_robot[0].move((0,1,0))
         x,y,z = a1.liste_robot[0].position
         rafraichir(a1)
+    if touche =='q':
+        #a1.liste_robot[0].tete.orientation = (-10, -10)
+        a1.liste_robot[0].tete.rotation_tete(-10)
+        rafraichir(a1)
+    if touche =='d':
+        #a1.liste_robot[0].tete.orientation = (10, 10)
+        a1.liste_robot[0].tete.rotation_tete(10)
+        rafraichir(a1)
+        
+        
+        
     canvas1.coords(robot_rectangle,x, y, x + larg, y + long)
 
 canvas1.bind_all('<Key>', clavier)
@@ -232,7 +231,6 @@ def effacer():
 def effacerdernier():
     """ Efface le dernier objet"""
     for i in range(2):
-        canvas1.delete(ALL) 
         if len(canvas1.find_all()) >= 1:
             item = canvas1.find_all()[-1]
             canvas1.delete(item)
@@ -308,10 +306,22 @@ def dessiner_robot(robot):
     x, y, z = robot.position
     long, larg, haut = robot.dimension
     dirx, diry, dirz = robot.direction
+    dirtetex, dirtetey = robot.tete.orientation
+    print( dirtetex, dirtetey)
     canvas1.create_rectangle(x, y, x + larg, y + long, fill="blue")
     canvas1.create_text(x + larg / 2, y + long / 2, text="Robot", fill="blue", activefill="black")
-    canvas1.create_line(x + larg / 2, y, x + dirx, y - diry, fill="black",
-                        arrow='last')  # creation d'une fleche indiquant la direction du robot      ~> trop petite
+
+    # creation d'une fleche indiquant la direction du robot
+    canvas1.create_line(
+                        x + (long / 2),
+                        y,
+                                                    
+                        ((x + (long / 2)) + dirtetex*8),
+                        (y + dirtetey*8),
+
+                        fill="black",
+                        arrow='last')
+    
     canvas1.create_oval(x + 2 * larg / 3, y - long / 4, x + larg / 3, y + long / 4,
                         outline="black")  # creation d'un cercle representant la tete du robot
 
@@ -319,5 +329,4 @@ def dessiner_robot(robot):
 # ___________________________________MAINLOOP___________________________________
 
 fenetre.mainloop()
-
 
