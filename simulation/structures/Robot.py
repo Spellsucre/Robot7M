@@ -2,7 +2,7 @@
 
 import random
 import math
-from TeteRobot import*
+from structures.TeteRobot import*
 #code
 
 class Robot:
@@ -20,13 +20,13 @@ class Robot:
         self.direction = direction
         self.dimension = dimension
         self.vitesse = 10
-        self.tete= Creation_TeteRobot(self)
+        self.tete= Creation_TeteRobot()
     
     def move(self,direc):
         x, y, z = self.getPosition()
         a, b, c = direc
         vitesse = self.getVitesse()
-        xt, yt, zt = (self.tete).getPosition()
+        #xt, yt, zt = (self.tete).getPosition()
         longr, larg, haut = self.getDimension()
         
         x += a*vitesse
@@ -34,10 +34,10 @@ class Robot:
         z += c*vitesse
         self.__setPosition((x, y, z))
         
-        xt= x + larg/2
-        yt= y
-        zt= z + haut/2
-        (self.tete).setPosition((xt, yt, zt))
+        #xt= x + larg/2
+        #yt= y
+        #zt= z + haut/2
+        #(self.tete).setPosition((xt, yt, zt))
 
     def retourne_angle(self,x,y,xx,yy) :
         """ retourne un angle teta en radian selon une direction initale d'un

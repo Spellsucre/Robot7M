@@ -6,14 +6,14 @@
 # import
 
 from tkinter import *
-from Arene import *
-from Cube import *
-from Mur import *
-from Sol import *
+from structures.Arene import *
+from basiques.Cube import *
+from basiques.Mur import *
+from basiques.Sol import *
 import random
 
 # code
-
+    
 
 # _________________________CREATION DU ARENE DE BASE ~> PAS TRES PROPRE__________________________
 
@@ -203,11 +203,11 @@ def clavier(event):
         rafraichir(a1)
     if touche =='q':
         #a1.liste_robot[0].tete.orientation = (-10, -10)
-        a1.liste_robot[0].tete.rotation_tete(-10)
+        a1.liste_robot[0].tete.rotation(-8)
         rafraichir(a1)
     if touche =='d':
         #a1.liste_robot[0].tete.orientation = (10, 10)
-        a1.liste_robot[0].tete.rotation_tete(10)
+        a1.liste_robot[0].tete.rotation(8)
         rafraichir(a1)
         
         
@@ -271,14 +271,14 @@ def rafraichir(arene):
     canvas1.delete(ALL) 
     i = 0
     dessiner_sol(s1)
-    while i < len(arene.liste_cube):
-        liste = arene.liste_cube[i]
-        if liste.is_Cube():
-            dessiner_cube(liste,arene)
-        elif liste.is_Mur():
-            dessiner_mur(liste,arene)
+    for c in arene.liste_cube:
+        #liste = arene.liste_cube[i]
+        if isinstance(c, Cube):
+            dessiner_cube(c,arene)
+        elif isinstance(c, Mur):
+            dessiner_mur(c,arene)
             
-        i = i + 1
+        #i = i + 1
 
     dessiner_robot(arene.liste_robot[0])
     
