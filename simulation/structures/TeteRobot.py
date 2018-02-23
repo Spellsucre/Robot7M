@@ -1,6 +1,6 @@
 import random
 import math
-from Robot import *
+
 
 class TeteRobot:
     """
@@ -27,7 +27,7 @@ class TeteRobot:
         vry = round(vry)
         
         self.setOrientation((vrx,vry))
-        print(self.safficher())
+		
 
     def toString(self):
         return "ROBOT[Tete] | direction: {0}".format(self.orientation,)

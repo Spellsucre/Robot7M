@@ -209,7 +209,9 @@ def clavier(event):
         #a1.liste_robot[0].tete.orientation = (10, 10)
         a1.liste_robot[0].tete.rotation(8)
         rafraichir(a1)
-        
+    if touche =='z':
+        a1.liste_robot[0].tete.setOrientation((0,-14))
+        rafraichir(a1)
         
         
     canvas1.coords(robot_rectangle,x, y, x + larg, y + long)
@@ -248,10 +250,10 @@ bouton1 = Button(fenetre, text="Quitter", command=fenetre.destroy).pack(side=RIG
 
 # creation d'un bouton de nettoyage du canvas
 bouton2 = Button(fenetre, text="Effacer tout", command=effacer).pack(side=LEFT)
-
+"""
 # creation d'un bouton qui efface le dernier ajouté au canvas
 bouton3 = Button(fenetre, text="Effacer Dernier objet", command=effacerdernier).pack(side=LEFT)
-
+"""
 # creation d'un bouton qui ajoute un sol à l'arene
 bouton4 = Button(fenetre, text="Nouveau Sol", command=ajout_sol).pack(side=LEFT)
 
@@ -273,10 +275,10 @@ def rafraichir(arene):
     dessiner_sol(s1)
     for c in arene.liste_cube:
         #liste = arene.liste_cube[i]
-        if isinstance(c, Cube):
-            dessiner_cube(c,arene)
-        elif isinstance(c, Mur):
+        if isinstance(c, Mur):
             dessiner_mur(c,arene)
+        elif isinstance(c, Cube):
+            dessiner_cube(c,arene)
             
         #i = i + 1
 
