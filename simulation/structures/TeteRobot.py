@@ -5,18 +5,12 @@ from Robot import *
 class TeteRobot:
     """
     Classe caractérisé par:
-    sa position: triplet(x,y,z)
-    son orientation: doublet(orx, ory)
-    sa dimension: triplet(longueur, largeur, hauteur)
-    un robot
+    son orientation: doublet(orx, ory) la tete ne bouge pas sur l'axe Z donc pas de triplet seulement un doublet
     """
 
     def __init__(self, orientation):
         """Constructeur de la classe TeteRobot"""
-        #self.position = position
         self.orientation = orientation
-        #self.dimension = dimension
-        #self.robot=robot
 
     def rotation(self, angle):
         """Methode de rotation de tete"""
@@ -46,38 +40,18 @@ class TeteRobot:
 #________________________________GETTER_______________________________________
 
 
-    """
-    def getPosition(self):
-        return self.position
-    """
     def getOrientation(self):
         return self.orientation
-    """
-    def getDimension(self):
-        return self.dimension
-    """
 
 #________________________________SETTER_____________________________________
-    """
-    def setPosition(self, position):
-        self.position = position
-    """
+
     def setOrientation(self, orientation):
         self.orientation = orientation
-    """
-    def setDimension(sel, dimension):
-        self.dimension = dimension
-    """
 
 
 def Creation_TeteRobot():
-    """Creation d'une tete de robot à partir d'un robot"""
-    #xr, yr, zr =robot.position
-    #longr, largr, hautr =robot.dimension
-    """
-    orx= xr
-    ory= yr + longr/2
-    """
+    """Creation d'une tete de robot"""
+
     orx= 10
     ory= 10
     
