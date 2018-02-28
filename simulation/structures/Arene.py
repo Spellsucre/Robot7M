@@ -14,7 +14,7 @@ class Arene :
     - liste_cube : une liste contenant des "cubes"(sol,mur,obstacle) avec leurs coordonnées dans l'arene
     """
 
-    def __init__(self,lx,ly,lz,liste_cube) :
+    def __init__(self,lx,ly,lz,liste_cube, liste_robot) :
         self.lx = lx
         self.ly = ly
         self.lz = lz
@@ -165,46 +165,15 @@ class Arene :
 def Creation_Arene() :
     """ Test d'une creation d'Arene vide"""
     liste_cube = [] #liste vide pour créer une arène vide
+    liste_robot = []
     lx = 500
     ly = 500
     lz = 500 # valeurs limites de l'arène
 
-    arene = Arene(lx,ly,lz,liste_cube)
+    arene = Arene(lx,ly,lz,liste_cube, liste_robot)
 
     return arene
 
-def sauvegardeEnv(arene,nomfichier):
-    with open(nomfichier,'w') as f:
-        arene.toSaveF(f)
-        print("Arene sauvegardée.")
-        
-	       
-def chargerEnv(nomfichier):
-    """Fonction de chargement, ouverture du fichier en mode lecture"""
-    with open(nomfichier,'r') as f:
-        liste_cube = list()
-        liste_robot = list()
-        """deux listes vides pour contenir les objets charges"""
-        for line in f:
-            ligne=line.split(";")
-            if ligne[0] == 'Arene':
-                """On cree une nouvelle arene avec les parametres trouves sur la ligne, separes par des ';' """
-                arene = Arene(int(ligne[1]),int(ligne[2]),int(ligne[3]),liste_cube)
-                arene.liste_robot=liste_robot
-            elif ligne[0] == 'Cube':
-                """On ajoute le cube a la liste de cube de l'arene, avec parametres trouves sur la ligne"""
-                arene.liste_cube.append(Cube(int(ligne[1]),int(ligne[2]),int(ligne[3]),int(ligne[4]),int(ligne[5]),int(ligne[6])))
-            elif ligne[0] == 'Mur':
-                arene.liste_cube.append(Mur(int(ligne[1]),int(ligne[2]),int(ligne[3]),int(ligne[4]),int(ligne[5]),int(ligne[6])))
-            elif ligne[0] == 'Sol':
-                arene.liste_cube.append(Sol(int(ligne[1]),int(ligne[2]),int(ligne[3]),int(ligne[4]),int(ligne[5])))
-            elif ligne[0] == 'Robot':
-                (x,y,z)=literal_eval(ligne[1])
-                (a,b,c)=literal_eval(ligne[2])
-                (lo,la,ha)=literal_eval(ligne[3])
-                arene.liste_robot.append(Robot((x,y,z),(a,b,c),(lo,la,ha)))
-        print("Arene chargée.")
-        return arene
                   
 	     
 

@@ -15,11 +15,11 @@ class Robot:
         sa tete: Class TeteRobot
     """
 
-    def __init__(self, position, direction, dimension):
+    def __init__(self, position, direction, dimension, vitesse):
         self.position = position
         self.direction = direction
         self.dimension = dimension
-        self.vitesse = 10
+        self.vitesse = vitesse
         self.tete= Creation_TeteRobot()
     
     def move(self,direc):
@@ -128,7 +128,7 @@ def Creation_Robot(arene):
         long = 50
         haut = 10
 
-        return Robot((x, y, z), (dirx, diry, dirz), (larg, long, haut))
+        return Robot((x, y, z), (dirx, diry, dirz), (larg, long, haut), 1)
 
         
 
