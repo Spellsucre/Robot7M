@@ -107,7 +107,7 @@ class Window(pyglet.window.Window):
         #self.listrobot = list()
         self.w = args[0]
         self.h = args[1]
-        self.INDROT = 10
+        self.INDROT = 1
 
         # methodes et variables de champ fenetre
         glClearColor(0.7, 0.2, 0.5, 1)
@@ -121,10 +121,12 @@ class Window(pyglet.window.Window):
 
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
+        # gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ)
+
         gluLookAt(
-            0.0, 800.0, 0.0,  # eye
-            0.0, -1.0, 0.0, # lookAt
-            0.0, 1.0, 0.0)  # up
+            0.0, 50.0, 200.0,  # position eye point
+            0.0, 0.0, 0.0, # position reference point
+            0.0, 1.0, 0.0)  # up vector direction
 
     xRotation = yRotation = zRotation = 30
 
@@ -138,8 +140,8 @@ class Window(pyglet.window.Window):
         # Push Matrix onto stack
         glPushMatrix()
 
-        glRotatef(self.xRotation, 1, 0, 0)  # gere les rotations
-        glRotatef(self.yRotation, 0, 1, 0)
+        #glRotatef(self.xRotation, 1, 0, 0)  # gere les rotations
+        #glRotatef(self.yRotation, 0, 1, 0)
 
         self.clear()
         i = 0
@@ -167,24 +169,25 @@ class Window(pyglet.window.Window):
 
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
-        # gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ)
-        #gluLookAt(0, 0, 10, 5, 5, 5, 50, 50, 50)
+        gluLookAt(
+            0.0, 50.0, 200.0,  # position eye point
+            0.0, 0.0, 0.0, # position reference point
+            0.0, 1.0, 0.0)  # up vector direction
         it = 0
-
-    # while it<len(self.listcube):
-    # glTranslatef(self.listcube[0].px, self.listcube[0].py, -500)
-    # it+=1
-    # (x,y,z) x gere la position horizontale de la camera, y gere sa position verticale, et z gere le zoom
 
     def on_key_press(self, symbol, modifiers):
         if symbol == key.UP:
             self.xRotation -= self.INDROT
+            glRotatef(self.xRotation,-1,0,0)
         elif symbol == key.DOWN:
             self.xRotation += self.INDROT
+            glRotatef(self.xRotation,1,0,0)
         elif symbol == key.LEFT:
             self.yRotation -= self.INDROT
+            glRotatef(self.yRotation,0,-1,0)
         elif symbol == key.RIGHT:
             self.yRotation += self.INDROT
+            glRotatef(self.yRotation,0,1,0)
         elif symbol == key.Q:  # vers la gauche
             self.clear()
             i = 0
@@ -232,10 +235,10 @@ class Window(pyglet.window.Window):
 # securite pour que le script ne se lance pas n importe quand
 if __name__ == "__main__":
     newwindow = Window(1280, 720, "futuremur", resizable=False)
-    #newwindow.addcube(0, 0, 0, 400, 300, 20,1)
-    #newwindow.addcube(200, 0, 200, 20, 300, 400,4)
-    #newwindow.addcube(200, 0, 600, 20, 300, 400,1)
-    #newwindow.addcube(0, 50, 200, 50, 50, 50, 3)
+    newwindow.addcube(0, 0, 0, 400, 300, 20,1)
+    newwindow.addcube(200, 0, 200, 20, 300, 400,4)
+    newwindow.addcube(200, 0, 600, 20, 300, 400,1)
+    newwindow.addcube(0, 50, 200, 50, 50, 50, 3)
 
     pyglet.app.run()
 
