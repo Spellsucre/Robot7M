@@ -4,9 +4,14 @@ from pyglet.window import key
 
 class Cube:
     def __init__(self, sx, sy, sz, l, h, p, setcolor):
+        #initialisation des variables getter self
         self.px = sx
         self.py = sy
         self.pz = sz
+        self.l=l
+        self.h=h
+        self.p=p
+        self.type = setcolor
 
         self.batch = pyglet.graphics.Batch()
 
@@ -124,7 +129,7 @@ class Window(pyglet.window.Window):
         # gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ)
 
         gluLookAt(
-            0.0, 50.0, 200.0,  # position eye point
+            0.0, 0, 0,  # position eye point
             0.0, 0.0, 0.0, # position reference point
             0.0, 1.0, 0.0)  # up vector direction
 
@@ -169,8 +174,12 @@ class Window(pyglet.window.Window):
 
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
+        eyex, eyey, eyez = 0,0,0
+        for e in self.listcube:
+        	if e.type == 3:
+        		eyex, eyey, eyez = e.px, e.py+(e.l/2), e.pz
         gluLookAt(
-            0.0, 50.0, 200.0,  # position eye point
+            eyex, eyey, eyez,  # position eye point
             0.0, 0.0, 0.0, # position reference point
             0.0, 1.0, 0.0)  # up vector direction
         it = 0
@@ -235,10 +244,10 @@ class Window(pyglet.window.Window):
 # securite pour que le script ne se lance pas n importe quand
 if __name__ == "__main__":
     newwindow = Window(1280, 720, "futuremur", resizable=False)
-    newwindow.addcube(0, 0, 0, 400, 300, 20,1)
-    newwindow.addcube(200, 0, 200, 20, 300, 400,4)
-    newwindow.addcube(200, 0, 600, 20, 300, 400,1)
-    newwindow.addcube(0, 50, 200, 50, 50, 50, 3)
+    #newwindow.addcube(0, 0, 0, 400, 300, 20,1)
+    #newwindow.addcube(200, 0, 200, 20, 300, 400,4)
+    #newwindow.addcube(200, 0, 600, 20, 300, 400,1)
+    #newwindow.addcube(50, 0, 200, 50, 50, 50, 3)
 
     pyglet.app.run()
 
