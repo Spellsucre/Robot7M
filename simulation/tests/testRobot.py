@@ -1,5 +1,5 @@
 """Il faudra tester les différents éléments du robot ici"""
-from Robot import Robot
+from structures.robot import *
 
 #1ere phase: creer le robot faire un déplacement nul
 robot = Robot((0,0,0), (0,0,0), (1,1,1))

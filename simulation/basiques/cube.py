@@ -35,11 +35,6 @@ class Cube():
         """return la position du cube sous forme d'un triplet -> (x, y, z)"""
         return self.x, self.y, self.z
 
-    def toSaveF(self, f):
-        """Ecrit les coordonnees du cube dans le fichier ouvert passe en argument, avec ';' comme separation"""
-        f.write('Cube;' + str(self.x) + ';' + str(self.y) + ';' + str(self.z) + ';' + str(self.larg) + ';' + str(self.long) + ';' + str(self.haut) + ';\n' )
-
-
 def Creation_Cube(arene):
     """Creation d'un cube de taille et coordonnees aleatoires"""
     x = random.randint(0,arene.lx)

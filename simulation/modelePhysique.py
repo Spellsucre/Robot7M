@@ -1,6 +1,6 @@
 from pynput import keyboard
-from structures.Arene import *
-from structures.Robot import *
+from structures.arene import *
+from structures.robot import *
 
 arene = Creation_Arene()
 arene.ajouter_robot(Creation_Robot(arene))

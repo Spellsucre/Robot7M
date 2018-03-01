@@ -1,5 +1,10 @@
 #imports
-from structures.Arene import *
+from structures.arene import *
+from structures.robot import *
+from basiques.cube import *
+from basiques.mur import *
+from basiques.sol import *
+from save.saveJson import *
 
 #main de test
 
@@ -35,8 +40,8 @@ m1.safficher()
 r1.safficher()
 #Avant sauvegarde
 print('_________________________________________________________')
-sauvegardeEnv(a1,'save.txt')
-a1=chargerEnv('save.txt')
+saveFic(a1,'save')
+newa=loadFic('save')
 print('_________________________________________________________')
 print("Après chargement")
 c1.safficher()
@@ -49,7 +54,7 @@ r1 = Creation_Robot(a1)
 print("avant mouvement:")
 r1.safficher()
 
-r1._Robot__setVitesse(100)
+r1.setVitesse(100)
 print("set vitesse à",r1.getVitesse(),":")
 r1.safficher()
 

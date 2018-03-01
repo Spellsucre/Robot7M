@@ -1,7 +1,7 @@
 import random
 from interface.featuresGL import *
 from structures.robot import *
-from basiques.cube import *
+from basiques.cube import * 
 from structures.arene import *
 from save.saveJson import *
 from save.csvToJson import *
