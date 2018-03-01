@@ -51,13 +51,13 @@ class Cube:
             colorf5 = ('c3f', (0.4, 0.4, 0.4,) * 4)
             colorf6 = ('c3f', (0.4, 0.4, 0.4,) * 4)
         if (setcolor==4): #rouge
-            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (1.,0,0,)*4)
+            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (0.9,0,0,)*4)
         if (setcolor==5): #vert
-            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (0.,1.,0,)*4)
+            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (0.,0.9,0,)*4)
         if (setcolor==6): #bleu
-            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (0.,0,1.,)*4)
+            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (0.,0,0.9,)*4)
         if (setcolor==7): #jaune
-            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (1.,0.0,1.,)*4)
+            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (0.9,0.9,0.0,)*4)
 
         # creation des faces
         
