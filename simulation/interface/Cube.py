@@ -125,7 +125,7 @@ class Window(pyglet.window.Window):
         #self.listrobot = list()
         self.w = args[0]
         self.h = args[1]
-        self.INDROT = 10
+        self.INDROT = 1
 
         # methodes et variables de champ fenetre
         glClearColor(0.7, 0.2, 0.5, 1)
@@ -153,9 +153,6 @@ class Window(pyglet.window.Window):
         # Push Matrix onto stack
         glPushMatrix()
 
-        glRotatef(self.xRotation, 1, 0, 0)  # gere les rotations
-        glRotatef(self.yRotation, 0, 1, 0)
-
         self.clear()
         i = 0
         while i < len(self.listcube):
@@ -180,31 +177,32 @@ class Window(pyglet.window.Window):
         # premier argument gere le rapprochement du cube de la camera
 
         # repositionnement de la camera par rapport au robot
+        eyex,eyey,eyez = 0,0,0
         for o in self.listcube:
             if o.type == 3:
                 #glTranslatef(o.px, o.py, o.pz-(o.cp/2))
-                gluLookAt(
-                    o.px, o.py, o.pz,  # eye
-                    200.0, 0.0, 200.0, # lookAt
-                    0.0, 1.0, 0.0)  # up
+                eyex, eyey, eyez=o.px, o.py, o.pz+(o.cp/2)
+        gluLookAt(
+            eyex, eyey, eyez,  # eye
+            0, 0.0, 0, # lookAt
+            0.0, 1.0, 0.0)  # up
 
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
 
-        # while it<len(self.listcube):
-        # glTranslatef(self.listcube[0].px, self.listcube[0].py, -500)
-        # it+=1
-        # (x,y,z) x gere la position horizontale de la camera, y gere sa position verticale, et z gere le zoom
-
     def on_key_press(self, symbol, modifiers):
         if symbol == key.UP:
-            self.xRotation -= self.INDROT
+            self.xRotation = self.INDROT
+            glRotatef(self.xRotation, 1,0,0)
         elif symbol == key.DOWN:
-            self.xRotation += self.INDROT
+            self.xRotation -= self.INDROT
+            glRotatef(self.yRotation, -1,0,0)
         elif symbol == key.LEFT:
             self.yRotation -= self.INDROT
+            glRotatef(self.yRotation, 0,-1,0)
         elif symbol == key.RIGHT:
             self.yRotation += self.INDROT
+            glRotatef(self.yRotation, 0,1,0)
         elif symbol == key.Q:  # vers la gauche
             self.clear()
             i = 0
@@ -247,6 +245,11 @@ class Window(pyglet.window.Window):
                 glTranslatef(0, 0, -10)
                 self.listcube[i].pz -= 10
                 i += 1
+
+        #action screenshot
+        elif symbol == key.V:
+
+            pyglet.image.get_buffer_manager().get_color_buffer().save('screen.png')
         
 
 # securite pour que le script ne se lance pas n importe quand
