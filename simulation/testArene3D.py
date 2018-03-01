@@ -3,8 +3,9 @@ from interface.cube import *
 from structures.robot import *
 from basiques.cube import *
 from structures.arene import *
+from save.saveJson import *
 """Pour modifier les valeurs, allez dans save.txt"""
-a1 = chargerEnv('save.txt')
+a1 = loadFic()
 a1.afficher()
 wPrincipale = Window(1366,768,'Arene')
 for c in a1.liste_cube:
