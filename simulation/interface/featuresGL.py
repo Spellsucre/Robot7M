@@ -107,19 +107,36 @@ class Cube:
             self.pz+=10
 
 class Balise:
-    def __init__(self,cx, cy, cz, size):
+    def __init__(self,cx, cy, cz, size, orientation):
+        bpx=cx
+        bpy=cy
+        bpz=cz
         self.cubesbalisel= list()
-        i=4
-        while i<=7:
-            if i==4:
-                self.cubesbalisel.append(Cube(cx-(size/4),cy+(size/4),cz, size/2,size/2,2, i))
-            elif i==5:
-                self.cubesbalisel.append(Cube(cx+(size/4),cy+(size/4),cz, size/2,size/2,2, i))
-            elif i==6:
-                self.cubesbalisel.append(Cube(cx-(size/4),cy-(size/4),cz, size/2,size/2,2, i))
-            elif i==7:
-                self.cubesbalisel.append(Cube(cx+(size/4),cy-(size/4),cz, size/2,size/2,2, i))
-            i+=1
+
+        i = 4
+        if(orientation=='c'):
+
+            while i <= 7:
+                if i == 4:
+                    self.cubesbalisel.append(Cube(bpx,bpy+(size/4),bpz-(size/4), 2,size/2,size/2, i))
+                elif i == 5:
+                    self.cubesbalisel.append(Cube(bpx,bpy+(size/4),bpz+(size/4), 2,size/2,size/2, i))
+                elif i == 6:
+                    self.cubesbalisel.append(Cube(bpx,bpy-(size/4),bpz-(size/4), 2,size/2,size/2, i))
+                elif i == 7:
+                    self.cubesbalisel.append(Cube(bpx,bpy-(size/4),bpz+(size/4), 2,size/2,size/2, i))
+                i += 1
+        else:
+            while i<=7:
+                if i==4:
+                    self.cubesbalisel.append(Cube(bpx-(size/4),bpy+(size/4),bpz, size/2,size/2,2, i))
+                elif i==5:
+                    self.cubesbalisel.append(Cube(bpx+(size/4),bpy+(size/4),bpz, size/2,size/2,2, i))
+                elif i==6:
+                    self.cubesbalisel.append(Cube(bpx-(size/4),bpy-(size/4),bpz, size/2,size/2,2, i))
+                elif i==7:
+                    self.cubesbalisel.append(Cube(bpx+(size/4),bpy-(size/4),bpz, size/2,size/2,2, i))
+                i+=1
 
 # creation d'une fenetre
 class Window(pyglet.window.Window):
@@ -160,8 +177,8 @@ class Window(pyglet.window.Window):
         self.listcube.append(Cube(x, y, z, h, l, p, setcolor))
         self.on_draw()
 
-    def addbalise(self, x,y,z, size):
-        self.listcube = self.listcube + Balise(x,y,z, size).cubesbalisel
+    def addbalise(self, x,y,z, size, orientation):
+        self.listcube = self.listcube + Balise(x,y,z, size, orientation).cubesbalisel
 
     # definition de la methode de dessin des vues sur la fenetre
     def on_draw(self):
@@ -267,11 +284,13 @@ class Window(pyglet.window.Window):
 # securite pour que le script ne se lance pas n importe quand
 if __name__ == "__main__":
     newwindow = Window(800, 800, "Arena", resizable=False)
-    newwindow.addcube(-200, 200, 200, 20, 400, 400,1)
+    newwindow.addcube(-200, 200, 200, 20, 400, 400,1) #pour un mur de cote l epaisseur sera en l
     newwindow.addcube(200, 200, 200, 20, 400, 400,3)
     newwindow.addcube(200, 200, 600, 20, 400, 400,1)
     newwindow.addcube(0, 25, 200, 50, 50, 50, 2)
-    newwindow.addbalise(0,50,0, 100)
+    newwindow.addcube(0,-2,0, 1000,2,1000,1) #pour un sol elle sera en l
+    newwindow.addbalise(0,50,0, 100, "f") #pour les mur de face en z
+    newwindow.addbalise(-100,50,200, 100, "c")
 
     pyglet.clock.schedule_interval(newwindow.update, newwindow.frame_rate)
     pyglet.app.run()
