@@ -1,8 +1,8 @@
 import random
-from interface.Cube import *
-from structures.Robot import *
-from basiques.Cube import * 
-from structures.Arene import *
+from interface.cube import *
+from structures.robot import *
+from basiques.cube import *
+from structures.arene import *
 """Pour modifier les valeurs, allez dans save.txt"""
 a1 = chargerEnv('save.txt')
 a1.afficher()
