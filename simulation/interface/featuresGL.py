@@ -35,21 +35,22 @@ class Cube:
 
         #setcolor robot
         if (setcolor == 2):
-            colorf1 = ('c3f', (0., 0., 0.,) * 4)
-            colorf2 = ('c3f', (0.2, 0.2, 0.2,) * 4)
-            colorf3 = ('c3f', (0., 0., 0.,) * 4)
-            colorf4 = ('c3f', (0.2, 0.2, 0.2,) * 4)
-            colorf5 = ('c3f', (0., 0., 0.,) * 4)
-            colorf6 = ('c3f', (0.2, 0.2, 0.2,) * 4)
+            colorf1 = ('c3f', (1., 1., 1.,) * 4)
+            colorf2 = ('c3f', (0.9, 0.9, 0.9,) * 4)
+            colorf3 = ('c3f', (1., 1., 1.,) * 4)
+            colorf4 = ('c3f', (0.9, 0.9, 0.9,) * 4)
+            colorf5 = ('c3f', (1., 1., 1.,) * 4)
+            colorf6 = ('c3f', (0.9, 0.9, 0.9,) * 4)
 
         #setcolor Sol
         if (setcolor == 3):
-            colorf1 = ('c3f', (0.4, 0.4, 0.4,) * 4)
-            colorf2 = ('c3f', (0.4, 0.4, 0.4,) * 4)
-            colorf3 = ('c3f', (0.4, 0.4, 0.4,) * 4)
-            colorf4 = ('c3f', (0.4, 0.4, 0.4,) * 4)
-            colorf5 = ('c3f', (0.4, 0.4, 0.4,) * 4)
-            colorf6 = ('c3f', (0.4, 0.4, 0.4,) * 4)
+            colorf1 = ('c3f', (0.7, 0.7, 0.7,) * 4)
+            colorf2 = ('c3f', (0.7, 0.7, 0.7,) * 4)
+            colorf3 = ('c3f', (0.7, 0.7, 0.7,) * 4)
+            colorf4 = ('c3f', (0.7, 0.7, 0.7,) * 4)
+            colorf5 = ('c3f', (0.7, 0.7, 0.7,) * 4)
+            colorf6 = ('c3f', (0.7, 0.7, 0.7,) * 4)
+
         if (setcolor==4): #rouge
             colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (0.9,0,0,)*4)
         if (setcolor==5): #vert
@@ -63,39 +64,37 @@ class Cube:
         
         # f1
         self.batch.add(4, GL_QUADS, None, (
-        'v3f', (x + lm, y - hm, z + pm, x - lm, y - hm, z + pm, x - lm, y + hm, z + pm, x + lm, y + hm, z + pm)),
+        'v3f', (x+lm,y-hm,z+pm, x-lm,y-hm,z+pm, x-lm,y+hm,z+pm, x+lm,y+hm,z+pm)),
                        colorf1)
         # face avant
         
         # f2
         self.batch.add(4, GL_QUADS, None, (
-        'v3f', (x + lm, y - hm, z + pm, x - lm, y - hm, z + pm, x - lm, y - hm, z - pm, x + lm, y - hm, z - pm)),
+        'v3f', (x+lm,y-hm,z+pm, x-lm,y-hm,z+pm, x-lm,y-hm,z-pm, x+lm,y-hm,z-pm)),
                        colorf2)
         # face dessous
         
         # f3
         self.batch.add(4, GL_QUADS, None, (
-        'v3f', (x + lm, y - hm, z - pm, x - lm, y - hm, z - pm, x - lm, y + hm, z - pm, x + lm, y + hm, z - pm)),
+        'v3f', (x+lm,y-hm,z-pm, x-lm,y-hm,z-pm, x-lm,y+hm,z-pm, x+lm,y+hm,z-pm)),
                        colorf3)
         # face arriere
         
         # f4
         self.batch.add(4, GL_QUADS, None, (
-        'v3f', (x + lm, y + hm, z + pm, x - lm, y + hm, z + pm, x - lm, y + hm, z - pm, x + lm, y + hm, z - pm)),
+        'v3f', (x+lm,y+hm,z+pm, x-lm,y+hm,z+pm, x-lm,y+hm,z-pm, x+lm,y+hm,z-pm)),
                        colorf4)
         # face dessus
         
         # f5
         self.batch.add(4, GL_QUADS, None, (
-        'v3f', (x + lm, y - hm, z - pm, x + lm, y - hm, z + pm, x + lm, y + hm, z + pm, x + lm, y + hm, z - pm)),
+        'v3f', (x+lm,y-hm,z-pm, x+lm,y-hm,z+pm, x+lm,y+hm,z+pm, x+lm,y+hm,z-pm)),
                        colorf5)
         # face cote droit
-        
-        #(x + lm, y - hm, z - pm, x + lm, y + hm, z + pm, x + lm, y + hm, z + pm, x + lm, y + hm, z - pm))
-        
+
         # f6
         self.batch.add(4, GL_QUADS, None, (
-        'v3f', (x - lm, y - hm, z - pm, x - lm, y - hm, z + pm, x - lm, y + hm, z + pm, x - lm, y + hm, z - pm)),
+        'v3f', (x-lm,y-hm,z-pm, x-lm,y-hm,z+pm, x-lm,y+hm,z+pm, x-lm,y+hm,z-pm)),
                        colorf6)
         # face cote gauche
         
@@ -285,10 +284,10 @@ class Window(pyglet.window.Window):
 if __name__ == "__main__":
     newwindow = Window(800, 800, "Arena", resizable=False)
     newwindow.addcube(-200, 200, 200, 20, 400, 400,1) #pour un mur de cote l epaisseur sera en l
-    newwindow.addcube(200, 200, 200, 20, 400, 400,3)
+    newwindow.addcube(200, 200, 200, 20, 400, 400,1)
     newwindow.addcube(200, 200, 600, 20, 400, 400,1)
     newwindow.addcube(0, 25, 200, 50, 50, 50, 2)
-    newwindow.addcube(0,-2,0, 1000,2,1000,1) #pour un sol elle sera en l
+    newwindow.addcube(0,-2,0, 1000,2,1000,3) #pour un sol elle sera en l
     newwindow.addbalise(0,50,0, 100, "f") #pour les mur de face en z
     newwindow.addbalise(-100,50,200, 100, "c")
 
