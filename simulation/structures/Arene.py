@@ -14,12 +14,12 @@ class Arene :
     - liste_cube : une liste contenant des "cubes"(sol,mur,obstacle) avec leurs coordonnées dans l'arene
     """
 
-    def __init__(self,lx,ly,lz,liste_cube, liste_robot) :
+    def __init__(self,lx,ly,lz,liste_cube=[], liste_robot=[]) :
         self.lx = lx
         self.ly = ly
         self.lz = lz
         self.liste_cube = liste_cube
-        self.liste_robot = []
+        self.liste_robot = liste_robot
 
     def ajouter_cube(self,cube) :
         """Si c'est possible on ajoute un cube dans l'arene
@@ -154,13 +154,6 @@ class Arene :
                     return True
             return False
 
-    def toSaveF(self, f):
-        """Ecrit les coordonnees de l'arene dans le fichier ouvert passe en argument, avec ';' comme separation"""
-        f.write('Arene;' + str(self.lx) + ';' + str(self.ly) + ';' + str(self.lz) + ';\n')
-        for cube in self.liste_cube:
-            cube.toSaveF(f)
-        for rob in self.liste_robot:
-            rob.toSaveF(f)
     
 def Creation_Arene() :
     """ Test d'une creation d'Arene vide"""
