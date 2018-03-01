@@ -7,14 +7,14 @@ from basiques.sol import Sol
 from basiques.mur import Mur
 
 
-def saveFic(obj, nomfichier="defaultsave.txt"):
-    with open("save/"+nomfichier,'w') as f:
-        f.write(serialiser(obj))
+def saveFic(obj, nomfichier="defaultsave"):
+    with open("save/"+nomfichier+".json",'w') as f: #Ouverture du fichier en ecriture
+        f.write(serialiser(obj)) #ecriture de l'objet formate par la fonction serialiser
         
-def loadFic(nomfichier="defaultsave.txt"):
-    with open("save/"+nomfichier,'r') as f:
-        content=f.read()
-    return deserialiser(content)
+def loadFic(nomfichier="defaultsave"):
+    with open("save/"+nomfichier+".json",'r') as f:
+        content=f.read() #On recup tout le fichier en une ligne
+    return deserialiser(content) #On deserialise la ligne et on retourne l'objet reconstitué
         
 def serialiser(obj):
     return json.dumps(obj, default=serialiser_aux)

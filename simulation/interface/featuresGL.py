@@ -153,8 +153,8 @@ class Window(pyglet.window.Window):
         #self.listrobot = list()
         self.w = args[0]
         self.h = args[1]
-        self.INDROT = 0.5
-        self.INDTRSLT = 5
+        self.INDROT = 2
+        self.INDTRSLT = 20
 
         # methodes et variables de champ fenetre
         glClearColor(0.7, 0.2, 0.5, 1)
