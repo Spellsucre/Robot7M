@@ -1,10 +1,10 @@
 from math import acos
 from math import sqrt
 from ast import literal_eval
-from basiques.Cube import *
-from basiques.Mur import *
-from basiques.Sol import *
-from structures.Robot import *
+from basiques.cube import Cube
+from basiques.mur import Mur
+from basiques.sol import Sol
+from structures.robot import Robot
 
 class Arene :
     """ Classe Arene caracterisée par les attributs:

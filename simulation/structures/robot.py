@@ -2,7 +2,7 @@
 
 import random
 import math
-from structures.TeteRobot import*
+from structures.teteRobot import *
 #code
 
 class Robot:
@@ -24,7 +24,7 @@ class Robot:
         self.vitesse = vitesse
         self.tete = tete
     
-    def move(self,direc):
+    def move(self,direc=(1,1)):
         x, y, z = self.getPosition()
         a, b = direc
         vitesse = self.getVitesse()

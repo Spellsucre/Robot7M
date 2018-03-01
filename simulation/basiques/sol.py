@@ -1,4 +1,4 @@
-from basiques.Cube import *
+from basiques.cube import Cube
 
 class Sol(Cube):
     """Classe héritant de la classe Cube, caractérisée par:
@@ -7,9 +7,9 @@ class Sol(Cube):
         -sa largueur
         -sa longueur"""
 
-    def __init__(self, x, y, z, larg, long):
+    def __init__(self, x, y, z, larg, long,haut=1):
         """Constructeur de la classe Cube"""
-        Cube.__init__(self,x,y,z,larg,long,1)
+        Cube.__init__(self,x,y,z,larg,long,haut)
 
     def safficher(self):
         """Methode d'affichage d'un sol au format :
