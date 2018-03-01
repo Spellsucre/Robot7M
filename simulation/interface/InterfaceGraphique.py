@@ -6,14 +6,14 @@
 # import
 
 from tkinter import *
-from Arene import *
-from Cube import *
-from Mur import *
-from Sol import *
+from structures.Arene import *
+from basiques.Cube import *
+from basiques.Mur import *
+from basiques.Sol import *
 import random
 
 # code
-
+    
 
 # _________________________CREATION DU ARENE DE BASE ~> PAS TRES PROPRE__________________________
 
@@ -23,21 +23,7 @@ a1 = Creation_Arene()
 # ___________________________________GENERATEUR DE MUR___________________________________
 
 
-"""
-    MANQUE:
-        - l'ajout des 4 murs de l'arene à la liste de cube de l'arene (pour dans le futur faire un move du robot detectant les obstacles)
-        
-        - l'ajout des blocs random à la liste de cube de l'arene
-        
-        - soit separer la fonction en deux fonctions distinctes (ajouter un autre bouton),
-          une pour la generation des murs de l'arene et une pour les blocs
-          sinon à chaque clic de bouton les murs sont recréés ~> saturation  de la liste de cube
-          
-        - soit bloquer cette fonction existante (gen_aleatoire()) à une seule generation comme pour le sol
-          car ~> plusieurs sols = impossible. 
-    
-    FMANSON 7/2/18 20:06
-"""
+
 def gen_aleatoire():
     # cube_horizontal = Cube(X,Y,0,longueur,largeur,30)
     # cube_vertical = Cube(X,Y,0,largeur,longueur,30)
@@ -61,7 +47,7 @@ def gen_aleatoire():
     dessiner_mur(m2, a1)  # mur gauche
     dessiner_mur(m3, a1)  # mur du bas
     dessiner_mur(m4, a1)  # mur droit
-
+    
     ###   Création d'obstacles (murs) que l'on va tirer aléatoirement   ###
 
     # les coordonnées x et y doivent être comprises entre larg_mur et taille-larg_mur-1 soit ici entre 30 et 469
@@ -153,14 +139,34 @@ def ajout_robot():
         canvas_console.create_text(250, 15, text="Il y a déjà un robot OU pas de sol !", fill="black", width=500, justify='center')
 
 
+# ___________________________________ON CLIC BOUTON ROTATION DROITE & GAUCHE___________________________________
+
+def bouton_rotation_D():
+    if a1.liste_robot:
+        a1.liste_robot[0].rotation_bis(10)
+        a1.liste_robot[0].rotation_tete(10)
+        a1.liste_robot[0].calcdir()
+        #print(a1.liste_robot[0].direction)
+        rafraichir(a1)
+
+
+def bouton_rotation_G():
+    if a1.liste_robot:
+        a1.liste_robot[0].rotation_bis(-10)
+        a1.liste_robot[0].rotation_tete(-10)
+        a1.liste_robot[0].calcdir()
+        #print(a1.liste_robot[0].direction)
+        rafraichir(a1)
+
+
 # ___________________________________FENETRE PRINCIPALE___________________________________
 
 fenetre = Tk()
-fenetre.geometry("800x800")
+fenetre.geometry("800x700")
 fenetre.title("Robot 2i013 Alpha 3.1")
-fenetre.resizable(width=False, height=False)
+fenetre.resizable(width=True, height=True)
 # affichage d'un texte dans la fenetre principale
-label = Label(fenetre, text="Clic gauche ~> ajout d'un cube\nClic droit  ~> ajout d'un mur").pack()
+label = Label(fenetre, text="Clic gauche ~> ajout d'un cube Clic droit  ~> ajout d'un mur").pack()
 
 
 # ___________________________________FRAME & CANEVAS___________________________________
@@ -186,34 +192,52 @@ canvas_console.pack()
 
 #_________________________________TOUCHES CLAVIER_________________________________
 
-robot_rectangle=canvas1.create_rectangle(0, 0, 0, 0, fill="white")
+#robot_rectangle=canvas1.create_rectangle(0, 0, 0, 0, fill="white")
 
 def clavier(event):
     x,y,z = a1.liste_robot[0].position
     long, larg, haut = a1.liste_robot[0].dimension
     touche=event.keysym
-    print(touche)
+    #print(touche)
     if touche=='Up':
-        a1.liste_robot[0].rotation(90)
-        a1.liste_robot[0].move((0,-1,0))
-        x,y,z = a1.liste_robot[0].position
+        #a1.liste_robot[0].rotation(90)
+        #a1.liste_robot[0].move(a1.liste_robot[0].direction)
+        #x,y,z = a1.liste_robot[0].position
+        a1.liste_robot[0].move_bis()
         rafraichir(a1)
+    
     if touche =='Left':
+        bouton_rotation_G()
+        """
         a1.liste_robot[0].rotation(90)
         a1.liste_robot[0].move((-1,0,0))
         x,y,z = a1.liste_robot[0].position
         rafraichir(a1)
+        """
     if touche =='Right':
-        a1.liste_robot[0].rotation(270)
-        a1.liste_robot[0].move((1,0,0))
-        x,y,z = a1.liste_robot[0].position
-        rafraichir(a1)
+        bouton_rotation_D()
+        
+    """    
     if touche=='Down':
         a1.liste_robot[0].rotation(180)
         a1.liste_robot[0].move((0,1,0))
         x,y,z = a1.liste_robot[0].position
         rafraichir(a1)
-    canvas1.coords(robot_rectangle,x, y, x + larg, y + long)
+        """
+    if touche =='q':
+        #a1.liste_robot[0].tete.orientation = (-10, -10)
+        a1.liste_robot[0].tete.rotation(-8)
+        rafraichir(a1)
+    if touche =='d':
+        #a1.liste_robot[0].tete.orientation = (10, 10)
+        a1.liste_robot[0].tete.rotation(8)
+        rafraichir(a1)
+    if touche =='z':
+        a1.liste_robot[0].tete.setOrientation(a1.liste_robot[0].direction)
+        rafraichir(a1)
+        
+        
+    #canvas1.coords(robot_rectangle,x, y, x + larg, y + long)
 
 canvas1.bind_all('<Key>', clavier)
 
@@ -229,19 +253,6 @@ def effacer():
     while len(a1.liste_robot) > 0:
         a1.liste_robot.pop(-1)
 
-def effacerdernier():
-    """ Efface le dernier objet"""
-    for i in range(2):
-        canvas1.delete(ALL) 
-        if len(canvas1.find_all()) >= 1:
-            item = canvas1.find_all()[-1]
-            canvas1.delete(item)
-    if len(a1.liste_cube) > 0:
-        a1.liste_cube.pop(-1)
-
-    if len(a1.liste_cube) == 0:
-        canvas_console.delete(ALL)
-
 
 # ___________________________________LES BOUTONS___________________________________
 
@@ -251,20 +262,23 @@ bouton1 = Button(fenetre, text="Quitter", command=fenetre.destroy).pack(side=RIG
 # creation d'un bouton de nettoyage du canvas
 bouton2 = Button(fenetre, text="Effacer tout", command=effacer).pack(side=LEFT)
 
-# creation d'un bouton qui efface le dernier ajouté au canvas
-bouton3 = Button(fenetre, text="Effacer Dernier objet", command=effacerdernier).pack(side=LEFT)
-
 # creation d'un bouton qui ajoute un sol à l'arene
-bouton4 = Button(fenetre, text="Nouveau Sol", command=ajout_sol).pack(side=LEFT)
+bouton3 = Button(fenetre, text="Nouveau Sol", command=ajout_sol).pack(side=LEFT)
 
 # creation d'un bouton qui affiche l'état de l'arene
-bouton5 = Button(fenetre, text="Etat Arene", command=a1.afficher).pack(side=LEFT)
+bouton4 = Button(fenetre, text="Etat Arene", command=a1.afficher).pack(side=LEFT)
 
 # creation bouton qui genere des murs tout autour de l'arene ainsi que des obstacles
-bouton = Button(fenetre, text="Generation Salle(WIP)", command=gen_aleatoire).pack(side=LEFT)
+bouton5 = Button(fenetre, text="Generation Salle(WIP)", command=gen_aleatoire).pack(side=LEFT)
 
 #creation d'un bouton qui ajoute un robot à l'arene
-bouton = Button(fenetre, text= "Ajout Robot", command=ajout_robot).pack(side=LEFT)
+bouton6 = Button(fenetre, text= "Ajout Robot", command=ajout_robot).pack(side=LEFT)
+
+#creation d'un bouton de rotation du robot dans le sens anti-horaire
+bouton7 = Button(fenetre, text= "Rt G", command=bouton_rotation_G).pack(side=LEFT)
+
+#creation d'un bouton de rotation du robot dans le sens horaire
+bouton8 = Button(fenetre, text= "Rt D", command=bouton_rotation_D).pack(side=LEFT)
 
 
 # ___________________________________FONCTIONS DRAW___________________________________
@@ -273,17 +287,14 @@ def rafraichir(arene):
     canvas1.delete(ALL) 
     i = 0
     dessiner_sol(s1)
-    while i < len(arene.liste_cube):
-        liste = arene.liste_cube[i]
-        if liste.is_Cube():
-            dessiner_cube(liste,arene)
-        elif liste.is_Mur():
-            dessiner_mur(liste,arene)
+    for c in arene.liste_cube:
+        if isinstance(c, Mur):
+            dessiner_mur(c,arene)
+        elif isinstance(c, Cube):
+            dessiner_cube(c,arene)
             
-        i = i + 1
 
     dessiner_robot(arene.liste_robot[0])
-    
 
 
 def dessiner_cube(cube, arene):
@@ -306,18 +317,23 @@ def dessiner_sol(s1):
 
 def dessiner_robot(robot):
     x, y, z = robot.position
+    (x0,y0), (x1,y1), (x2,y2), (x3,y3) = robot.coords
     long, larg, haut = robot.dimension
-    dirx, diry, dirz = robot.direction
-    canvas1.create_rectangle(x, y, x + larg, y + long, fill="blue")
-    canvas1.create_text(x + larg / 2, y + long / 2, text="Robot", fill="blue", activefill="black")
-    canvas1.create_line(x + larg / 2, y, x + dirx, y - diry, fill="black",
-                        arrow='last')  # creation d'une fleche indiquant la direction du robot      ~> trop petite
-    canvas1.create_oval(x + 2 * larg / 3, y - long / 4, x + larg / 3, y + long / 4,
-                        outline="black")  # creation d'un cercle representant la tete du robot
+    dirx, diry = robot.direction
+    dirtetex, dirtetey = robot.tete.orientation
+    #print( dirtetex, dirtetey)
+    print("robot.coords",robot.coords)
+    canvas1.create_polygon(robot.coords, fill="blue")
+    #canvas1.create_text(x + larg / 2, y + long / 2, text="Robot", fill="blue", activefill="black")
 
+    # creation d'une fleche indiquant la direction du robot
+    canvas1.create_line((x0+x1)/2, (y0+y1)/2, ((x + (long / 2)) + dirtetex*6), y + dirtetey*6, fill="black", arrow='last')
+    
+    """canvas1.create_oval((x0+x1)/2, (y0+y1)/2, x + larg / 3, y + long / 4,
+                        outline="black")  # creation d'un cercle representant la tete du robot
+    """
 
 # ___________________________________MAINLOOP___________________________________
 
 fenetre.mainloop()
-
 
