@@ -32,33 +32,32 @@ class Cube:
             colorf4 = ('c3f', (0.8, 0.8, 0.8,) * 4)
             colorf5 = ('c3f', (0.5, 0.5, 0.5,) * 4)
             colorf6 = ('c3f', (0.5, 0.5, 0.5,) * 4)
-        """
-        #setcolor cubes
-        if(setcolor==2):
-            colorf1 = ('c3f', (0.8, 0.8, 0.8,) * 4)
-            colorf2 = ('c3f', (0.8, 0.8, 0.8,) * 4)
-            colorf3 = ('c3f', (0.8, 0.8, 0.8,) * 4)
-            colorf4 = ('c3f', (0.8, 0.8, 0.8,) * 4)
-            colorf5 = ('c3f', (0.8, 0.8, 0.8,) * 4)
-            colorf6 = ('c3f', (0.8, 0.8, 0.8,) * 4)
-        """
+
         #setcolor robot
-        if (setcolor == 3):
-            colorf1 = ('c3f', (0.4, 0., 0.3,) * 4)
-            colorf2 = ('c3f', (0.5, 0., 0.4,) * 4)
-            colorf3 = ('c3f', (0.5, 0., 0.4,) * 4)
-            colorf4 = ('c3f', (0.6, 0., 0.5,) * 4)
-            colorf5 = ('c3f', (0.6, 0., 0.5,) * 4)
-            colorf6 = ('c3f', (0.5, 0., 0.4,) * 4)
+        if (setcolor == 2):
+            colorf1 = ('c3f', (0., 0., 0.,) * 4)
+            colorf2 = ('c3f', (0.2, 0.2, 0.2,) * 4)
+            colorf3 = ('c3f', (0., 0., 0.,) * 4)
+            colorf4 = ('c3f', (0.2, 0.2, 0.2,) * 4)
+            colorf5 = ('c3f', (0., 0., 0.,) * 4)
+            colorf6 = ('c3f', (0.2, 0.2, 0.2,) * 4)
 
         #setcolor Sol
-        if (setcolor == 4):
+        if (setcolor == 3):
             colorf1 = ('c3f', (0.4, 0.4, 0.4,) * 4)
             colorf2 = ('c3f', (0.4, 0.4, 0.4,) * 4)
             colorf3 = ('c3f', (0.4, 0.4, 0.4,) * 4)
             colorf4 = ('c3f', (0.4, 0.4, 0.4,) * 4)
             colorf5 = ('c3f', (0.4, 0.4, 0.4,) * 4)
             colorf6 = ('c3f', (0.4, 0.4, 0.4,) * 4)
+        if (setcolor==4): #rouge
+            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (1.,0,0,)*4)
+        if (setcolor==5): #vert
+            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (0.,1.,0,)*4)
+        if (setcolor==6): #bleu
+            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (0.,0,1.,)*4)
+        if (setcolor==7): #jaune
+            colorf1=colorf2=colorf3=colorf4=colorf5=colorf6= ('c3f', (1.,0.0,1.,)*4)
 
         # creation des faces
         
@@ -107,7 +106,20 @@ class Cube:
         if self.type==3:
             self.pz+=10
 
-
+class Balise:
+    def __init__(self,cx, cy, cz, size):
+        self.cubesbalisel= list()
+        i=4
+        while i<=7:
+            if i==4:
+                self.cubesbalisel.append(Cube(cx-(size/4),cy+(size/4),cz, size/2,size/2,2, i))
+            elif i==5:
+                self.cubesbalisel.append(Cube(cx+(size/4),cy+(size/4),cz, size/2,size/2,2, i))
+            elif i==6:
+                self.cubesbalisel.append(Cube(cx-(size/4),cy-(size/4),cz, size/2,size/2,2, i))
+            elif i==7:
+                self.cubesbalisel.append(Cube(cx+(size/4),cy-(size/4),cz, size/2,size/2,2, i))
+            i+=1
 
 # creation d'une fenetre
 class Window(pyglet.window.Window):
@@ -125,7 +137,8 @@ class Window(pyglet.window.Window):
         #self.listrobot = list()
         self.w = args[0]
         self.h = args[1]
-        self.INDROT = 1
+        self.INDROT = 0.5
+        self.INDTRSLT = 5
 
         # methodes et variables de champ fenetre
         glClearColor(0.7, 0.2, 0.5, 1)
@@ -135,7 +148,7 @@ class Window(pyglet.window.Window):
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
 
-    xRotation = yRotation = zRotation = 30
+    xRotation = yRotation = zRotation = 5
 
     #methodes pour le rafraichissement de l affichage du robot
     def update(self, dt):
@@ -146,6 +159,9 @@ class Window(pyglet.window.Window):
     def addcube(self, x, y, z, h, l, p, setcolor):
         self.listcube.append(Cube(x, y, z, h, l, p, setcolor))
         self.on_draw()
+
+    def addbalise(self, x,y,z, size):
+        self.listcube = self.listcube + Balise(x,y,z, size).cubesbalisel
 
     # definition de la methode de dessin des vues sur la fenetre
     def on_draw(self):
@@ -179,7 +195,7 @@ class Window(pyglet.window.Window):
         # repositionnement de la camera par rapport au robot
         eyex,eyey,eyez = 0,0,0
         for o in self.listcube:
-            if o.type == 3:
+            if o.type == 2:
                 #glTranslatef(o.px, o.py, o.pz-(o.cp/2))
                 eyex, eyey, eyez=o.px, o.py, o.pz+(o.cp/2)
         gluLookAt(
@@ -192,58 +208,54 @@ class Window(pyglet.window.Window):
 
     def on_key_press(self, symbol, modifiers):
         if symbol == key.UP:
-            self.xRotation = self.INDROT
-            glRotatef(self.xRotation, 1,0,0)
+            glRotatef(self.xRotation, self.INDROT,0,0)
         elif symbol == key.DOWN:
-            self.xRotation -= self.INDROT
-            glRotatef(self.yRotation, -1,0,0)
+            glRotatef(self.yRotation, -self.INDROT,0,0)
         elif symbol == key.LEFT:
-            self.yRotation -= self.INDROT
-            glRotatef(self.yRotation, 0,-1,0)
+            glRotatef(self.yRotation, 0,self.INDROT,0)
         elif symbol == key.RIGHT:
-            self.yRotation += self.INDROT
-            glRotatef(self.yRotation, 0,1,0)
+            glRotatef(self.yRotation, 0,-self.INDROT,0)
         elif symbol == key.Q:  # vers la gauche
             self.clear()
             i = 0
             while i < len(self.listcube):
-                glTranslatef(-10, 0, 0)
-                self.listcube[i].px -= 10
+                glTranslatef(self.INDTRSLT, 0, 0)
+                self.listcube[i].px += self.INDTRSLT
                 i += 1
         elif symbol == key.D:  # vers la droite
             self.clear()
             i = 0
             while i < len(self.listcube):
-                glTranslatef(10, 0, 0)
-                self.listcube[i].px += 10
+                glTranslatef(-self.INDTRSLT, 0, 0)
+                self.listcube[i].px -= self.INDTRSLT
                 i += 1
         elif symbol == key.Z:  # vers le haut
             self.clear()
             i = 0
             while i < len(self.listcube):
-                glTranslatef(0, 10, 0)
-                self.listcube[i].py += 10
+                glTranslatef(0, -self.INDTRSLT, 0)
+                self.listcube[i].py -= self.INDTRSLT
                 i += 1
         elif symbol == key.S:  # vers le bas
             self.clear()
             i = 0
             while i < len(self.listcube):
-                glTranslatef(0, -10, 0)
-                self.listcube[i].py -= 10
+                glTranslatef(0, self.INDTRSLT, 0)
+                self.listcube[i].py += self.INDTRSLT
                 i += 1
         elif symbol == key.P:
             self.clear()
             i = 0
             while i < len(self.listcube):
-                glTranslatef(0, 0, 10)
-                self.listcube[i].pz += 10
+                glTranslatef(0, 0, self.INDTRSLT)
+                self.listcube[i].pz += self.INDTRSLT
                 i += 1
         elif symbol == key.M:
             self.clear()
             i = 0
             while i < len(self.listcube):
-                glTranslatef(0, 0, -10)
-                self.listcube[i].pz -= 10
+                glTranslatef(0, 0, -self.INDTRSLT)
+                self.listcube[i].pz -=self.INDTRSLT
                 i += 1
 
         #action screenshot
@@ -256,9 +268,10 @@ class Window(pyglet.window.Window):
 if __name__ == "__main__":
     newwindow = Window(1280, 720, "Arena", resizable=False)
     #newwindow.addcube(0, 200, 0, 400, 400, 20,1)
-    #newwindow.addcube(200, 200, 200, 20, 400, 400,4)
+    #newwindow.addcube(200, 200, 200, 20, 400, 400,3)
     #newwindow.addcube(200, 200, 600, 20, 400, 400,1)
-    #newwindow.addcube(0, 25, 200, 50, 50, 50, 3)
+    #newwindow.addcube(0, 25, 200, 50, 50, 50, 2)
+    #newwindow.addbalise(-200,50,200, 100)
 
     pyglet.clock.schedule_interval(newwindow.update, newwindow.frame_rate)
     pyglet.app.run()
