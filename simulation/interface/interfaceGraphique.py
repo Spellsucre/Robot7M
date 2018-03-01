@@ -6,10 +6,10 @@
 # import
 
 from tkinter import *
-from structures.Arene import *
-from basiques.Cube import *
-from basiques.Mur import *
-from basiques.Sol import *
+from structures.arene import *
+from basiques.cube import *
+from basiques.mur import *
+from basiques.sol import *
 import random
 
 # code

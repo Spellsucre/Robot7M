@@ -1,7 +1,7 @@
-from mur import *
-from basique.Cube import * 
-from structure.Arene import *
+from basique.mur import *
+from basique.cube import * 
+from structure.arene import *
 
-a1 = chargerEnv('save.txt')
+a1 = loadFic('save.txt')
 windowa = Window(1000,1000,'Arene')
 pyglet.app.run()
