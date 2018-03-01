@@ -1,6 +1,6 @@
 import unittest
 
-from structures import Arene
+from structures.arene import *
 
 class testArene(unittest.TestCase):
 
