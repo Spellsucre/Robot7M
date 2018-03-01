@@ -210,13 +210,15 @@ class Window(pyglet.window.Window):
 
         # repositionnement de la camera par rapport au robot
         eyex,eyey,eyez = 0,0,0
+        visex, visey, visez = 0,0,0
         for o in self.listcube:
             if o.type == 2:
                 #glTranslatef(o.px, o.py, o.pz-(o.cp/2))
                 eyex, eyey, eyez=o.px, o.py, o.pz-(o.cp/2)
+                visex, visey, visez =  o.px, o.py, o.pz-o.cl
         gluLookAt(
             eyex, eyey, eyez,  # eye
-            0, 0.0, 0, # lookAt
+            visex, visey,visez, # lookAt
             0.0, 1.0, 0.0)  # up
 
         glMatrixMode(GL_MODELVIEW)
