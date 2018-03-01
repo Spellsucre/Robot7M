@@ -1,11 +1,14 @@
 import random
-from interface.CubeGL import *
-from structures.Robot import *
-from basiques.Cube import * 
-from structures.Arene import *
+from interface.cubeGL import *
+from structures.robot import *
+from basiques.cube import * 
+from structures.arene import *
+from save.saveJson import *
+from save.csvToJson import *
 
-"""Pour modifier les valeurs, allez dans save.txt"""
-a1 = chargerEnv('save/save.txt')
+"""Pour modifier les valeurs, allez dans save.csv"""
+CsvToJson("save")
+a1 = loadFic('save')
 a1.afficher()
 wPrincipale = Window(1366,768,'Arene')
 for c in a1.liste_cube:
