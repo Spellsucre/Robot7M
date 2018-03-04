@@ -2,7 +2,7 @@
 
 import random
 import math
-from structures.teteRobot import *
+from TeteRobot import*
 #code
 
 class Robot:
@@ -16,15 +16,15 @@ class Robot:
         sa tete: Class TeteRobot
     """
 
-    def __init__(self, position, coords, direction, dimension, vitesse, tete=Creation_TeteRobot()):
+    def __init__(self, position, coords, direction, dimension, vitesse):
         self.position = position
         self.coords = coords
         self.direction = direction
         self.dimension = dimension
         self.vitesse = vitesse
-        self.tete = tete
+        self.tete= Creation_TeteRobot()
     
-    def move(self,direc=(1,1)):
+    def move(self,direc):
         x, y, z = self.getPosition()
         a, b = direc
         vitesse = self.getVitesse()
@@ -121,13 +121,13 @@ class Robot:
         ctx3 = (x3-self.position[0])*math.cos(angle) - (y3-self.position[1])*math.sin(angle) + self.position[0]
         cty3 = (x3-self.position[0])*math.sin(angle) + (y3-self.position[1])*math.cos(angle) + self.position[1]
 
-        newcoords = [ (round(ctx0), round(cty0)),
-                      (round(ctx1), round(cty1)),
-                      (round(ctx2), round(cty2)),
-                      (round(ctx3), round(cty3))]
+        newcoords = [ ((ctx0), (cty0)),
+                      ((ctx1), (cty1)),
+                      ((ctx2), (cty2)),
+                      ((ctx3), (cty3))]
         
         self.setCoords(newcoords)   #maj coords des 4 points du robot
-        print("coords=",self.coords)
+        #print("coords=",self.coords)
         self.calcdir()              #maj direction du robot
         
 
@@ -137,7 +137,7 @@ class Robot:
 
         dirxy1 = (self.position[0], self.position[1])
         dirxy2 = ( ((x0 + x1)/2), ((y0+y1)/2) )
-        newdir = ( round(dirxy2[0]-dirxy1[0]), round(dirxy2[1]-dirxy1[1]) )
+        newdir = ( (dirxy2[0]-dirxy1[0]), (dirxy2[1]-dirxy1[1]) )
         self.__setDirection(newdir)
 
     
@@ -151,7 +151,7 @@ class Robot:
                 """Methode d'affichage d'un robot au format :
                 Robot[position, direction, taille, vitesse]
                 """
-                return "ROBOT([Corps] position: {0}, coords: {1} direction: {2}, dimension{3}, vitesse: {4}".format(self.getPosition(),self.getCoords(),self.getDirection(),self.getDimension(),self.getVitesse())#||| "+self.tete.safficher()+")"
+                return "ROBOT([Corps] position: {0}, direction: {1}, dimension{2}, vitesse: {3}".format(self.getPosition(),self.getDirection(),self.getDimension(),self.getVitesse())#||| "+self.tete.safficher()+")"
                 
 
     """-----------------------GETTTER-------------------------"""
@@ -163,9 +163,6 @@ class Robot:
 
     def getDimension(self):
         return self.dimension
-        
-    def getCoords(self):
-        return self.coords
 
     def getVitesse(self):
         return self.vitesse
@@ -186,6 +183,10 @@ class Robot:
         
     
     """-----------------------SAVER-------------------------"""
+    def toSaveF(self, f):
+        """Ecrit les coordonnees du robot dans le fichier ouvert passe en argument, avec ';' comme separation"""
+        f.write('Robot;' + str(self.position) + ';' +  str(self.direction) + ';' + str(self.dimension) + ';' + str(self.vitesse) + ';\n')
+
 
 def Creation_Robot(arene):
         """creation d'un Robot avec une position aleatoire"""
@@ -217,7 +218,6 @@ def Creation_Robot(arene):
         coords = ((x-larg/2, y+long/2), (x+larg/2, y+long/2), (x+larg/2, y-long/2), (x-larg/2, y-long/2))
 
         return Robot((x, y, z), coords, newdir, (larg, long, haut), vitesse)
-
 
         
 

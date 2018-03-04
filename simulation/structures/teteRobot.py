@@ -23,8 +23,8 @@ class TeteRobot:
         vrx = vx * math.cos(angle) - vy * math.sin(angle)
         vry = vx * math.sin(angle) + vy * math.cos(angle)
 
-        vrx = round(vrx)
-        vry = round(vry)
+        #vrx = round(vrx)
+        #vry = round(vry)
         
         self.setOrientation((vrx,vry))
 		

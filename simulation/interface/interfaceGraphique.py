@@ -6,10 +6,11 @@
 # import
 
 from tkinter import *
-from structures.arene import *
-from basiques.cube import *
-from basiques.mur import *
-from basiques.sol import *
+from Arene import *
+from Cube import *
+from Mur import *
+from Sol import *
+from Capteur import *
 import random
 
 # code
@@ -25,53 +26,8 @@ a1 = Creation_Arene()
 
 
 def gen_aleatoire():
-    # cube_horizontal = Cube(X,Y,0,longueur,largeur,30)
-    # cube_vertical = Cube(X,Y,0,largeur,longueur,30)
-
-    ###   Initialise le contour de l'arene avec des murs ###
-    ajout_sol()
-    taille = 500  # taille de l'arene
-    larg_mur = 30  # largeur des murs de contour
-
-    m1 = Mur(0, 0, 0, taille - 1, larg_mur, larg_mur)
-    m2 = Mur(0, 0, 0, larg_mur, taille - 1, 30)
-    m3 = Mur(0, taille - larg_mur - 1, 0, taille - 1, larg_mur, larg_mur)
-    m4 = Mur(taille - larg_mur - 1, 0, 0, larg_mur, taille - 1, larg_mur)
-
-    a1.ajouter_cube(m1)
-    a1.ajouter_cube(m2)
-    a1.ajouter_cube(m3)
-    a1.ajouter_cube(m4)
-    
-    dessiner_mur(m1, a1)  # mur du haut
-    dessiner_mur(m2, a1)  # mur gauche
-    dessiner_mur(m3, a1)  # mur du bas
-    dessiner_mur(m4, a1)  # mur droit
-    
-    ###   Création d'obstacles (murs) que l'on va tirer aléatoirement   ###
-
-    # les coordonnées x et y doivent être comprises entre larg_mur et taille-larg_mur-1 soit ici entre 30 et 469
-
-    nb_obstacles = 5
-    i = 0
-    long_max = 90
-    larg_max = 90
-    while i < nb_obstacles:
-        x = random.randint(larg_mur, taille - larg_mur - 1)
-        y = random.randint(larg_mur, taille - larg_mur - 1)
-        long = random.randint(0, long_max)
-        larg = random.randint(0, larg_max)
-
-        if a1.isCube(x, y, 0):  #MARCHE PAS ~> doit tester tous le pxl presents dans les coords de l'objet ~> à mon avis c'est trop compliqué et sert pas à grand chose... FManson
-            canvas_console.delete(ALL)
-            canvas_console.create_text(250, 15, text="ajout impossible : cube présent à cette position", fill="black", width=500,justify='center')
-            print("ajout obstacle impossible : cube déja présent à cette position")
-
-        else:
-            m = Mur(x, y, 0, long, larg, 0)
-            a1.ajouter_cube(m)
-            dessiner_mur(m, a1)
-        i = i + 1
+    a1.generateur_arene()
+    rafraichir(a1)
 
 # ___________________________________GESTION DES CLICS (G & D)___________________________________
 
@@ -195,45 +151,56 @@ canvas_console.pack()
 #robot_rectangle=canvas1.create_rectangle(0, 0, 0, 0, fill="white")
 
 def clavier(event):
-    x,y,z = a1.liste_robot[0].position
-    long, larg, haut = a1.liste_robot[0].dimension
+    #xr,yr,zr = a1.liste_robot[0].position
+    robot = a1.liste_robot[0]
+    long, larg, haut = robot.dimension
+    
     touche=event.keysym
     #print(touche)
     if touche=='Up':
         #a1.liste_robot[0].rotation(90)
         #a1.liste_robot[0].move(a1.liste_robot[0].direction)
         #x,y,z = a1.liste_robot[0].position
-        a1.liste_robot[0].move_bis()
+        capteur = Capteur(a1)
+        #test = capteur.detecter()
+        print(robot.coords)
+        x = (robot.coords[0][0] + robot.coords[1][0]) /2
+        y = (robot.coords[0][1] + robot.coords[1][1]) /2
+
+        print("milieux face avant rob=", round(x,2), round(y,2))
+        #print(robot.dimension[2])
+        estdansunbloc = isCubeList(x,y,robot.position[2], a1.liste_cube)
+        
+        if(estdansunbloc == False):
+            print("est dans un bloc:",estdansunbloc)
+        a1.liste_robot[0].setVitesse(1)
+        robot.move_bis()
         rafraichir(a1)
+        #if(capteur.detecter() == False):
+        #    a1.liste_robot[0].move_bis()
+        #    rafraichir(a1)
     
     if touche =='Left':
         bouton_rotation_G()
-        """
-        a1.liste_robot[0].rotation(90)
-        a1.liste_robot[0].move((-1,0,0))
-        x,y,z = a1.liste_robot[0].position
-        rafraichir(a1)
-        """
+        
     if touche =='Right':
         bouton_rotation_D()
         
-    """    
     if touche=='Down':
-        a1.liste_robot[0].rotation(180)
-        a1.liste_robot[0].move((0,1,0))
-        x,y,z = a1.liste_robot[0].position
+        a1.liste_robot[0].setVitesse(-1)
+        a1.liste_robot[0].move_bis()
         rafraichir(a1)
-        """
+        
     if touche =='q':
         #a1.liste_robot[0].tete.orientation = (-10, -10)
-        a1.liste_robot[0].tete.rotation(-8)
+        robot.tete.rotation(-8)
         rafraichir(a1)
     if touche =='d':
         #a1.liste_robot[0].tete.orientation = (10, 10)
-        a1.liste_robot[0].tete.rotation(8)
+        robot.tete.rotation(8)
         rafraichir(a1)
     if touche =='z':
-        a1.liste_robot[0].tete.setOrientation(a1.liste_robot[0].direction)
+        robot.tete.setOrientation(robot.direction)
         rafraichir(a1)
         
         
@@ -284,18 +251,21 @@ bouton8 = Button(fenetre, text= "Rt D", command=bouton_rotation_D).pack(side=LEF
 # ___________________________________FONCTIONS DRAW___________________________________
 
 def rafraichir(arene):
+    
     canvas1.delete(ALL) 
     i = 0
-    dessiner_sol(s1)
     for c in arene.liste_cube:
+        if isinstance(c, Sol):
+            dessiner_sol(c)
         if isinstance(c, Mur):
             dessiner_mur(c,arene)
         elif isinstance(c, Cube):
             dessiner_cube(c,arene)
             
-
-    dessiner_robot(arene.liste_robot[0])
-
+    if(len(arene.liste_robot) == 1):
+        print(arene.liste_robot[0].tete.orientation)
+        dessiner_robot(arene.liste_robot[0])
+        #print("R.rafrai.",arene.liste_robot[0].position)
 
 def dessiner_cube(cube, arene):
     if isinstance(cube, Cube) and cube.x + cube.larg < arene.lx and cube.y + cube.long < arene.ly:
@@ -322,12 +292,12 @@ def dessiner_robot(robot):
     dirx, diry = robot.direction
     dirtetex, dirtetey = robot.tete.orientation
     #print( dirtetex, dirtetey)
-    print("robot.coords",robot.coords)
+    #print("robot.coords",robot.coords)
     canvas1.create_polygon(robot.coords, fill="blue")
     #canvas1.create_text(x + larg / 2, y + long / 2, text="Robot", fill="blue", activefill="black")
 
     # creation d'une fleche indiquant la direction du robot
-    canvas1.create_line((x0+x1)/2, (y0+y1)/2, ((x + (long / 2)) + dirtetex*6), y + dirtetey*6, fill="black", arrow='last')
+    canvas1.create_line((x0+x1)/2, (y0+y1)/2, ((x0+x1)/2 + dirtetex*3), ((y0+y1)/2 + dirtetey*3), fill="black", arrow='last')
     
     """canvas1.create_oval((x0+x1)/2, (y0+y1)/2, x + larg / 3, y + long / 4,
                         outline="black")  # creation d'un cercle representant la tete du robot
