@@ -1,0 +1,16 @@
+﻿PROJET 2I013  P5: les 8 ou 9 (je ne sais plus) mercenaires
+
+-CR3 :
+
+[Semaine du 12/02/18] : Suite du développement des différentes fonctionnalités:
+	-creation d'un cube en 3D avec pyglet + rotation et deplacement
+	-fonction de sauvegarde de l'arene sous .txt
+	-fix de la fonction rotation ~> pb de signe
+	
+	- trop de taches generiques ou mal definie:
+		ex: Pyglet dessin interface -> ne permet pas de developper une petite fonctionnalité
+		
+		-Toujours pas de communication "intensives" -> entraine ue production de code "périmée"
+		
+
+fin  CR3
