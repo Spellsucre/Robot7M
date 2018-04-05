@@ -2,12 +2,12 @@
 
 import random
 import math
-from TeteRobot import*
+from structures.TeteRobot import*
 #code
 
 class Robot:
     """
-        Classe caractérisé par:
+        Classe caracterise par:
         Sa Position: triplet(x, y, z)
         Les coordonnees de ses 4 angles (xy0, xy1, xy2, xy3)
         Sa direction: triplet(a, b)
@@ -35,7 +35,7 @@ class Robot:
         y += b*vitesse
         #z += c*vitesse
         z += 0
-        self.__setPosition((x, y, z))
+        self.setPosition((x, y, z))
         
         #xt= x + larg/2
         #yt= y
@@ -63,7 +63,7 @@ class Robot:
         y3 += self.direction[1]*vitesse
         
 
-        self.__setPosition((x, y, z))
+        self.setPosition((x, y, z))
         #print("1:",self.coords)
         self.setCoords(((x0,y0),(x1,y1),(x2,y2),(x3,y3)))
         #self.setCoords( ((x-larg/2, y+long/2), (x+larg/2, y+long/2), (x+larg/2, y-long/2), (x-larg/2, y-long/2)) )
@@ -73,25 +73,25 @@ class Robot:
         
     def retourne_angle(self,x,y,xx,yy) :
         """ retourne un angle teta en radian selon une direction initale d'un
-            vecteur u(x,y) et une les coordonées du vecteur de la prochaine
-            direction d'un vecteur v(xx,yy) en paramètres """
+            vecteur u(x,y) et une les coordonees du vecteur de la prochaine
+            direction d'un vecteur v(xx,yy) en parametres """
 
         sgn = (x*yy)+(xx*y)
-        u = sqrt((x*x)+(y*y)) #norme de u
-        v = sqrt((xx*xx)+(yy*yy)) #norme de v
+        u = math.sqrt((x*x)+(y*y)) #norme de u
+        v = math.sqrt((xx*xx)+(yy*yy)) #norme de v
         
         tmp = ((x*xx)+(y*yy))/(u+v)
-        teta = acos(tmp)
+        teta = math.acos(tmp)
 
         if(sgn < 0):
             return -1*teta
         return teta
-        #teta: int en degré
+        #teta: int en degre
 
     
     def rotation(self, teta):
 
-        """la rotation est effectuée dans le sens anti-horaire"""
+        """la rotation est effectuee dans le sens anti-horaire"""
         teta = math.radians(teta)
         a, b = self.getDirection()
         temp = a
@@ -101,11 +101,11 @@ class Robot:
             a = abs(a)
         if(b == -0.0):
             b = abs(b)
-        self.__setDirection((a, b))
+        self.setDirection((a, b))
 
 
     def rotation_bis(self,teta):
-        """Effectue une rotation du robot (sur lui-même) de teta°"""
+        """Effectue une rotation du robot (sur lui-meme) de teta"""
         angle = math.radians(teta)
         (x0,y0), (x1,y1), (x2,y2), (x3,y3) = self.coords
         
@@ -121,13 +121,13 @@ class Robot:
         ctx3 = (x3-self.position[0])*math.cos(angle) - (y3-self.position[1])*math.sin(angle) + self.position[0]
         cty3 = (x3-self.position[0])*math.sin(angle) + (y3-self.position[1])*math.cos(angle) + self.position[1]
 
-        newcoords = [ ((ctx0), (cty0)),
-                      ((ctx1), (cty1)),
-                      ((ctx2), (cty2)),
-                      ((ctx3), (cty3))]
+        newcoords = [ (round(ctx0), round(cty0)),
+                      (round(ctx1), round(cty1)),
+                      (round(ctx2), round(cty2)),
+                      (round(ctx3), round(cty3))]
         
         self.setCoords(newcoords)   #maj coords des 4 points du robot
-        #print("coords=",self.coords)
+        print("coords=",self.coords)
         self.calcdir()              #maj direction du robot
         
 
@@ -137,8 +137,8 @@ class Robot:
 
         dirxy1 = (self.position[0], self.position[1])
         dirxy2 = ( ((x0 + x1)/2), ((y0+y1)/2) )
-        newdir = ( (dirxy2[0]-dirxy1[0]), (dirxy2[1]-dirxy1[1]) )
-        self.__setDirection(newdir)
+        newdir = ( round(dirxy2[0]-dirxy1[0]), round(dirxy2[1]-dirxy1[1]) )
+        self.setDirection(newdir)
 
     
     def rotation_tete(self, teta):
@@ -167,11 +167,14 @@ class Robot:
     def getVitesse(self):
         return self.vitesse
 
+    def getCoords(self):
+        return self.coords
+
     """-----------------------SETTER-------------------------"""
-    def __setPosition(self, position):
+    def setPosition(self, position):
         self.position = position
 
-    def __setDirection(self, direction):
+    def setDirection(self, direction):
         self.direction = direction
 
     def setVitesse(self, vitesse):
@@ -199,7 +202,7 @@ def Creation_Robot(arene):
 
         #x = 60
         #y = 60
-        z = 1   #un robot est posé sur le sol
+        z = 1   #un robot est pose sur le sol
 
         larg = 40
         long = 40

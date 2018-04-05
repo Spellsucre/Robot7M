@@ -4,7 +4,7 @@ import math
 
 class TeteRobot:
     """
-    Classe caractérisé par:
+    Classe caracterise par:
     son orientation: doublet(orx, ory) la tete ne bouge pas sur l'axe Z donc pas de triplet seulement un doublet
     """
 
@@ -23,8 +23,8 @@ class TeteRobot:
         vrx = vx * math.cos(angle) - vy * math.sin(angle)
         vry = vx * math.sin(angle) + vy * math.cos(angle)
 
-        #vrx = round(vrx)
-        #vry = round(vry)
+        vrx = round(vrx)
+        vry = round(vry)
         
         self.setOrientation((vrx,vry))
 		

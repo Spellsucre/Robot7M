@@ -1,17 +1,17 @@
 from math import acos
 from math import sqrt
 from ast import literal_eval
-from Cube import *
-from Mur import *
-from Sol import *
-from Robot import *
+from basiques.Cube import *
+from basiques.Mur import *
+from basiques.Sol import *
+from structures.Robot import *
 
 class Arene :
-    """ Classe Arene caracterisée par les attributs:
+    """ Classe Arene caracterisee par les attributs:
     - lx : sa limite (double) sur l'axe des x
     - ly : sa limite (double) sur l'axe des y
     - lz : sa limite (double) sur l'axe des z
-    - liste_cube : une liste contenant des "cubes"(sol,mur,obstacle) avec leurs coordonnées dans l'arene
+    - liste_cube : une liste contenant des "cubes"(sol,mur,obstacle) avec leurs coordonnees dans l'arene
     """
 
     def __init__(self,lx,ly,lz,liste_cube) :
@@ -36,41 +36,6 @@ class Arene :
             self.liste_cube.append(cube)
             return True
         return False
-
-    def generateur_arene(self):
-
-        if (len(self.liste_cube) == 0):
-            s1 = Creation_Sol(self)
-            self.ajouter_cube(s1)
-            
-            taille = self.lx  # taille de l'arene
-            larg_mur = 30  # largeur des murs de contour
-
-            m1 = Mur(0, 0, 0, taille - 1, larg_mur, larg_mur)
-            m2 = Mur(0, 0, 0, larg_mur, taille - 1, 30)
-            m3 = Mur(0, taille - larg_mur - 1, 0, taille - 1, larg_mur, larg_mur)
-            m4 = Mur(taille - larg_mur - 1, 0, 0, larg_mur, taille - 1, larg_mur)
-
-            self.ajouter_cube(m1)
-            self.ajouter_cube(m2)
-            self.ajouter_cube(m3)
-            self.ajouter_cube(m4)
-
-            #generation de cubes aleatoires
-            nb_obstacles = 5
-            i = 0
-            long_max = 90
-            larg_max = 90
-            while i < nb_obstacles:
-                x = random.randint(larg_mur, taille - larg_mur - 1)
-                y = random.randint(larg_mur, taille - larg_mur - 1)
-                long = random.randint(0, long_max)
-                larg = random.randint(0, larg_max)
-
-                m = Mur(x, y, 0, long, larg, 0)
-                self.ajouter_cube(m)
-
-                i = i + 1
     
     def afficher(self):
 
@@ -78,7 +43,7 @@ class Arene :
         Arene(limiteX= , limiteY= , limiteZ= )
         Liste d'objet [    ,    ,    ]
         """
-        print("-------------------------------------------------\nArene(limiteX=%.2f,limiteY=%.2f,limiteZ=%.2f)"
+        print("-----------------------------------------------------------------------------------------------------------------------------------------------\nArene(limiteX=%.2f,limiteY=%.2f,limiteZ=%.2f)"
               %(self.lx, self.ly, self.lz))
         print("LISTE OBJET\n[")
         for i in self.liste_cube:
@@ -87,11 +52,11 @@ class Arene :
         print("LISTE ROBOT\n[")
         for j in self.liste_robot:
             print("\t"+j.safficher())
-        print("]\n-------------------------------------------------")
+        print("]\n-----------------------------------------------------------------------------------------------------------------------------------------------")
         
 
     def retirer_cube(self,x,y,z) :
-        """Si il y'a un cube à la position (x,y,z) dans l'arene
+        """Si il y'a un cube a la position (x,y,z) dans l'arene
             on le retire et on return True, sinon on return False """
         i = 0
         while i<len(self.liste_cube) :
@@ -103,10 +68,10 @@ class Arene :
                 i= i+1
         return False
 
-    """
+    
     def isCube(self,x,y,z) :
-        #return True si il y'a un cube à la position (x,y,z)
-            #de l'arene et False sinon
+        """return True si il y'a un cube a la position (x,y,z)
+            de l'arene et False sinon"""
         i = 0
         while i<len(self.liste_cube) :
             c = self.liste_cube[i]
@@ -117,22 +82,22 @@ class Arene :
         return False
 
     def isCubeAtPoint(self,x,y,z) :
-        #return True si le point à la position (x,y,z) appartient à un cube
-            #de l'arene et False sinon
+        """return True si le point a la position (x,y,z) appartient a un cube
+            de l'arene et False sinon"""
         i = 0
         cube = None
-        if (self.liste_cube is None) or x >= self.lx or x < 0 or y >= self.ly or y < 0 or z >= self.lz or z < 0 :
+        if (self.liste_cube is None) or x >= self.lx or x < 0 or y >= self.ly or y < 0 or z < self.lz or z < self.lz :
             return False
         while i<len(self.liste_cube) :
             c = self.liste_cube[i]
-            if (c.x+c.larg >=x and c.x <= x) and (c.y+c.long >= y and c.y<= y) and (c.z+c.haut >= z and c.z<= z):
-                return True
+            if (c.x+0.5*c.larg >=x and c.x-0.5*c.larg <= x) and (c.y+0.5*c.longr >= y and c.y-0.5*c.longr <= y) and (c.z+0.5*c.haut >= z and c.z-0.5*c.haut <= z):
+                cube = c
             i= i+1
-        return False
+        return cube
 
     def renvoie_cube(self,x,y,z) :
-         #Renvoie le cube à la position (x,y,z) si il y'en a un
-            #et None sinon 
+        """ Renvoie le cube a la position (x,y,z) si il y'en a un
+            et None sinon """
 
         i = 0
         while i<len(self.liste_cube) :
@@ -142,7 +107,7 @@ class Arene :
             else :
                 i= i+1
         return None
-    """
+
     def ajouter_robot(self,robot) :
         """Si c'est possible on ajoute un robot dans l'arene
             et on return True, et False sinon"""
@@ -163,10 +128,10 @@ class Arene :
             return True
         return False
 
-    def retourne_angle(self,x,y,xx,yy) :
+    def retourne_angle(self,x,y,xx,yy) :                                            #ICI ? La meme dans Robot
         """ retourne un angle teta en radian selon une direction initale d'un
-            vecteur u(x,y) et une les coordonées du vecteur de la prochaine
-            direction d'un vecteur v(xx,yy) en paramètres """
+            vecteur u(x,y) et une les coordonees du vecteur de la prochaine
+            direction d'un vecteur v(xx,yy) en parametres """
 
         sgn = (x*yy)+(xx*y)
         u = sqrt((x*x)+(y*y)) #norme de u
@@ -180,7 +145,7 @@ class Arene :
         return teta
 
     def possede_sol(self):
-        """Cherche si l'arene possède un sol ou non"""
+        """Cherche si l'arene possede un sol ou non"""
         if len(self.liste_cube) == 0:
             return False
         else:
@@ -188,8 +153,7 @@ class Arene :
                 if isinstance(i, Sol):
                     return True
             return False
-    
-    
+
     def toSaveF(self, f):
         """Ecrit les coordonnees de l'arene dans le fichier ouvert passe en argument, avec ';' comme separation"""
         f.write('Arene;' + str(self.lx) + ';' + str(self.ly) + ';' + str(self.lz) + ';\n')
@@ -200,10 +164,10 @@ class Arene :
     
 def Creation_Arene() :
     """ Test d'une creation d'Arene vide"""
-    liste_cube = [] #liste vide pour créer une arène vide
+    liste_cube = [] #liste vide pour creer une arene vide
     lx = 500
     ly = 500
-    lz = 500 # valeurs limites de l'arène
+    lz = 500 # valeurs limites de l'arene
 
     arene = Arene(lx,ly,lz,liste_cube)
 
@@ -212,7 +176,7 @@ def Creation_Arene() :
 def sauvegardeEnv(arene,nomfichier):
     with open(nomfichier,'w') as f:
         arene.toSaveF(f)
-        print("Arene sauvegardée.")
+        print("Arene sauvegardee.")
         
 	       
 def chargerEnv(nomfichier):
@@ -239,7 +203,7 @@ def chargerEnv(nomfichier):
                 (a,b,c)=literal_eval(ligne[2])
                 (lo,la,ha)=literal_eval(ligne[3])
                 arene.liste_robot.append(Robot((x,y,z),(a,b,c),(lo,la,ha)))
-        print("Arene chargée.")
+        print("Arene chargee.")
         return arene
                   
 	     

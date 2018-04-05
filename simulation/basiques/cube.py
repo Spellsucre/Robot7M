@@ -4,8 +4,8 @@ import random
 #code
 
 class Cube():
-    """Classe definissant un cube caractérisé par :
-    - ses coordonnées, x, y, z
+    """Classe definissant un cube caracterise par :
+    - ses coordonnees, x, y, z
     - sa largueur
     - sa longueur
     - sa hauteur"""
@@ -14,7 +14,7 @@ class Cube():
         """constructeur de la classe cube
 
         exemple de creation d'un cube : c1 = Cube(0,0,0,10,10,10)
-        (création d'un cube de coordonnées x = y = z = 0 et de taille 10
+        (creation d'un cube de coordonnees x = y = z = 0 et de taille 10
         """
         self.x = x
         self.y = y
@@ -34,6 +34,11 @@ class Cube():
     def getPos(self):
         """return la position du cube sous forme d'un triplet -> (x, y, z)"""
         return self.x, self.y, self.z
+
+    def toSaveF(self, f):
+        """Ecrit les coordonnees du cube dans le fichier ouvert passe en argument, avec ';' comme separation"""
+        f.write('Cube;' + str(self.x) + ';' + str(self.y) + ';' + str(self.z) + ';' + str(self.larg) + ';' + str(self.long) + ';' + str(self.haut) + ';\n' )
+
 
 def Creation_Cube(arene):
     """Creation d'un cube de taille et coordonnees aleatoires"""
